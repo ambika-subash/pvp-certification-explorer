@@ -14,10 +14,6 @@ This repo is part of a broader portfolio on agritech, biotechnology regulation, 
 
 - **Source**: India's PVP registry --> published lists of granted certificates as per the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2001.
 
----
-
-## Methods
-
 All analysis is in **R**, using:
 
 - `tidyverse` for data cleaning and manipulation.
