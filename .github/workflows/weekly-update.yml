@@ -1,0 +1,63 @@
+name: Weekly PPVFRA update
+
+on:
+  schedule:
+    - cron: "0 6 * * 0"      # every Sunday at 06:00 UTC
+  workflow_dispatch: {}       # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write             # needed to commit the updated data CSVs
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::rvest
+            any::httr
+            any::dplyr
+            any::readr
+            any::janitor
+            any::purrr
+            any::stringr
+            any::tidyr
+            any::ggplot2
+            any::forcats
+            any::scales
+            any::lubridate
+
+      - name: Scrape, clean, and build figures
+        run: |
+          Rscript scrape_all_certificates.R
+          Rscript clean_pvp_certificates.R
+          Rscript analyze_pvp_certificates.R
+
+      - name: Upload figures as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: figures
+          path: figures/
+          if-no-files-found: warn
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/pvp_certificates_all.csv data/pvp_certificates_clean.csv
+          if git diff --cached --quiet; then
+            echo "No data changes this week — nothing to commit."
+          else
+            git commit -m "Weekly PPVFRA refresh ($(date -u +%Y-%m-%d))"
+            git push
+          fi
