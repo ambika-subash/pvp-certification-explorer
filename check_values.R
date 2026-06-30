@@ -1,0 +1,7 @@
+suppressPackageStartupMessages({library(readr); library(dplyr)})
+d <- read_csv("data/pvp_certificates_all.csv", col_types = cols(.default = "c"))
+cat("rows:", nrow(d), "\n\n")
+cat("== category_of_variety ==\n");  print(sort(table(d$category_of_variety), decreasing = TRUE))
+cat("\n== applicant_category ==\n");  print(sort(table(d$applicant_category), decreasing = TRUE))
+cat("\n== crop_group ==\n");          print(sort(table(d$crop_group), decreasing = TRUE))
+cat("\n== issue years ==\n");         print(table(sub(".*-", "", d$date_of_certificate_issue)))
