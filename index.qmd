@@ -103,8 +103,8 @@ ggplot(f3, aes(crop_bucket, n)) +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
-Cereals lead by a wide margin. Fibre crops, which are almost all cotton, are the
-second largest group.
+Cereals lead by a wide margin. Vegetables are the second-largest group, followed by
+fibre crops (which are almost all cotton).
 
 ## By variety category
 
@@ -120,6 +120,8 @@ Farmers' varieties are the largest single category overall. The crop by crop bre
 below shows that this total sits very differently across crops.
 
 # Public, private, and farmers
+
+Certificates are filed by five types of applicants: Farmer (an individual farmer or farmers' group), Private (for-profit firms), Public (government research bodies), SAU (State Agricultural Universities), and Individual Breeder (independent plant breeders not affiliated with any organization).
 
 ## Applicant category, cotton vs all crops
 
@@ -169,6 +171,25 @@ ggplot(f7, aes(issue_year, n, fill = variety_category)) + geom_col() +
   labs(title = "Certificates to private applicants, by category",
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
+## Company concentration across all crops
+
+```{r}
+priv_all <- d %>% filter(applicant_category == "Private") %>%
+  mutate(key = alias_company(canon_company(applicant)))
+labels_all <- priv_all %>% count(key, applicant) %>% group_by(key) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
+f14 <- priv_all %>% count(key, name = "n") %>% left_join(labels_all, by = "key") %>%
+  arrange(desc(n)) %>%
+  mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
+  group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
+  mutate(pct = n / sum(n)) %>% arrange(desc(n))
+ggplot(f14, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
+  geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
+  geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "Major private applicants, all crops", fill = NULL) +
+  theme_void(base_size = 12)
 
 # The cotton case
 
