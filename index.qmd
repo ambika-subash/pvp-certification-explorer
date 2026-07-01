@@ -193,6 +193,32 @@ ggplot(f14, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
 
 # The cotton case
 
+## Who are the private cotton firms?
+
+```{r}
+priv <- cot %>% filter(applicant_category == "Private") %>%
+  mutate(key = alias_company(canon_company(applicant)))
+labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
+f13 <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
+  arrange(desc(n)) %>%
+  mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
+  group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
+  mutate(pct = n / sum(n)) %>% arrange(desc(n))
+ggplot(f13, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
+  geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
+  geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "Major private applicants, cotton", fill = NULL) +
+  theme_void(base_size = 12)
+```
+
+A small number of firms, led by Nuziveedu, hold most of the private cotton certificates.
+Varietal control in India's most commercial crop rests with a few companies.
+
+---
+
 ## Ploidy by applicant
 
 ```{r}
@@ -240,31 +266,6 @@ ggplot(f12, aes(issue_year, n, fill = variety_category)) + geom_col() +
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
 
-## Who are the private cotton firms?
-
-```{r}
-priv <- cot %>% filter(applicant_category == "Private") %>%
-  mutate(key = alias_company(canon_company(applicant)))
-labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
-  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
-  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
-f13 <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
-  arrange(desc(n)) %>%
-  mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
-  group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
-  mutate(pct = n / sum(n)) %>% arrange(desc(n))
-ggplot(f13, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
-  geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
-  geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
-            position = position_stack(vjust = 0.5), size = 3) +
-  labs(title = "Major private applicants, cotton", fill = NULL) +
-  theme_void(base_size = 12)
-```
-
-A small number of firms, led by Nuziveedu, hold most of the private cotton certificates.
-Varietal control in India's most commercial crop rests with a few companies.
-
----
 
 ::: {.callout-tip appearance="minimal"}
 Full pipeline (scrape, clean, figures, and this page) is in the
