@@ -63,6 +63,17 @@ canon_company <- function(x) {
   str_squish(y)
 }
 
+# merge known aliases whose names share no words (acronyms, parent entities)
+alias_company <- function(key) {
+  case_when(
+    str_detect(key, "maharashtra hybrid seed") | key == "mahyco" ~ "mahyco",
+    str_detect(key, "^monsanto")                                 ~ "monsanto",
+    TRUE ~ key
+  )
+}
+pretty_names <- c("mahyco"   = "Mahyco (Maharashtra Hybrid Seeds)",
+                  "monsanto" = "Monsanto")
+
 ## Fig 1
 f1 <- dd %>% count(issue_year)
 save_fig(ggplot(f1, aes(issue_year, n)) +
