@@ -185,16 +185,16 @@ save_fig(ggplot(f12, aes(issue_year, n, fill = variety_category)) + geom_col() +
 
 ## Fig 13  (spelling variants merged)
 priv <- cot %>% filter(applicant_category == "Private") %>%
-  mutate(key = canon_company(applicant))
+  mutate(key = alias_company(canon_company(applicant)))
 labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
-  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>% transmute(key, label = applicant)
+  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
 f13 <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
   arrange(desc(n)) %>%
   mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
   group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
   mutate(pct = n / sum(n)) %>% arrange(desc(n))
-save_fig(ggplot(f13, aes("", n, fill = fct_reorder(label, n))) +
-           geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
+save_fig(ggplot(f13, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +           geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
            geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
                      position = position_stack(vjust = 0.5), size = 3) +
            labs(title = "Major Private Applicants — Cotton Variety Certification", fill = NULL) +
