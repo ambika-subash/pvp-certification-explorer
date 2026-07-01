@@ -1,16 +1,35 @@
 name: Weekly PPVFRA update
 
+# Scrape -> clean -> figures -> commit data -> render Quarto dashboard -> publish to Pages.
+
 on:
   schedule:
     - cron: "0 6 * * 0"      # every Sunday at 06:00 UTC
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:                    # rebuild the site when the dashboard or code changes
+      - "index.qmd"
+      - "_quarto.yml"
+      - "**/*.R"
+      - ".github/workflows/weekly-update.yml"
 
 permissions:
-  contents: write
+  contents: write             # commit refreshed data
+  pages: write                # publish to GitHub Pages
+  id-token: write             # required by deploy-pages
+
+# allow one publish at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v5
@@ -36,19 +55,19 @@ jobs:
             any::forcats
             any::scales
             any::lubridate
+            any::plotly
+            any::htmlwidgets
+            any::knitr
+            any::rmarkdown
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Scrape, clean, and build figures
         run: |
           Rscript scrape_all_certificates.R
           Rscript clean_pvp_certificates.R
           Rscript analyze_pvp_certificates.R
-
-      - name: Upload figures as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: figures
-          path: figures/
-          if-no-files-found: warn
 
       - name: Commit refreshed data
         run: |
@@ -63,3 +82,15 @@ jobs:
             git commit -m "Weekly PPVFRA refresh ($(date -u +%Y-%m-%d))"
             git push
           fi
+
+      - name: Render Quarto dashboard
+        run: quarto render
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
