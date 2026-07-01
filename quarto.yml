@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "PVP Certification Explorer (India)"
+  reader-mode: true
+  page-footer: "Data: Protection of Plant Varieties & Farmers' Rights Authority · Built with Quarto"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: left
+    page-layout: full
+    fig-width: 9
+    fig-height: 5
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: false
