@@ -5,20 +5,20 @@ issued under the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2
 
 **Focus**
 - Who dominates PVP certificates over time (private firms vs public institutions vs farmers).
-- How crop-wise and firm-wise concentration evolves — with a particular lens on **cotton**.
+- How crop-wise and firm-wise concentration evolves, with a particular lens on **cotton**, as it concerns my own research objectives.
 
-This repo is part of a broader portfolio on agritech, biotechnology regulation, and
-tech-policy analytics.
+This repo is part of a broader portfolio on agritech, biotechnology regulation, and tech-policy analytics.
 
 ---
 
 ## Data
 
-- **Source**: the PPV&FR Authority's public certificate register —
+- **Source**: the PPV&FR Authority's public certificate register:
   <https://plantauthority.gov.in/list-certificates>
 - **Coverage**: every granted certificate (~10,500+ and growing), 2007 onward.
 - The register is scraped, cleaned, and analysed entirely in R. A weekly job keeps the
   dataset current automatically (see [Automation](#automation)).
+- The data is published at https://ambika-subash.github.io/pvp-certification-explorer/ .
 
 Generated data files (tracked in `data/`):
 
@@ -41,8 +41,8 @@ Three scripts, run in order. Each reads the previous one's output.
 | 3. Figures | `analyze_pvp_certificates.R` | `…_clean.csv` → `figures/*.png` (13 charts) |
 
 Extras:
-- `interactive_figures.R` — interactive **plotly** HTML versions of the time-series charts.
-- `check_values.R`, `diagnose_raw.R` — quick data-inspection helpers.
+- `interactive_figures.R` - interactive **plotly** HTML versions of the time-series charts.
+- `check_values.R`, `diagnose_raw.R` - quick data-inspection helpers.
 
 ### Cleaning notes
 - Category/sector/crop labels are case-normalised (`FARMER`/`farmer` → `Farmer`, etc.).
@@ -88,14 +88,14 @@ fully fresh pull.
 
 Thirteen charts are written to `figures/` (git-ignored — regenerated on demand):
 
-1. Total certificates per year — all crops
-2. Certificates per year — cotton
+1. Total certificates per year - all crops
+2. Certificates per year - cotton
 3. Crop-group-wise totals
 4. Variety-category-wise totals
 5. Farmers' varieties issued per year
 6. Public applicants by category × year
 7. Private applicants by category × year
-8. Applicant category — cotton vs all crops
+8. Applicant category - cotton vs all crops
 9. Cotton by ploidy × applicant
 10. Cotton applicant composition over time
 11. Cotton by variety category × applicant
@@ -116,6 +116,7 @@ A GitHub Actions workflow (`.github/workflows/weekly-update.yml`) runs the full 
 2. Commits refreshed data back to the repo (only when the register actually changed),
    updating `data/last_updated.txt`.
 3. Uploads the figures as a downloadable **artifact** on the run.
+4. Updates the data write-up and figures published at https://ambika-subash.github.io/pvp-certification-explorer/
 
 It can also be triggered manually from the repo's **Actions** tab (*Run workflow*).
 
