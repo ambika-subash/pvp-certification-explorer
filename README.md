@@ -1,34 +1,46 @@
 # PVP Certification Explorer (India)
 
-R-based exploratory project on India's Plant Variety Protection (PVP) certificates,
-issued under the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2001.
+An R + Quarto project on India's Plant Variety Protection (PVP) certificates, issued
+under the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2001. The full
+register is scraped, cleaned, and analysed automatically every week and published as a
+two-page interactive dashboard.
+
+**Live site**: <https://ambika-subash.github.io/pvp-certification-explorer/>
 
 **Focus**
-- Who dominates PVP certificates over time (private firms vs public institutions vs farmers).
-- How crop-wise and firm-wise concentration evolves, with a particular lens on **cotton**, as it concerns my own research objectives.
+- Who actually holds PVP certificates over time — private firms vs. public institutions
+  vs. farmers vs. individual breeders.
+- How crop-wise and firm-wise concentration has evolved, with a particular case study on
+  **cotton**, India's only widely genetically modified crop.
 
-This repo is part of a broader portfolio on agritech, biotechnology regulation, and tech-policy analytics.
+This repo is part of a broader portfolio on agritech, biotechnology regulation, and
+tech-policy analytics.
 
 ---
 
-## Background
+## The dashboard
 
-India's Protection of Plant Varieties and Farmers' Rights Act (PPVFRA), 2001, was enacted as a sui generis intellectual property regime under WTO-TRIPS obligations. It formally recognises three classes of right-holders, viz. breeders, researchers, and farmers, and was designed to balance the commercialisation of plant genetic resources with protections for farming communities and public science. Plant Variety Protection (PVP) certificates, issued by the PPVFR Authority, are the legal instrument through which variety ownership is established and rent extracted.
+The site is a two-page [Quarto](https://quarto.org) website, rebuilt automatically every
+week from the latest data.
 
-This dashboard uses the complete certificate register: every PVP certificate issued since 2007, to ask who has actually benefited from the Act's operation. The data show a distribution of benefits that follows the class structure of Indian agricultural biotechnology: private seed firms dominate new and commercially significant variety registrations, public research institutions (ICAR, State Agricultural Universities) hold substantial legacy registrations but have progressively withdrawn from active commercial breeding, and farmers, though nominally recognised as innovators, hold registrations that confer no right to sell branded seed and generate no royalties.
+| Page | File | What it's for |
+|------|------|----------------|
+| **Explore the data** | `index.qmd` | The landing page. Interactive charts (built with Observable Plot inside Quarto's OJS engine) that let you ask the paper's questions of *any* crop, not just cotton: certificate trends, applicant composition, firm-level concentration, a per-crop Gini concentration score, variety category breakdown, cumulative ownership over time, a full crop-comparison tool, and a searchable firm lookup table. |
+| **Full analysis** | `analysis.qmd` | The write-up: an overview of the register, the headline findings (including a Lorenz curve and Gini coefficient for private cotton ownership), and a detailed cotton case study covering ploidy, VCK enclosure, and EDV registrations. |
 
-Cotton is the primary analytical lens throughout. It is India's only commercially cultivated genetically modified (GM) crop, and these dynamics are most legible there. Every Essentially Derived Variety ever registered under the PPVFRA, across all crops, is a cotton variety, and all are privately held.
+Both pages source `R/prep_dashboard.R`, which is the single place data loading, colour
+palettes, the company-name deduplication logic, and the Gini function live — so both
+pages always agree on the numbers.
 
-This dashboard is the data companion to the author's research paper on the class structure of plant variety protection in India. The dataset is updated weekly from the PPVFR Authority's public register, and all code is open source.
+---
 
 ## Data
 
-- **Source**: the PPV&FR Authority's public certificate register:
+- **Source**: the PPV&FR Authority's public certificate register —
   <https://plantauthority.gov.in/list-certificates>
 - **Coverage**: every granted certificate (~10,500+ and growing), 2007 onward.
 - The register is scraped, cleaned, and analysed entirely in R. A weekly job keeps the
   dataset current automatically (see [Automation](#automation)).
-- The data is published at https://ambika-subash.github.io/pvp-certification-explorer/ .
 
 Generated data files (tracked in `data/`):
 
@@ -42,17 +54,20 @@ Generated data files (tracked in `data/`):
 
 ## Pipeline
 
-Three scripts, run in order. Each reads the previous one's output.
+Scripts live in `R/`, run in order. Each reads the previous one's output.
 
 | Step | Script | Input → Output |
 |------|--------|----------------|
-| 1. Scrape  | `scrape_all_certificates.R`  | live website → `data/pvp_certificates_all.csv` |
-| 2. Clean   | `clean_pvp_certificates.R`   | `…_all.csv` → `data/pvp_certificates_clean.csv` |
-| 3. Figures | `analyze_pvp_certificates.R` | `…_clean.csv` → `figures/*.png` (13 charts) |
+| 1. Scrape  | `R/scrape_all_certificates.R`  | live website → `data/pvp_certificates_all.csv` |
+| 2. Clean   | `R/clean_pvp_certificates.R`   | `…_all.csv` → `data/pvp_certificates_clean.csv` |
+| 3. Figures | `R/analyze_pvp_certificates.R` | `…_clean.csv` → `figures/*.png` (13 standalone charts) |
+| 4. Dashboard | `index.qmd`, `analysis.qmd` (via `R/prep_dashboard.R`) | `…_clean.csv` → the two-page website (`_site/`) |
 
 Extras:
-- `interactive_figures.R` - interactive **plotly** HTML versions of the time-series charts.
-- `check_values.R`, `diagnose_raw.R` - quick data-inspection helpers.
+- `R/parse_pvp_certificates.R` — a manual helper for parsing a single registry page
+  (`plantauthority.gov.in/node/...`) into a tidy CSV. Not part of the automated pipeline.
+- `R/interactive_figures.R` — standalone interactive **plotly** HTML versions of the
+  time-series charts, independent of the Quarto site.
 
 ### Cleaning notes
 - Category/sector/crop labels are case-normalised (`FARMER`/`farmer` → `Farmer`, etc.).
@@ -60,34 +75,120 @@ Extras:
   all time-series use **year of certificate issue**.
 - **SAU** applicants are split out of "Public" using an applicant-name heuristic.
 - **Cotton ploidy** (diploid/tetraploid) is read from the crop field.
-- For the company chart, spelling variants (`Ltd`/`Ltd.`/`Limited`, `Pvt`/`Private`) and
-  known aliases (e.g. Mahyco ↔ Maharashtra Hybrid Seeds) are merged.
+
+---
+
+## Methodology notes
+
+### Company name deduplication
+
+The same firm appears under many spellings in the raw register — `Nuziveedu Seeds
+Limited`, `Nuziveedu Seeds Ltd`, `Nuziveedu Seeds Pvt Ltd.` — and if left unmerged, any
+concentration measure built on top of it (market share, Gini coefficient, "top firms"
+charts) is artificially deflated, since one real company is being counted as several
+smaller ones.
+
+Two functions in `R/prep_dashboard.R` handle this, applied in sequence as
+`alias_company(canon_company(applicant))`:
+
+- **`canon_company()`** strips punctuation, normalises `&` to "and", singularises
+  "seeds" → "seed", strips common legal-form suffixes (`Private`, `Pvt`, `Ltd`,
+  `Limited`, `LLP`, `Company`, `Co`, `Corporation`, `Corp`, `Incorporated`, `Inc`), and
+  strips leading `M/S` / `Messrs` prefixes.
+- **`alias_company()`** merges a short list of known aliases that share no common
+  substring with `canon_company()` alone — e.g. Mahyco and Maharashtra Hybrid Seeds
+  Company, or the various Monsanto entity names.
+
+This is a heuristic, not a corporate-registry lookup, so it will not catch every
+possible variant (a genuine typo, an unlisted acronym, a completely different legal
+name for the same beneficial owner). Anyone extending the analysis should spot-check the
+top firms by grouping raw `applicant` strings under each canonical key and eyeballing
+whether anything that should have merged didn't.
+
+### Concentration: Lorenz curve and Gini coefficient
+
+Used on the "How concentrated is private cotton ownership?" chart in the full analysis,
+and computed per-crop for the interactive Gini explorer on the landing page.
+
+For a given crop (or crop group), let $x_1, x_2, \ldots, x_n$ be the certificate counts
+held by its $n$ distinct private applicants (after deduplication), sorted ascending so
+that $x_{(1)} \le x_{(2)} \le \cdots \le x_{(n)}$.
+
+**Lorenz curve.** The cumulative share of certificates held by the smallest $k$ firms,
+against the cumulative share of firms itself:
+
+$$
+L\!\left(\frac{k}{n}\right) = \frac{\displaystyle\sum_{i=1}^{k} x_{(i)}}{\displaystyle\sum_{i=1}^{n} x_{(i)}}, \qquad k = 0, 1, \ldots, n
+$$
+
+If every firm held an identical number of certificates, $L(p) = p$ for every $p$: the
+45° line of perfect equality. The further the observed curve sags below that line, the
+more concentrated ownership is — this is exactly what the shaded area on the chart
+shows.
+
+**Gini coefficient.** Defined as twice the area between the line of equality and the
+Lorenz curve:
+
+$$
+G = 1 - 2\int_0^1 L(p)\, dp
+$$
+
+which, for the sorted discrete counts above, reduces to the closed-form expression
+implemented directly in `gini()`:
+
+$$
+G = \frac{2\displaystyle\sum_{i=1}^{n} i \cdot x_{(i)}}{n\displaystyle\sum_{i=1}^{n} x_{(i)}} - \frac{n+1}{n}
+$$
+
+```r
+# R/prep_dashboard.R
+gini <- function(x){
+  x <- sort(x)
+  n <- length(x)
+  if (n <= 1 || sum(x) == 0) return(NA_real_)
+  (2 * sum(seq_len(n) * x) / (n * sum(x))) - (n + 1) / n
+}
+```
+
+$G = 0$ means every firm holds an equal share of certificates in that crop; $G = 1$
+means a single firm holds all of them. Gini is unstable with very few observations, so
+the interactive per-crop explorer excludes any crop with fewer than 5 distinct private
+applicants — below that threshold the statistic isn't meaningful.
 
 ---
 
 ## Usage
 
-Requires R (≥ 4.1). Install the packages once:
+Requires **R (≥ 4.1)** and **[Quarto](https://quarto.org/docs/get-started/)**.
+
+Install the R packages once:
 
 ```r
 install.packages(c(
   "rvest", "httr", "dplyr", "readr", "janitor", "purrr", "stringr",
   "tidyr", "lubridate", "ggplot2", "forcats", "scales",
-  "plotly", "htmlwidgets"
+  "plotly", "htmlwidgets", "knitr", "rmarkdown"
 ))
 ```
 
-Then, from the repo root:
+Then, from the repo root, run the pipeline:
 
 ```sh
-Rscript scrape_all_certificates.R     # fetch the full register
-Rscript clean_pvp_certificates.R      # build the clean dataset
-Rscript analyze_pvp_certificates.R    # render the 13 figures into figures/
-Rscript interactive_figures.R         # (optional) interactive HTML charts
+Rscript R/scrape_all_certificates.R     # fetch the full register
+Rscript R/clean_pvp_certificates.R      # build the clean dataset
+Rscript R/analyze_pvp_certificates.R    # (optional) render the 13 standalone figures
+Rscript R/interactive_figures.R         # (optional) standalone interactive HTML charts
 ```
 
-The scraper caches each page under `data/pages/`; delete that folder to force a
-fully fresh pull.
+...and build the dashboard:
+
+```sh
+quarto render      # builds both pages into _site/
+quarto preview      # live-reloading local preview in your browser
+```
+
+The scraper caches each page under `data/pages/`; delete that folder to force a fully
+fresh pull.
 
 > **Windows tip:** close the CSVs in Excel before running — an open file locks it and
 > the scripts/git will fail to write.
@@ -96,39 +197,46 @@ fully fresh pull.
 
 ## Figures
 
-Thirteen charts are written to `figures/` (git-ignored — regenerated on demand):
+The 13 static figures in `analyze_pvp_certificates.R` (git-ignored, regenerated on
+demand into `figures/`) cover the same ground as the dashboard's "Certificates at a
+glance" and cotton sections, useful for anyone who wants standalone PNGs rather than the
+interactive site:
 
-1. Total certificates per year - all crops
-2. Certificates per year - cotton
+1. Total certificates per year — all crops
+2. Certificates per year — cotton
 3. Crop-group-wise totals
 4. Variety-category-wise totals
 5. Farmers' varieties issued per year
 6. Public applicants by category × year
 7. Private applicants by category × year
-8. Applicant category - cotton vs all crops
+8. Applicant category — cotton vs all crops
 9. Cotton by ploidy × applicant
 10. Cotton applicant composition over time
 11. Cotton by variety category × applicant
 12. Private cotton by category × year
 13. Major private cotton applicants (share)
 
-A consistent colour palette is used across figures (e.g. Farmer = green, EDV = purple)
-so charts line up visually side by side.
+A consistent colour palette is used across figures and the dashboard alike (Farmer =
+green, Private = blue, Public = red, SAU = orange, Individual Breeder = purple; EDV =
+purple in the variety-category palette) so charts line up visually side by side.
 
 ---
 
 ## Automation
 
 A GitHub Actions workflow (`.github/workflows/weekly-update.yml`) runs the full pipeline
-**every Sunday (06:00 UTC)** on GitHub's servers:
+**every Sunday (06:00 UTC)**, entirely on GitHub's servers:
 
-1. Re-scrapes the register, rebuilds the clean dataset and all figures.
-2. Commits refreshed data back to the repo (only when the register actually changed),
+1. Re-scrapes the register and rebuilds the clean dataset (`R/scrape_all_certificates.R`,
+   `R/clean_pvp_certificates.R`) and the 13 standalone figures (`R/analyze_pvp_certificates.R`).
+2. Commits refreshed data back to the repo — only when the register actually changed —
    updating `data/last_updated.txt`.
-3. Uploads the figures as a downloadable **artifact** on the run.
-4. Updates the data write-up and figures published at https://ambika-subash.github.io/pvp-certification-explorer/
+3. Renders both Quarto pages (`quarto render`) and publishes the result to **GitHub
+   Pages**.
 
-It can also be triggered manually from the repo's **Actions** tab (*Run workflow*).
+It can also be triggered manually from the repo's **Actions** tab (*Run workflow*), and
+runs automatically on any push to `main` that touches a `.qmd` file, `_quarto.yml`, or
+any `.R` file.
 
 A local Windows alternative (`run_update.ps1` + Task Scheduler) is included for running
 the same pipeline on your own machine instead of the cloud.
@@ -139,14 +247,19 @@ the same pipeline on your own machine instead of the cloud.
 
 ```
 .
-├── scrape_all_certificates.R      # 1. scrape
-├── clean_pvp_certificates.R       # 2. clean
-├── analyze_pvp_certificates.R     # 3. figures (13 PNGs)
-├── interactive_figures.R          # interactive plotly charts
-├── check_values.R, diagnose_raw.R # inspection helpers
+├── index.qmd                      # Explore the data (dashboard homepage)
+├── analysis.qmd                   # Full analysis (write-up + cotton case study)
+├── _quarto.yml                    # Quarto project + navbar config
+├── R/
+│   ├── prep_dashboard.R           # shared data prep, palettes, dedup, gini() -- sourced by both .qmd pages
+│   ├── scrape_all_certificates.R  # 1. scrape
+│   ├── parse_pvp_certificates.R   # manual single-page parsing helper
+│   ├── clean_pvp_certificates.R   # 2. clean
+│   ├── analyze_pvp_certificates.R # 3. standalone figures (13 PNGs)
+│   └── interactive_figures.R      # standalone interactive plotly charts
 ├── run_update.ps1                 # local (Windows) weekly runner — alternative to CI
 ├── .github/workflows/
-│   └── weekly-update.yml          # cloud weekly automation
+│   └── weekly-update.yml          # cloud weekly automation + GitHub Pages publish
 ├── data/                          # generated datasets (+ last_updated.txt)
-└── figures/                       # generated charts (git-ignored)
+└── figures/                       # generated standalone charts (git-ignored)
 ```
