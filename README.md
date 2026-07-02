@@ -29,8 +29,7 @@ week from the latest data.
 | **Full analysis** | `analysis.qmd` | The write-up: an overview of the register, the headline findings (including a Lorenz curve and Gini coefficient for private cotton ownership), and a detailed cotton case study covering ploidy, VCK enclosure, and EDV registrations. |
 
 Both pages source `R/prep_dashboard.R`, which is the single place data loading, colour
-palettes, the company-name deduplication logic, and the Gini function live. That way both
-pages always agree on the numbers.
+palettes, the company-name deduplication logic, and the Gini function live. 
 
 ---
 
@@ -236,9 +235,7 @@ interactive site:
 12. Private cotton by category × year
 13. Major private cotton applicants (share)
 
-A consistent colour palette is used across figures and the dashboard alike (Farmer =
-green, Private = blue, Public = red, SAU = orange, Individual Breeder = purple; EDV =
-purple in the variety-category palette) so charts line up visually side by side.
+A consistent colour palette is used across figures and the dashboard alike so that charts make sense visually.
 
 ---
 
