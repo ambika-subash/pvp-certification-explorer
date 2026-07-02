@@ -11,13 +11,13 @@ d <- read_csv("data/pvp_certificates_clean.csv", show_col_types = FALSE)
 
 yr_min <- 2009L
 theme_set(theme_minimal(base_size = 13))
-blue <- "#3b6fb6"
+neutral <- "#6b7280"
 cat_cols <- c("Farmer"="#4daf4a","New"="#377eb8","Extant"="#80b1d3",
               "Extant (Notified)"="#ff7f00","Extant (VCK)"="#e41a1c","EDV"="#984ea3")
 sector_cols <- c("Farmer"="#4daf4a","Private"="#377eb8","Public"="#e41a1c",
                  "SAU"="#ff7f00","Individual Breeder"="#984ea3")
 ploidy_cols <- c("Diploid"="#377eb8","Tetraploid"="#e41a1c")
-set_cols    <- c("All crops"="#377eb8","Cotton"="#e41a1c")
+set_cols    <- c("All crops"=neutral,"Cotton"="#e41a1c")
 sector_levels <- c("Farmer","Private","Public","SAU","Individual Breeder")
 cat_levels    <- c("Farmer","New","Extant","Extant (Notified)","Extant (VCK)","EDV")
 paper_groups  <- c("Cereals","Fibre Crops","Vegetables","Legumes","Oilseeds","Fruits","Sugar Crops")
@@ -44,6 +44,23 @@ alias_company <- function(key) case_when(
   str_detect(key, "^monsanto") ~ "monsanto", TRUE ~ key)
 pretty_names <- c("mahyco" = "Mahyco (Maharashtra Hybrid Seeds)", "monsanto" = "Monsanto")
 
+top_firms_bar <- function(df, n_top = 8, title){
+  priv <- df %>% filter(applicant_category == "Private") %>%
+    mutate(key = alias_company(canon_company(applicant)))
+  labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
+    slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+    transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
+  f <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
+    arrange(desc(n)) %>%
+    mutate(label = ifelse(row_number() <= n_top, label, "Others")) %>%
+    group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(n)
+  ggplot(f, aes(x = n, y = fct_reorder(label, n))) +
+    geom_col(fill = sector_cols[["Private"]]) +
+    geom_text(aes(label = comma(n)), hjust = -0.2, size = 3) +
+    scale_x_continuous(labels = comma, expand = expansion(mult = c(0, .18))) +
+    labs(title = title, x = "Certificates", y = NULL)
+}
+
 n_total <- nrow(d)
 last_updated <- tryCatch(sub("^Last updated: ", "", readLines("data/last_updated.txt", warn = FALSE)[1]),
                          error = function(e) format(Sys.Date()))
@@ -56,43 +73,37 @@ Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
 The Protection of Plant Varieties and Farmers' Rights Act (PPVFRA), 2001 set out to
-protect breeders' rights while also recognising farmers as innovators. This page reports
-what the certification record shows: who secures plant variety protection, for which
-crops and categories, and how that has changed over time.
+protect breeders' rights while also recognising farmers as innovators. This page uses the
+full certification register to show who actually holds plant variety protection, for which
+crops, and how that has shifted over time.
+[Read the full methodology](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/README.md).
 
-The page is built in three passes. First, **the big picture** across all crops. Then an
-**interactive explorer** so you can ask these questions of any crop you care about. Then a
-worked case study of **cotton**, India's only widely genetically modified crop, which turns
-out to be the clearest example of a pattern that runs through the whole register.
-
-# The big picture
+# Certificates at a glance
 
 ## Certificates issued over time
 
 ```{r}
 f1 <- dd %>% count(issue_year)
+year_2013_n  <- first(f1$n[f1$issue_year == 2013], default = NA)
+latest_year  <- max(f1$issue_year)
+latest_year_n <- first(f1$n[f1$issue_year == latest_year], default = NA)
+
 plot_ly(f1, x = ~issue_year, y = ~n, type = "scatter", mode = "lines+markers",
-        line = list(color = blue), marker = list(color = blue),
+        line = list(color = neutral), marker = list(color = neutral),
         hovertemplate = "%{x}: %{y} certificates<extra></extra>") %>%
   layout(title = "Total PPVFRA certificates issued, all crops",
          xaxis = list(title = "Year of certificate issue"),
-         yaxis = list(title = "No. of certificates"))
+         yaxis = list(title = "No. of certificates", tickformat = ",d"),
+         annotations = list(
+           list(x = 2013, y = year_2013_n, text = "2013", showarrow = TRUE, arrowhead = 2, ay = -35),
+           list(x = latest_year, y = latest_year_n, text = as.character(latest_year),
+                showarrow = TRUE, arrowhead = 2, ay = -35)))
 ```
 
-Certification started slowly, fell during the Covid years, and has since climbed to its
-highest levels on record.
-
-## Cotton, on its own
-
-```{r}
-f2 <- cot %>% count(issue_year)
-plot_ly(f2, x = ~issue_year, y = ~n, type = "scatter", mode = "lines+markers",
-        line = list(color = blue), marker = list(color = blue),
-        hovertemplate = "%{x}: %{y} certificates<extra></extra>") %>%
-  layout(title = "PPVFRA certificates issued, cotton",
-         xaxis = list(title = "Year of certificate issue"),
-         yaxis = list(title = "No. of certificates"))
-```
+Certificates jump sharply in 2013 (`r comma(year_2013_n)` issued) and again in
+`r latest_year` (`r comma(latest_year_n)`). The register does not record why. These look
+more like batches of applications cleared together than steady organic growth, but that is
+an inference, not a confirmed cause, so treat it as an open question.
 
 ## What gets certified
 
@@ -100,7 +111,8 @@ plot_ly(f2, x = ~issue_year, y = ~n, type = "scatter", mode = "lines+markers",
 f3 <- d %>% count(crop_bucket) %>%
   mutate(crop_bucket = fct_relevel(fct_reorder(crop_bucket, n, .desc = TRUE), "Others", after = Inf))
 ggplot(f3, aes(crop_bucket, n)) +
-  geom_col(fill = blue) + geom_text(aes(label = n), vjust = -0.4, size = 3) +
+  geom_col(fill = neutral) + geom_text(aes(label = comma(n)), vjust = -0.4, size = 3) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Certificates by crop group", x = NULL, y = "Certificates issued") +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
@@ -114,14 +126,70 @@ fibre crops (which are almost all cotton).
 f4 <- d %>% filter(!is.na(variety_category)) %>% count(variety_category)
 ggplot(f4, aes(variety_category, n, fill = variety_category)) +
   geom_col() + scale_fill_manual(values = cat_cols) + guides(fill = "none") +
-  geom_text(aes(label = n), vjust = -0.4, size = 3) +
+  geom_text(aes(label = comma(n)), vjust = -0.4, size = 3) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Certificates by variety category", x = NULL, y = "Certificates issued")
 ```
 
-Farmers' varieties are the largest single category overall. The crop by crop breakdown
-in the explorer below shows that this total sits very differently across crops.
+Farmers' varieties are the largest single category overall. The sections below show that
+this total sits very differently across applicant types and crops.
 
-# Who owns plant varieties?
+## Farmers' varieties over time
+
+```{r}
+f5 <- dd %>% filter(variety_category == "Farmer") %>% count(issue_year)
+ggplot(f5, aes(issue_year, n)) +
+  geom_col(fill = cat_cols[["Farmer"]]) + geom_text(aes(label = n), vjust = -0.4, size = 3) +
+  scale_x_continuous(breaks = seq(yr_min, max(f5$issue_year), 1)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Certificates issued for farmers' varieties annually",
+       x = "Year of certificate issue", y = "Farmers' certificates") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Farmer variety certification has effectively ceased in recent years. The bars that once
+built the largest single category on this page have trailed off to almost nothing.
+
+## Public applicants, by category
+
+```{r}
+f6 <- dd %>% filter(applicant_category == "Public", !is.na(variety_category)) %>% count(issue_year, variety_category)
+ggplot(f6, aes(issue_year, n, fill = variety_category)) + geom_col() +
+  scale_fill_manual(values = cat_cols) +
+  scale_x_continuous(breaks = seq(yr_min, max(f6$issue_year), 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Certificates to public applicants, by category",
+       x = "Year of certificate issue", y = "Certificates", fill = "Category")
+```
+
+## Private applicants, by category
+
+```{r}
+f7 <- dd %>% filter(applicant_category == "Private", !is.na(variety_category)) %>% count(issue_year, variety_category)
+ggplot(f7, aes(issue_year, n, fill = variety_category)) + geom_col() +
+  scale_fill_manual(values = cat_cols) +
+  scale_x_continuous(breaks = seq(yr_min, max(f7$issue_year), 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Certificates to private applicants, by category",
+       x = "Year of certificate issue", y = "Certificates", fill = "Category")
+```
+
+## Ownership concentration beyond cotton
+
+```{r}
+top_firms_bar(d, title = "Major private applicants, all crops")
+```
+
+Market concentration is high across all crops, not just cotton. A small number of
+companies dominate private variety certification in India. Cotton, covered next, is the
+most extreme version of this pattern.
+
+# The headline findings
+
+::: {.callout-note appearance="simple"}
+These four charts carry the argument of this page. A reader who only looks at this section
+should leave knowing the story.
+:::
 
 Certificates are filed by five types of applicants: Farmer (an individual farmer or
 farmers' group), Private (for-profit firms), Public (government research bodies), SAU
@@ -135,100 +203,91 @@ f8 <- bind_rows(d %>% count(sector) %>% mutate(set = "All crops"),
                 cot %>% count(sector) %>% mutate(set = "Cotton")) %>% filter(!is.na(sector))
 ggplot(f8, aes(sector, n, fill = set)) +
   geom_col(position = "dodge") + scale_fill_manual(values = set_cols) +
-  geom_text(aes(label = n), position = position_dodge(width = 0.9), vjust = -0.4, size = 3) +
+  geom_text(aes(label = comma(n)), position = position_dodge(width = 0.9), vjust = -0.4, size = 3) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Applicant category: cotton vs all crops",
        x = "Applicant category", y = "Certificates", fill = NULL)
 ```
 
-Farmers hold the most certificates across all crops. In cotton the order reverses:
-private firms hold almost all of them, and farmers hold close to none.
+This is the central finding. Farmers hold the most certificates of any applicant type
+across all crops combined. In cotton, that order inverts almost completely: private firms
+hold nearly every certificate, and farmers are left with a handful. The applicant category
+that dominates the register overall is nearly absent in India's most commercial crop.
 
-## Farmers' varieties over time
-
-```{r}
-f5 <- dd %>% filter(variety_category == "Farmer") %>% count(issue_year)
-ggplot(f5, aes(issue_year, n)) +
-  geom_col(fill = cat_cols[["Farmer"]]) + geom_text(aes(label = n), vjust = -0.4, size = 3) +
-  scale_x_continuous(breaks = seq(yr_min, max(f5$issue_year), 1)) +
-  labs(title = "Certificates issued for farmers' varieties annually",
-       x = "Year of certificate issue", y = "Farmers' certificates") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-## Public applicants, by category
+## Cumulative ownership over time, all crops
 
 ```{r}
-f6 <- dd %>% filter(applicant_category == "Public", !is.na(variety_category)) %>% count(issue_year, variety_category)
-ggplot(f6, aes(issue_year, n, fill = variety_category)) + geom_col() +
-  scale_fill_manual(values = cat_cols) +
-  scale_x_continuous(breaks = seq(yr_min, max(f6$issue_year), 2)) +
-  labs(title = "Certificates to public applicants, by category",
-       x = "Year of certificate issue", y = "Certificates", fill = "Category")
+f_cum <- dd %>% filter(!is.na(sector)) %>% count(issue_year, sector) %>%
+  arrange(issue_year) %>% group_by(sector) %>% mutate(cum = cumsum(n)) %>% ungroup()
+ggplot(f_cum, aes(issue_year, cum, color = sector)) +
+  geom_line(linewidth = 1.1) + geom_point(size = 1.5) +
+  scale_color_manual(values = sector_cols) +
+  scale_x_continuous(breaks = seq(yr_min, max(f_cum$issue_year), 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Cumulative certificates by applicant category, all crops",
+       x = "Year of certificate issue", y = "Cumulative certificates", color = NULL)
 ```
 
-## Private applicants, by category
+This is the inversion in the previous chart, unfolding year by year rather than as a single
+endpoint. Watch where the lines separate: that is the moment the structural divergence
+between applicant types took hold.
+
+## Cotton applicant composition over time
 
 ```{r}
-f7 <- dd %>% filter(applicant_category == "Private", !is.na(variety_category)) %>% count(issue_year, variety_category)
-ggplot(f7, aes(issue_year, n, fill = variety_category)) + geom_col() +
-  scale_fill_manual(values = cat_cols) +
-  scale_x_continuous(breaks = seq(yr_min, max(f7$issue_year), 2)) +
-  labs(title = "Certificates to private applicants, by category",
-       x = "Year of certificate issue", y = "Certificates", fill = "Category")
+f10 <- cot %>% filter(!is.na(sector)) %>% count(issue_year, sector)
+plot_ly(f10, x = ~issue_year, y = ~n, color = ~sector, colors = sector_cols,
+        type = "scatter", mode = "lines+markers") %>%
+  layout(title = "Cotton applicant composition over time",
+         xaxis = list(title = "Year of certificate issue"),
+         yaxis = list(title = "No. of certificates", tickformat = ",d"))
 ```
 
-## Company concentration across all crops
+Private applicants do not just dominate cotton certification, they have driven almost
+every year of its growth. Public, SAU, and farmer lines stay close to flat by comparison.
+
+## Who are the private cotton firms?
 
 ```{r}
-priv_all <- d %>% filter(applicant_category == "Private") %>%
-  mutate(key = alias_company(canon_company(applicant)))
-labels_all <- priv_all %>% count(key, applicant) %>% group_by(key) %>%
-  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
-  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
-f14 <- priv_all %>% count(key, name = "n") %>% left_join(labels_all, by = "key") %>%
-  arrange(desc(n)) %>%
-  mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
-  group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
-  mutate(pct = n / sum(n)) %>% arrange(desc(n))
-ggplot(f14, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
-  geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
-  geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
-            position = position_stack(vjust = 0.5), size = 3) +
-  labs(title = "Major private applicants, all crops", fill = NULL) +
-  theme_void(base_size = 12)
+top_firms_bar(cot, title = "Major private applicants, cotton")
 ```
 
-Market concentration is high across all crops, not just cotton. A small number of
-companies dominate private variety certification in India.
+A small number of firms, led by Nuziveedu, hold most of the private cotton certificates.
+Varietal control in India's most commercial crop rests with a few companies.
 
 # Explore the data yourself
 
-The charts so far describe the register in aggregate. The five tools below let you ask the
-same questions of any single crop or crop group. Pick a crop from the dropdown and each
-chart re-draws. The cotton story you will read next is just one path through these tools.
+::: {.callout-important appearance="simple"}
+**These charts are interactive.** Each one has two dropdowns side by side: pick a crop
+category (like Cereals) or a specific crop (like Brinjal), and the chart redraws.
+Whichever dropdown you touch last is the one that applies.
+:::
+
+The findings above are about cotton specifically. The tools below let you ask the same
+questions of any crop in the register.
 
 ```{r}
 #| label: prep-ojs
 #| include: false
 
-# selection universe = the crop groups plus the ten largest individual crops
+# Individual crops offered in the dropdown: the 20 most-certified crops by name.
 top_crops <- d %>% filter(!is.na(crop)) %>% count(crop, sort = TRUE) %>%
-  slice_head(n = 10) %>% pull(crop)
+  slice_head(n = 20) %>% pull(crop)
+crop_categories <- sort(unique(na.omit(d$crop_bucket)))
 
-# each row is tagged with a "sel" value; rows appear under both their group and
-# their crop, so picking "Cereals" or "Rice" both work without double counting
+# Each row is tagged under both its crop group and its individual crop name,
+# so either dropdown can filter the same underlying dataset.
 sel_for <- function(df) bind_rows(
   df %>% filter(!is.na(crop_bucket)) %>% mutate(sel = as.character(crop_bucket)),
   df %>% filter(crop %in% top_crops)  %>% mutate(sel = crop))
 
-# OJS serialises characters cleanly; drop factor codes first
 chr <- function(df) df %>% mutate(across(where(is.factor), as.character))
 
 trends_df <- chr(sel_for(dd) %>% filter(!is.na(sector)) %>%
   count(sel, issue_year, sector, name = "n"))
 
-comp_df <- chr(sel_for(d) %>% filter(!is.na(sector)) %>%
-  count(sel, sector, name = "n"))
+comp_all <- d %>% filter(!is.na(sector)) %>% count(sector, name = "n") %>% mutate(sel = "All crops")
+comp_df  <- chr(bind_rows(comp_all, sel_for(d) %>% filter(!is.na(sector)) %>% count(sel, sector, name = "n")))
 
 firm_key    <- sel_for(d) %>% filter(applicant_category == "Private") %>%
   mutate(firm = alias_company(canon_company(applicant)))
@@ -248,6 +307,8 @@ cum_all <- dd %>% filter(!is.na(sector)) %>% count(issue_year, sector, name = "n
 cum_df  <- chr(bind_rows(cum_all, cum_sel) %>% arrange(sel, sector, issue_year) %>%
   group_by(sel, sector) %>% mutate(cum = cumsum(n)) %>% ungroup())
 
+ojs_define(categories_ojs = crop_categories)
+ojs_define(crops_ojs      = top_crops)
 ojs_define(trends_ojs = trends_df)
 ojs_define(comp_ojs   = comp_df)
 ojs_define(firm_ojs   = firm_df)
@@ -257,24 +318,45 @@ ojs_define(cum_ojs    = cum_df)
 
 ```{ojs}
 //| echo: false
+categories = categories_ojs
+crops = crops_ojs
 sectorDomain = ["Farmer", "Private", "Public", "SAU", "Individual Breeder"]
 sectorRange  = ["#4daf4a", "#377eb8", "#e41a1c", "#ff7f00", "#984ea3"]
 catDomain = ["Farmer", "New", "Extant", "Extant (Notified)", "Extant (VCK)", "EDV"]
 catRange  = ["#4daf4a", "#377eb8", "#80b1d3", "#ff7f00", "#e41a1c", "#984ea3"]
-uniqueSel = df => Array.from(new Set(transpose(df).map(d => d.sel))).sort()
+
+// Custom paired viewof: a category dropdown and a crop dropdown side by side.
+// Whichever one fires last wins; its value becomes this input's value.
+function pairedCropInput({catOptions = categories, cropOptions = crops,
+                           catValue, cropValue, catLabel, cropLabel,
+                           defaultMode = "crop"} = {}) {
+  const catSel  = Inputs.select(catOptions,  {label: catLabel  ?? "Crop category", value: catValue  ?? catOptions[0]});
+  const cropSel = Inputs.select(cropOptions, {label: cropLabel ?? "Specific crop", value: cropValue ?? cropOptions[0]});
+  const box = html`<div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:0.5rem">
+    <div>${catSel}</div><div>${cropSel}</div></div>`;
+  box.value = defaultMode === "crop" ? cropSel.value : catSel.value;
+  function fire(mode) {
+    box.value = mode === "category" ? catSel.value : cropSel.value;
+    box.dispatchEvent(new CustomEvent("input", {bubbles: true}));
+  }
+  catSel.addEventListener("input",  (e) => { e.stopPropagation(); fire("category"); });
+  cropSel.addEventListener("input", (e) => { e.stopPropagation(); fire("crop"); });
+  return box;
+}
 ```
 
 ## Certificate trends by crop
 
 ```{ojs}
 //| echo: false
-viewof sel1 = Inputs.select(uniqueSel(trends_ojs), {label: "Crop / group", value: "Fibre Crops"})
+viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 ```
 
 ```{ojs}
 //| echo: false
 Plot.plot({
   marginLeft: 55,
+  style: {fontSize: "13px"},
   x: {label: "Year", tickFormat: "d"},
   y: {label: "Certificates", grid: true},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
@@ -294,45 +376,58 @@ farmers?
 
 ```{ojs}
 //| echo: false
-viewof sel2 = Inputs.select(uniqueSel(comp_ojs), {label: "Crop / group", value: "Fibre Crops"})
+viewof sel2 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 ```
 
 ```{ojs}
 //| echo: false
-viewof mode2 = Inputs.radio(["Counts", "Percentage"], {label: "Show", value: "Percentage"})
+viewof mode2 = Inputs.radio(["Percentage", "Counts"], {label: "Show", value: "Percentage"})
+```
+
+```{ojs}
+//| echo: false
+rows2 = {
+  const all = transpose(comp_ojs).filter(d => d.sel === "All crops").map(d => ({...d, group: "All crops"}));
+  const sel = transpose(comp_ojs).filter(d => d.sel === sel2).map(d => ({...d, group: sel2}));
+  return all.concat(sel);
+}
 ```
 
 ```{ojs}
 //| echo: false
 Plot.plot({
-  marginLeft: 55,
-  x: {label: null},
-  y: {label: mode2 === "Percentage" ? "Share of certificates" : "Certificates",
-      grid: true, percent: mode2 === "Percentage"},
+  marginLeft: 90,
+  style: {fontSize: "13px"},
+  x: {label: mode2 === "Percentage" ? "Share of certificates" : "Certificates",
+      percent: mode2 === "Percentage", grid: true},
+  y: {label: null},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
   marks: [
-    Plot.barY(transpose(comp_ojs).filter(d => d.sel === sel2),
-      {x: "sel", y: "n", fill: "sector",
-       offset: mode2 === "Percentage" ? "normalize" : null, tip: true}),
-    Plot.ruleY([0])
+    Plot.barX(rows2, {x: "n", y: "group", fill: "sector",
+      offset: mode2 === "Percentage" ? "normalize" : null, tip: true}),
+    Plot.ruleX([0])
   ]
 })
 ```
 
-Switch to Percentage to see the composition cleanly. Most crops are farmer- or
-public-dominated; cotton is the one that flips almost entirely to private.
+Two thin bars: all crops on top, your selection below. Switch to Percentage to compare
+shape rather than scale. Most crops look like the top bar, farmer- or public-heavy. Cotton
+is the clearest case of a crop that flips almost entirely to private.
 
 ## Firm-level concentration
 
 ```{ojs}
 //| echo: false
-viewof sel3 = Inputs.select(uniqueSel(firm_ojs), {label: "Crop / group", value: "Fibre Crops"})
+viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 ```
 
 ```{ojs}
 //| echo: false
 Plot.plot({
-  marginLeft: 180,
+  marginLeft: 220,
+  marginRight: 20,
+  width: 760,
+  style: {fontSize: "13px"},
   x: {label: "Certificates", grid: true},
   y: {label: null},
   marks: [
@@ -344,14 +439,14 @@ Plot.plot({
 ```
 
 The top ten private applicants for the selected crop. Cotton shows Nuziveedu at the top;
-maize and rice show different firms. Use this to check whether concentration is unique to
-cotton or a general pattern.
+other crops show a different set of firms entirely. Use this to check whether
+concentration is a cotton-specific pattern or a general one.
 
 ## Variety category breakdown
 
 ```{ojs}
 //| echo: false
-viewof sel4 = Inputs.select(uniqueSel(var_ojs), {label: "Crop / group", value: "Fibre Crops"})
+viewof sel4 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 ```
 
 ```{ojs}
@@ -372,6 +467,7 @@ rows4 = {
 //| echo: false
 Plot.plot({
   marginLeft: 55,
+  style: {fontSize: "14px"},
   x: {label: null, tickRotate: -20},
   y: {label: "Certificates", grid: true},
   color: {legend: true, domain: catDomain, range: catRange},
@@ -382,15 +478,17 @@ Plot.plot({
 })
 ```
 
-Certificates split across variety categories for the selected crop and applicant. Select
-Private together with a cotton option to see how far New and Extant (VCK) varieties
-dominate, with EDVs barely present.
+Certificates split across variety categories for the selected crop and applicant. Try
+Private together with Cotton: New and Extant (VCK) varieties dominate, while EDVs are
+almost invisible.
 
 ## Cumulative ownership over time
 
 ```{ojs}
 //| echo: false
-viewof sel5 = Inputs.select(uniqueSel(cum_ojs), {label: "Crop / group", value: "All crops"})
+viewof sel5 = pairedCropInput({
+  catOptions: ["All crops"].concat(categories), catValue: "All crops",
+  cropValue: "Cotton", defaultMode: "category"})
 ```
 
 ```{ojs}
@@ -410,6 +508,7 @@ rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
 //| echo: false
 Plot.plot({
   marginLeft: 55,
+  style: {fontSize: "13px"},
   x: {label: "Year", tickFormat: "d"},
   y: {label: "Cumulative certificates", grid: true},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
@@ -421,14 +520,14 @@ Plot.plot({
 })
 ```
 
-Drag the year slider to watch ownership build up rather than just seeing the endpoint. The
-structural divergence between applicant types is a process, not a single snapshot.
+Drag the year slider to watch ownership build up rather than just seeing the endpoint.
+Default view is all crops; switch to a specific crop to see whether its divergence looks
+like cotton's or like the aggregate.
 
-# Why cotton is the outlier
+# Cotton in detail
 
-Everything in the explorer points the same way: for most crops, farmers and public bodies
-hold the bulk of certificates. Cotton is where that structure inverts. This section walks
-through why.
+The headline findings established that cotton inverts the usual applicant pattern. This
+section supports that finding with more detail on how.
 
 ## Ploidy by applicant
 
@@ -437,23 +536,13 @@ f9 <- cot %>% filter(!is.na(ploidy), !is.na(sector)) %>% count(sector, ploidy)
 ggplot(f9, aes(sector, n, fill = ploidy)) +
   geom_col(position = "dodge") + scale_fill_manual(values = ploidy_cols) +
   geom_text(aes(label = n), position = position_dodge(width = 0.9), vjust = -0.4, size = 3) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Cotton certificates by ploidy", x = "Applicant category",
        y = "No. of PVP certificates", fill = NULL)
 ```
 
 Private cotton certification is mostly tetraploid, the hybrid and Bt lines. Diploid desi
 cotton makes up a small share for every type of applicant.
-
-## Applicant composition over time
-
-```{r}
-f10 <- cot %>% filter(!is.na(sector)) %>% count(issue_year, sector)
-plot_ly(f10, x = ~issue_year, y = ~n, color = ~sector, colors = sector_cols,
-        type = "scatter", mode = "lines+markers") %>%
-  layout(title = "Cotton applicant composition over time",
-         xaxis = list(title = "Year of certificate issue"),
-         yaxis = list(title = "No. of certificates"))
-```
 
 ## Variety category by applicant
 
@@ -462,6 +551,7 @@ f11 <- cot %>% filter(!is.na(variety_category), !is.na(sector)) %>% count(variet
 ggplot(f11, aes(variety_category, n, fill = sector)) + geom_col() +
   scale_fill_manual(values = sector_cols) +
   geom_text(aes(label = n), position = position_stack(vjust = 0.5), size = 3) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Cotton certificates by variety category and applicant",
        x = "Variety category", y = "Certificates", fill = NULL) +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
@@ -475,33 +565,10 @@ ggplot(f12, aes(issue_year, n, fill = variety_category)) + geom_col() +
   scale_fill_manual(values = cat_cols) +
   geom_text(aes(label = n), position = position_stack(vjust = 0.5), size = 3) +
   scale_x_continuous(breaks = seq(yr_min, max(f12$issue_year), 2)) +
+  scale_y_continuous(labels = comma) +
   labs(title = "Private cotton certificates by category",
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
-
-## Who are the private cotton firms?
-
-```{r}
-priv <- cot %>% filter(applicant_category == "Private") %>%
-  mutate(key = alias_company(canon_company(applicant)))
-labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
-  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
-  transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
-f13 <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
-  arrange(desc(n)) %>%
-  mutate(label = ifelse(row_number() <= 10, label, "Others")) %>%
-  group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>%
-  mutate(pct = n / sum(n)) %>% arrange(desc(n))
-ggplot(f13, aes("", n, fill = fct_reorder(label, n, .desc = TRUE))) +
-  geom_col(width = 1, color = "white") + coord_polar(theta = "y") +
-  geom_text(aes(label = ifelse(pct >= 0.03, percent(pct, accuracy = 0.1), "")),
-            position = position_stack(vjust = 0.5), size = 3) +
-  labs(title = "Major private applicants, cotton", fill = NULL) +
-  theme_void(base_size = 12)
-```
-
-A small number of firms, led by Nuziveedu, hold most of the private cotton certificates.
-Varietal control in India's most commercial crop rests with a few companies.
 
 ---
 
