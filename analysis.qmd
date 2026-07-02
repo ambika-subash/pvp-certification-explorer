@@ -499,6 +499,10 @@ Built with R and Quarto.
 :::
 
 ::: {style="margin-top:2rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.8rem;color:#6b7280;line-height:1.6"}
+**Code:** [MIT License](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE).
+**Data and content:** [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA).
+If you use this tool, please cite:
+
 **How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
 Certification Explorer (India).* Centre for Economic Studies and Planning, Jawaharlal
 Nehru University. <https://ambika-subash.github.io/pvp-certification-explorer/> [Zenodo

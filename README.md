@@ -29,7 +29,8 @@ week from the latest data.
 | **Full analysis** | `analysis.qmd` | The write-up: an overview of the register, the headline findings (including a Lorenz curve and Gini coefficient for private cotton ownership), and a detailed cotton case study covering ploidy, VCK enclosure, and EDV registrations. |
 
 Both pages source `R/prep_dashboard.R`, which is the single place data loading, colour
-palettes, the company-name deduplication logic, and the Gini function live. 
+palettes, the company-name deduplication logic, and the Gini function live. That way both
+pages always agree on the numbers.
 
 ---
 
@@ -235,7 +236,9 @@ interactive site:
 12. Private cotton by category × year
 13. Major private cotton applicants (share)
 
-A consistent colour palette is used across figures and the dashboard alike so that charts make sense visually.
+A consistent colour palette is used across figures and the dashboard alike (Farmer =
+green, Private = blue, Public = red, SAU = orange, Individual Breeder = purple; EDV =
+purple in the variety-category palette) so charts line up visually side by side.
 
 ---
 
@@ -280,3 +283,17 @@ the same pipeline on your own machine instead of the cloud.
 ├── data/                          # generated datasets (+ last_updated.txt)
 └── figures/                       # generated standalone charts (git-ignored)
 ```
+
+---
+
+## License
+
+This project is dual-licensed:
+
+- **Code** (R scripts, Quarto document code, configuration files): [MIT License](LICENSE).
+- **Data, written analysis, and visualisations**: [CC BY 4.0](LICENSE-DATA).
+
+If you use this tool or its data, please cite it, see "How to cite" on the
+[dashboard](https://ambika-subash.github.io/pvp-certification-explorer/) or
+[full analysis](https://ambika-subash.github.io/pvp-certification-explorer/analysis.html)
+page.
