@@ -291,9 +291,22 @@ the same pipeline on your own machine instead of the cloud.
 This project is dual-licensed:
 
 - **Code** (R scripts, Quarto document code, configuration files): [MIT License](LICENSE).
+  Use, copy, modify, and distribute freely, minimal restrictions.
 - **Data, written analysis, and visualisations**: [CC BY 4.0](LICENSE-DATA).
+  Share and adapt for any purpose, including commercially, as long as you give
+  appropriate credit.
+
+Both license files contain only the standard, unmodified license text (so GitHub and
+other tooling can detect them correctly). This section is where the project-specific
+context lives instead.
+
+**Suggested attribution for the data and content:**
+
+> Subash, Ambika. 2026. "Who owns India's plant varieties? PVP Certification Explorer
+> (India)." Centre for Economic Studies and Planning, Jawaharlal Nehru University.
+> <https://ambika-subash.github.io/pvp-certification-explorer/>
 
 If you use this tool or its data, please cite it, see "How to cite" on the
 [dashboard](https://ambika-subash.github.io/pvp-certification-explorer/) or
 [full analysis](https://ambika-subash.github.io/pvp-certification-explorer/analysis.html)
-page.
+page for the full citation and BibTeX.
