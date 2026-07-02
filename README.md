@@ -11,6 +11,15 @@ This repo is part of a broader portfolio on agritech, biotechnology regulation, 
 
 ---
 
+**Background**
+India's Protection of Plant Varieties and Farmers' Rights Act (PPVFRA), 2001, was enacted as a sui generis intellectual property regime under WTO-TRIPS obligations. It formally recognises three classes of right-holders, viz. breeders, researchers, and farmers, and was designed to balance the commercialisation of plant genetic resources with protections for farming communities and public science. Plant Variety Protection (PVP) certificates, issued by the PPVFR Authority, are the legal instrument through which variety ownership is established and rent extracted.
+
+This dashboard uses the complete certificate register: every PVP certificate issued since 2007, to ask who has actually benefited from the Act's operation. The data show a distribution of benefits that follows the class structure of Indian agricultural biotechnology: private seed firms dominate new and commercially significant variety registrations, public research institutions (ICAR, State Agricultural Universities) hold substantial legacy registrations but have progressively withdrawn from active commercial breeding, and farmers, though nominally recognised as innovators, hold registrations that confer no right to sell branded seed and generate no royalties.
+
+Cotton is the primary analytical lens throughout. It is India's only commercially cultivated genetically modified (GM) crop, and these dynamics are most legible there. Every Essentially Derived Variety ever registered under the PPVFRA, across all crops, is a cotton variety, and all are privately held.
+
+This dashboard is the data companion to the author's research paper on the class structure of plant variety protection in India. The dataset is updated weekly from the PPVFR Authority's public register, and all code is open source.
+
 ## Data
 
 - **Source**: the PPV&FR Authority's public certificate register:
