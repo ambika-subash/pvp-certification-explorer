@@ -6,6 +6,8 @@ subtitle: "Explore the PPV&FRA certification data"
 ```{r setup}
 source("R/prep_dashboard.R")
 
+register_start_year <- min(d$issue_year, na.rm = TRUE)
+
 trends_df <- chr(sel_for(dd) %>% filter(!is.na(sector)) %>%
   count(sel, issue_year, sector, name = "n"))
 
@@ -56,14 +58,14 @@ firm_table_df <- chr(firm_crop_key %>% count(key, crop, name = "certs") %>%
             `% of all private certificates in this crop` = share_of_crop) %>%
   arrange(desc(Certificates)))
 
-# Ranked overview of the largest private firms across all crops combined, so
-# a visitor can browse and recognise a name before searching for it. Reuses
-# top_firms_ranked() (same helper the charts use) rather than a separate
-# ranking pass.
+# Ranked overview of every private firm across all crops combined. Feeds the
+# firm-lookup combobox's name list and its rank/total/crop-count summary.
+# Reuses top_firms_ranked() (same helper the charts use) rather than a
+# separate ranking pass. Not sliced to a top-N, since a single search box
+# should be able to find any firm, not just the largest ones.
 firm_n_crops <- firm_crop_key %>% distinct(key, crop) %>% count(key, name = "n_crops")
 firm_overview_df <- chr(top_firms_ranked(d) %>%
   left_join(firm_n_crops, by = "key") %>%
-  slice_head(n = 25) %>%
   transmute(Rank = row_number(), Firm = label, `Total certificates` = n,
             `Crops active in` = n_crops,
             `Share of all private certificates (%)` = round(pct, 1)))
@@ -113,13 +115,46 @@ Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
 Every chart below answers the same set of questions for whichever crop you pick: who holds
-certificates, is the market concentrated, and how has that changed over time. Certificates
-are filed by five applicant types: Farmer, Private, Public, SAU (State Agricultural
-Universities), and Individual Breeder (a person registering a variety in their own name,
-independent of any company or institution, and distinct from the Farmer category, which
-covers traditional and community-developed varieties). Individual Breeder certificates are
-rare in almost every crop. For the full write-up, background, and the cotton case study,
-see [Full analysis](analysis.qmd).
+certificates, is the market concentrated, and how has that changed over time. For the full
+write-up, background, and the cotton case study, see [Full analysis](analysis.qmd).
+
+::: {.callout-note appearance="minimal" icon="false"}
+**About this data.** A certificate under the PPVFRA confers intellectual property rights
+over a registered plant variety: the right to control commercial sale, reproduction, and
+licensing for a fixed term. This register records certificates granted, not applications
+filed or rejected. Certificates are issued to five applicant categories: Private firms,
+State Agricultural Universities (SAUs), Public institutions, Farmers, and Individual
+Breeders.
+:::
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Methodology and data notes
+
+**Source.** The PPV&FR Authority's public certificate register:
+[plantauthority.gov.in/list-certificates](https://plantauthority.gov.in/list-certificates).
+
+**Update frequency.** Weekly, every Sunday, via an automated pipeline that re-scrapes the
+full register, rebuilds the dataset, and republishes this site.
+
+**Coverage.** Every certificate granted since `r register_start_year`, through the most
+recent successful weekly refresh.
+
+**What's excluded.** Applications that were withdrawn or rejected are not in this register
+and are not represented here. This page only covers certificates that were actually
+granted.
+
+**Known limitations.** Company names are merged across spelling variants using a
+name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate-registry
+lookup, so a genuine typo or an unlisted acronym could still cause one real firm to appear
+as two. Full methodology, including how every statistic on this page is computed, is
+documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
+:::
+
+**A note on Individual Breeders.** Individual Breeders are private persons who develop
+varieties independently, outside any company or institution. This is distinct from
+Farmers, who are recognised separately under the Act's farmers' rights provisions and
+whose registrations mostly cover traditional and community-developed varieties rather
+than newly bred ones. Individual Breeder certificates are rare in almost every crop.
 
 ::: {.callout-important appearance="simple"}
 The following charts are interactive. Use the dropdowns to filter by crop, crop category,
@@ -273,9 +308,11 @@ chartCum = Plot.plot({
 withExport(chartCum, `cumulative_ownership_${slug(sel5)}_to_${yr5}`)
 ```
 
-Drag the year slider to watch ownership build up rather than just seeing the endpoint. This
-sets the broadest context, all crops, all time, before the sections below narrow in on
-specific crops and firms.
+Private firms have dominated cumulative certifications throughout the register's history.
+The gap between private and all other categories has widened consistently since 2014,
+driven largely by a surge in cotton registrations. Drag the year slider to watch this
+build up rather than just seeing the endpoint. This sets the broadest context, all crops,
+all time, before the sections below narrow in on specific crops and firms.
 
 ## Every crop at a glance
 
@@ -493,6 +530,25 @@ html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start">
 </div>`
 ```
 
+```{ojs}
+//| echo: false
+giniHighShare = {
+  const eligible = giniLookup.filter(d => d.gini !== "" && d.gini != null && !Number.isNaN(+d.gini));
+  const high = eligible.filter(d => +d.gini > 0.6);
+  return eligible.length > 0 ? high.length / eligible.length : null;
+}
+giniInterp = giniValue === null ? "" : giniValue > 0.6
+  ? "A Gini above 0.6 indicates high concentration: a small number of large seed companies dominate this crop."
+  : giniValue >= 0.4
+  ? "A Gini between 0.4 and 0.6 indicates moderate concentration: certificates are split among a wider set of firms than in a highly concentrated crop, but still unevenly."
+  : "A Gini below 0.4 indicates relatively low concentration: certificates are spread more evenly across private firms in this crop."
+```
+
+```{ojs}
+//| echo: false
+md`${giniInterp}${giniHighShare === null ? "" : ` Across all eligible crops, ${Math.round(giniHighShare * 100)}% fall in the high-concentration range (Gini above 0.6).`}`
+```
+
 Gini coefficient measures concentration among private firms holding at least one
 certificate in the selected crop. Firms with no registrations in that crop are excluded.
 Crops with fewer than 5 private certificate holders are not shown.
@@ -544,46 +600,102 @@ Private together with Cotton.
 
 ## Look up a firm
 
-The 25 largest private firms across all crops combined, so you can browse and recognise
-a name before searching for it below.
+Start typing a firm name (try "Nuziveedu") and pick it from the suggestions.
 
 ```{ojs}
 //| echo: false
-html`<div class="firm-lookup-table">${
-  Inputs.table(transpose(firm_overview_ojs), {
-    columns: ["Rank", "Firm", "Total certificates", "Crops active in", "Share of all private certificates (%)"],
-    rows: 25,
-    sort: "Rank"
-  })
-}</div>`
+firmOverviewRows = transpose(firm_overview_ojs)
+firmNames = firmOverviewRows.map(d => d.Firm).sort()
+
+// A native browser combobox: a text input with a <datalist> of suggestions.
+// Typing filters the dropdown automatically (built into the browser, no
+// custom filtering logic needed), and it still accepts free text, so this
+// behaves as one unified search-and-select control rather than a separate
+// search box plus a separate results table.
+function firmCombobox(names) {
+  const listId = "firm-datalist-" + Math.random().toString(36).slice(2);
+  const input = html`<input type="text" list="${listId}" placeholder="Search or select a firm..."
+    style="padding:6px 10px;font-size:14px;width:340px;border:1px solid #d1d5db;border-radius:4px">`;
+  const options = names.map(n => html`<option value="${n}">`);
+  const datalist = html`<datalist id="${listId}">${options}</datalist>`;
+  const box = html`<div>${input}${datalist}</div>`;
+  box.value = "";
+  input.addEventListener("input", () => {
+    box.value = input.value;
+    box.dispatchEvent(new CustomEvent("input", {bubbles: true}));
+  });
+  return box;
+}
 ```
 
 ```{ojs}
 //| echo: false
-viewof firmSearch = Inputs.search(transpose(firm_table_ojs), {placeholder: "Search firm name..."})
+viewof firmPick = firmCombobox(firmNames)
 ```
 
 ```{ojs}
 //| echo: false
-html`<div class="firm-lookup-table">${
-  Inputs.table(firmSearch, {
-    columns: ["Firm", "Crop", "Certificates", "Total (all crops)",
-              "% of this firm's own certificates", "% of all private certificates in this crop"],
-    rows: 15,
-    sort: "Certificates",
-    reverse: true
-  })
-}</div>`
+firmMatch = firmOverviewRows.find(d => d.Firm.toLowerCase() === firmPick.trim().toLowerCase())
+firmCropRows = firmMatch
+  ? transpose(firm_table_ojs).filter(d => d.Firm === firmMatch.Firm)
+      .sort((a, b) => d3.descending(+a.Certificates, +b.Certificates))
+  : []
 ```
 
-Every private applicant, every crop they hold certificates in, how much of that firm's
-own total portfolio the crop represents, and separately, what share of all private
-certificates in that crop belong to them. Search a firm name (try "Nuziveedu") to see
-their full footprint across crops.
+```{ojs}
+//| echo: false
+firmPick.trim() === ""
+  ? html`<p><em>Start typing above to look up a firm's crop-by-crop footprint.</em></p>`
+  : !firmMatch
+    ? html`<p><em>No exact match for "${firmPick}". Pick a suggestion from the dropdown.</em></p>`
+    : html`<div>
+        <p><strong>${firmMatch.Firm}</strong> holds ${firmMatch["Total certificates"]} certificates
+        across ${firmMatch["Crops active in"]} crop(s), ${firmMatch["Share of all private certificates (%)"]}%
+        of all private certificates nationally, ranked #${firmMatch.Rank} among all private applicants.</p>
+        <div class="firm-lookup-table">${
+          Inputs.table(firmCropRows, {
+            columns: ["Crop", "Certificates", "% of this firm's own certificates",
+                      "% of all private certificates in this crop"],
+            rows: 15,
+            sort: "Certificates",
+            reverse: true
+          })
+        }</div>
+      </div>`
+```
 
 ---
 
 ::: {.callout-tip appearance="minimal"}
 For the headline findings, the cotton case study, and full methodology, see
 [Full analysis](analysis.qmd). Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
+:::
+
+::: {style="margin-top:2rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.8rem;color:#6b7280;line-height:1.6"}
+**How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
+Certification Explorer (India).* Centre for Economic Studies and Planning, Jawaharlal
+Nehru University. <https://ambika-subash.github.io/pvp-certification-explorer/> [Zenodo
+DOI to be added upon deposit].
+
+<details><summary style="cursor:pointer">BibTeX</summary>
+
+```
+@misc{subash2026pvp,
+  author      = {Subash, Ambika},
+  title       = {Who owns {India}'s plant varieties? {PVP} Certification Explorer ({India})},
+  year        = {2026},
+  institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
+  url         = {https://ambika-subash.github.io/pvp-certification-explorer/},
+  note        = {Data updated weekly. Accessed: [date]}
+}
+```
+
+</details>
+
+**About the author.** Built by Ambika Subash, Centre for Economic Studies and Planning,
+Jawaharlal Nehru University. Her research examines the political economy of agricultural
+biotechnology regulation, seed systems, and regulatory governance in India.
+[Substack](https://theloneresearcher.substack.com/) |
+[ORCID](https://orcid.org/0000-0002-8636-7123) |
+[Google Scholar](https://scholar.google.com/citations?user=QbSSDTAAAAAJ&hl=en)
 :::

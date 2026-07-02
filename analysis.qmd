@@ -61,6 +61,45 @@ concentration is most complete.
 To ask these questions of a specific crop yourself, use the
 [interactive explorer](index.qmd).
 
+::: {.callout-note appearance="minimal" icon="false"}
+**About this data.** A certificate under the PPVFRA confers intellectual property rights
+over a registered plant variety: the right to control commercial sale, reproduction, and
+licensing for a fixed term. This register records certificates granted, not applications
+filed or rejected. Certificates are issued to five applicant categories: Private firms,
+State Agricultural Universities (SAUs), Public institutions, Farmers, and Individual
+Breeders.
+:::
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Methodology and data notes
+
+**Source.** The PPV&FR Authority's public certificate register:
+[plantauthority.gov.in/list-certificates](https://plantauthority.gov.in/list-certificates).
+
+**Update frequency.** Weekly, every Sunday, via an automated pipeline that re-scrapes the
+full register, rebuilds the dataset, and republishes this site.
+
+**Coverage.** Every certificate granted since `r register_start_year`, through the most
+recent successful weekly refresh.
+
+**What's excluded.** Applications that were withdrawn or rejected are not in this
+register and are not represented here. This page only covers certificates that were
+actually granted.
+
+**Known limitations.** Company names are merged across spelling variants using a
+name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate-registry
+lookup, so a genuine typo or an unlisted acronym could still cause one real firm to
+appear as two. Every figure quoted in the prose below (firm percentages, EDV and VCK
+counts, cotton applicant splits) is computed live from the current dataset at render
+time, not hardcoded, so it updates automatically with each weekly refresh. Full
+methodology is documented in the
+[project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
+:::
+
+**A note on Individual Breeders.** Individual Breeders are private persons who develop
+varieties independently, outside any company or institution. This is distinct from
+Farmers, who are recognised separately under the Act's farmers' rights provisions.
+
 # Certificates at a glance
 
 ## Certificates issued over time
@@ -251,8 +290,10 @@ ggplot(f_cum, aes(issue_year, cum, color = sector)) +
 ```
 
 This is the inversion in the previous chart, unfolding year by year rather than as a single
-endpoint. Watch where the lines separate: that is the moment the structural divergence
-between applicant types took hold.
+endpoint. Private firms have dominated cumulative certifications throughout the register's
+history. The gap between private and all other categories has widened consistently since
+2014, driven largely by a surge in cotton registrations. Watch where the lines separate:
+that is the moment the structural divergence between applicant types took hold.
 
 ## Cotton applicant composition over time
 
@@ -455,4 +496,33 @@ register entries. All figures use year of certificate issue. Full pipeline is op
 and available in the
 [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
 Built with R and Quarto.
+:::
+
+::: {style="margin-top:2rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.8rem;color:#6b7280;line-height:1.6"}
+**How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
+Certification Explorer (India).* Centre for Economic Studies and Planning, Jawaharlal
+Nehru University. <https://ambika-subash.github.io/pvp-certification-explorer/> [Zenodo
+DOI to be added upon deposit].
+
+<details><summary style="cursor:pointer">BibTeX</summary>
+
+```
+@misc{subash2026pvp,
+  author      = {Subash, Ambika},
+  title       = {Who owns {India}'s plant varieties? {PVP} Certification Explorer ({India})},
+  year        = {2026},
+  institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
+  url         = {https://ambika-subash.github.io/pvp-certification-explorer/},
+  note        = {Data updated weekly. Accessed: [date]}
+}
+```
+
+</details>
+
+**About the author.** Built by Ambika Subash, Centre for Economic Studies and Planning,
+Jawaharlal Nehru University. Her research examines the political economy of agricultural
+biotechnology regulation, seed systems, and regulatory governance in India.
+[Substack](https://theloneresearcher.substack.com/) |
+[ORCID](https://orcid.org/0000-0002-8636-7123) |
+[Google Scholar](https://scholar.google.com/citations?user=QbSSDTAAAAAJ&hl=en)
 :::

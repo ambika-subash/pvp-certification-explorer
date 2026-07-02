@@ -40,15 +40,46 @@ cot <- dd %>% filter(is_cotton) %>%
 canon_company <- function(x){
   y <- str_to_lower(x)
   y <- str_replace(y, "^\\s*(m/s\\.?|messrs\\.?)\\s+", "")  # strip "M/S" / "Messrs" prefix
+  # strip administrative reissue/correction annotations entirely -- the
+  # register appends things like "(reissued with address change, old serial
+  # no. 12345)" when a certificate is reissued, and the serial number
+  # differs every time, which otherwise splits one firm into many distinct
+  # canonical keys (this is what was fragmenting Pioneer Overseas
+  # Corporation into a dozen-plus "different" firms). These annotations
+  # sometimes contain nested parentheses of their own (e.g. a former name
+  # in brackets inside the reissue note), so strip from the opening marker
+  # straight to the end of the string rather than trying to match a single
+  # balanced parenthetical -- it is always a trailing block, never followed
+  # by other legitimate content.
+  y <- str_replace(y, "\\((reissu\\w*|corrigend\\w*).*$", "")
   y <- str_replace_all(y, "[.,()/]", " ")
   y <- str_replace_all(y, "&", " and "); y <- str_replace_all(y, "\\bseeds\\b", "seed")
+  # spelling/spacing noise for the same entity, not a different legal
+  # entity: "Sciences" vs "Science", "Crop Science" vs "CropScience". Legal
+  # jurisdiction suffixes (LP / AG / Ltd) are left untouched by this, so
+  # entities that are genuinely different (e.g. a US LP vs a German AG)
+  # still end up as separate keys after the suffix-stripping step below.
+  y <- str_replace_all(y, "\\bsciences\\b", "science")
+  y <- str_replace_all(y, "crop\\s*science", "cropscience")
+  # "P Ltd" is a common Indian abbreviation for "Private Limited"; only
+  # collapse it in that specific adjacent position, not standalone "P"
+  # elsewhere, since that could be a legitimate initial in some other name
+  y <- str_replace_all(y, "\\bp\\s+ltd\\b", "ltd")
   y <- str_replace_all(y, "\\b(private|pvt|limited|ltd|llp|company|co|corporation|corp|incorporated|inc)\\b", " ")
   str_squish(y)
 }
 alias_company <- function(key) case_when(
   str_detect(key, "maharashtra hybrid seed") | key == "mahyco" ~ "mahyco",
-  str_detect(key, "^monsanto") ~ "monsanto", TRUE ~ key)
-pretty_names <- c("mahyco" = "Mahyco (Maharashtra Hybrid Seeds)", "monsanto" = "Monsanto")
+  str_detect(key, "^monsanto") ~ "monsanto",
+  str_detect(key, "^pioneer overseas") ~ "pioneer overseas",
+  # genuine data-entry typos ("Sees" for "Seeds", "Hybris" for "Hybrid") plus
+  # a location suffix, none of which canon_company()'s regex can generalise
+  str_detect(key, "^shakti vardhak") ~ "shakti vardhak hybrid seed",
+  str_detect(key, "^ganga kaveri seed") ~ "ganga kaveri seed",
+  TRUE ~ key)
+pretty_names <- c("mahyco" = "Mahyco (Maharashtra Hybrid Seeds)", "monsanto" = "Monsanto",
+                  "pioneer overseas" = "Pioneer Overseas Corporation",
+                  "shakti vardhak hybrid seed" = "Shakti Vardhak Hybrid Seeds")
 
 # Gini coefficient of a vector of firm-level counts: 0 = every firm holds an
 # equal share, 1 = one firm holds everything.
