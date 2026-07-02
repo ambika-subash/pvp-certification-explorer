@@ -1,5 +1,7 @@
 # PVP Certification Explorer (India)
 
+[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
+
 An R + Quarto project on India's Plant Variety Protection (PVP) certificates, issued
 under the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2001. The full
 register is scraped, cleaned, and analysed automatically every week and published as a
@@ -300,13 +302,28 @@ Both license files contain only the standard, unmodified license text (so GitHub
 other tooling can detect them correctly). This section is where the project-specific
 context lives instead.
 
-**Suggested attribution for the data and content:**
+## How to cite
+
+If you use this tool or its data, please cite it:
 
 > Subash, Ambika. 2026. "Who owns India's plant varieties? PVP Certification Explorer
 > (India)." Centre for Economic Studies and Planning, Jawaharlal Nehru University.
-> <https://ambika-subash.github.io/pvp-certification-explorer/>
+> <https://doi.org/10.5281/zenodo.21140353>
 
-If you use this tool or its data, please cite it, see "How to cite" on the
-[dashboard](https://ambika-subash.github.io/pvp-certification-explorer/) or
-[full analysis](https://ambika-subash.github.io/pvp-certification-explorer/analysis.html)
-page for the full citation and BibTeX.
+BibTeX:
+
+```bibtex
+@misc{subash2026pvp,
+  author      = {Subash, Ambika},
+  title       = {Who owns {India}'s plant varieties? {PVP} Certification Explorer ({India})},
+  year        = {2026},
+  institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
+  doi         = {10.5281/zenodo.21140353},
+  url         = {https://doi.org/10.5281/zenodo.21140353},
+  note        = {Data updated weekly. Accessed: [date]}
+}
+```
+
+The DOI `10.5281/zenodo.21140353` is the concept DOI: it always resolves to the latest
+released version. Each release also gets its own version-specific DOI on Zenodo if you
+need to cite an exact snapshot.

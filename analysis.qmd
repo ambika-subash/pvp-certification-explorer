@@ -44,6 +44,8 @@ sau_cotton_years <- cot %>% filter(sector == "SAU") %>% pull(issue_year)
 sau_cotton_last  <- if (length(sau_cotton_years)) max(sau_cotton_years, na.rm = TRUE) else NA_integer_
 ```
 
+[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
+
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
 [PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
@@ -500,8 +502,7 @@ Data and content: [CC BY 4.0](https://github.com/ambika-subash/pvp-certification
 
 **How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
 Certification Explorer (India).* Centre for Economic Studies and Planning, Jawaharlal
-Nehru University. <https://ambika-subash.github.io/pvp-certification-explorer/> [Zenodo
-DOI to be added upon deposit].
+Nehru University. <https://doi.org/10.5281/zenodo.21140353>
 
 <details><summary style="cursor:pointer;display:inline-block;padding:2px 10px;margin-top:0.25rem;background:#eef2f7;border-radius:4px;font-weight:600;color:#374151;font-size:0.78rem">Show BibTeX</summary>
 
@@ -511,7 +512,8 @@ DOI to be added upon deposit].
   title       = {Who owns {India}'s plant varieties? {PVP} Certification Explorer ({India})},
   year        = {2026},
   institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
-  url         = {https://ambika-subash.github.io/pvp-certification-explorer/},
+  doi         = {10.5281/zenodo.21140353},
+  url         = {https://doi.org/10.5281/zenodo.21140353},
   note        = {Data updated weekly. Accessed: [date]}
 }
 ```
