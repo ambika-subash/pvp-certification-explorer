@@ -25,7 +25,7 @@ week from the latest data.
 
 | Page | File | What it's for |
 |------|------|----------------|
-| **Explore the data** | `index.qmd` | The landing page. Interactive charts (built with Observable Plot inside Quarto's OJS engine) that let you ask the paper's questions of *any* crop, not just cotton: certificate trends, applicant composition, firm-level concentration, a per-crop Gini concentration score, variety category breakdown, cumulative ownership over time, a full crop-comparison tool, and a searchable firm lookup table. |
+| **Explore the data** | `index.qmd` | The landing page. Interactive charts (built with Observable Plot inside Quarto's OJS engine) that let you ask the paper's questions of *any* crop, not just cotton: certificate trends, applicant composition, firm-level concentration, a per-crop Gini concentration score, variety category breakdown, cumulative ownership over time, and a full crop-comparison tool. Every chart has a "Save chart as PNG" export button. Firm lookup starts with a browsable top-25 ranking, then a searchable table of every private applicant's crop-by-crop footprint. |
 | **Full analysis** | `analysis.qmd` | The write-up: an overview of the register, the headline findings (including a Lorenz curve and Gini coefficient for private cotton ownership), and a detailed cotton case study covering ploidy, VCK enclosure, and EDV registrations. |
 
 Both pages source `R/prep_dashboard.R`, which is the single place data loading, colour
@@ -47,7 +47,7 @@ Generated data files (tracked in `data/`):
 | File | Description |
 |------|-------------|
 | `pvp_certificates_all.csv`   | Raw scrape of the full register (one row per certificate). |
-| `pvp_certificates_clean.csv` | Cleaned/analysis-ready: normalised categories & sectors, parsed years, cotton & ploidy flags, SAU split. |
+| `pvp_certificates_clean.csv` | Cleaned/analysis-ready: normalised categories & sectors, parsed years, cotton & ploidy flags. |
 | `last_updated.txt`           | Timestamp of the last successful refresh. |
 
 ---
@@ -73,7 +73,9 @@ Extras:
 - Category/sector/crop labels are case-normalised (`FARMER`/`farmer` → `Farmer`, etc.).
 - **Years** are extracted by regex from the (inconsistently formatted) issue-date field;
   all time-series use **year of certificate issue**.
-- **SAU** applicants are split out of "Public" using an applicant-name heuristic.
+- **SAU** is a sector value the register itself assigns; the pipeline does not derive it
+  from applicant names, it just passes the register's own `applicant_category` field
+  through unchanged (after normalising case and whitespace).
 - **Cotton ploidy** (diploid/tetraploid) is read from the crop field.
 
 ---
@@ -153,6 +155,25 @@ $G = 0$ means every firm holds an equal share of certificates in that crop; $G =
 means a single firm holds all of them. Gini is unstable with very few observations, so
 the interactive per-crop explorer excludes any crop with fewer than 5 distinct private
 applicants. Below that threshold the statistic isn't meaningful.
+
+### Figures in the prose are computed live, not hardcoded
+
+Every specific number quoted in `analysis.qmd`'s write-up, firm names and their
+percentages, EDV and VCK counts, the cotton applicant split, peak years, is computed by
+inline R at render time from whatever `data/pvp_certificates_clean.csv` currently
+contains, rather than typed in by hand. That means the weekly data refresh updates the
+prose along with the charts: if a new firm overtakes Nuziveedu next year, or the EDV
+count changes, the text describing it changes too on the next render, nobody has to
+remember to go back and edit a sentence.
+
+The `setup` chunk at the top of `analysis.qmd` computes these once (register span, EDV
+totals, cotton applicant splits, VCK splits, top-firm rankings and their prose) so every
+caption that cites the same fact pulls from the same variable, and can't drift out of
+sync with a different caption citing the same thing. The `top_firms_ranked()` and
+`top_firms_prose()` helpers in `R/prep_dashboard.R` turn a firm ranking directly into
+readable text, for example `"Nuziveedu Seed (30.1 percent), Prabhat Agri Biotech (11.8
+percent), and Mahyco (7.1 percent)"`, so a chart and the sentence describing it are
+always built from the same underlying ranking.
 
 ---
 
