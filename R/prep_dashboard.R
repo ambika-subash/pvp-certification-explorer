@@ -9,7 +9,10 @@ library(ggplot2); library(forcats); library(scales); library(plotly)
 d <- read_csv("data/pvp_certificates_clean.csv", show_col_types = FALSE)
 
 yr_min <- 2009L
-theme_set(theme_minimal(base_size = 13))
+theme_set(theme_minimal(base_size = 13) + theme(
+  axis.title.x = element_text(margin = margin(t = 10)),
+  axis.title.y = element_text(margin = margin(r = 10))
+))
 accent <- "#0d9488"   # teal - generic/non-category charts (certs over time, crop groups)
 muted  <- "#6b7280"   # grey - deliberate backdrop colour (e.g. "All crops" baseline bars)
 cat_cols <- c("Farmer"="#4daf4a","New"="#377eb8","Extant"="#80b1d3",
@@ -17,7 +20,7 @@ cat_cols <- c("Farmer"="#4daf4a","New"="#377eb8","Extant"="#80b1d3",
 sector_cols <- c("Farmer"="#4daf4a","Private"="#377eb8","Public"="#e41a1c",
                  "SAU"="#ff7f00","Individual Breeder"="#984ea3")
 ploidy_cols <- c("Diploid"="#377eb8","Tetraploid"="#e41a1c")
-set_cols    <- c("All crops"=muted,"Cotton"="#e41a1c")
+set_cols    <- c("All crops"=accent,"Cotton"="#e41a1c")
 sector_levels <- c("Farmer","Private","Public","SAU","Individual Breeder")
 cat_levels    <- c("Farmer","New","Extant","Extant (Notified)","Extant (VCK)","EDV")
 paper_groups  <- c("Cereals","Fibre Crops","Vegetables","Legumes","Oilseeds","Fruits","Sugar Crops")
@@ -56,14 +59,31 @@ gini <- function(x){
   (2 * sum(seq_len(n) * x) / (n * sum(x))) - (n + 1) / n
 }
 
-top_firms_bar <- function(df, n_top = 8, title){
+# Full ranked, deduplicated, labelled list of private firms in df (one row
+# per firm, not bucketed into "Others"). Both the chart and any inline text
+# stats about "the top N firms" should be built from this, so a number
+# quoted in prose can never drift out of sync with what a chart shows.
+top_firms_ranked <- function(df){
   priv <- df %>% filter(applicant_category == "Private") %>%
     mutate(key = alias_company(canon_company(applicant)))
   labels <- priv %>% count(key, applicant) %>% group_by(key) %>%
     slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
     transmute(key, label = coalesce(unname(pretty_names[key]), applicant))
-  f <- priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
-    arrange(desc(n)) %>%
+  priv %>% count(key, name = "n") %>% left_join(labels, by = "key") %>%
+    arrange(desc(n)) %>% mutate(pct = 100 * n / sum(n))
+}
+
+# "and"-joined prose list like "A (10%), B (8%), and C (5%)" from the top
+# n_top rows of a top_firms_ranked() table.
+top_firms_prose <- function(ranked, n_top, digits = 1){
+  top <- ranked %>% slice_head(n = n_top)
+  parts <- paste0(top$label, " (", round(top$pct, digits), " percent)")
+  if (length(parts) <= 1) return(parts)
+  paste0(paste(parts[-length(parts)], collapse = ", "), ", and ", parts[length(parts)])
+}
+
+top_firms_bar <- function(df, n_top = 8, title){
+  f <- top_firms_ranked(df) %>%
     mutate(label = ifelse(row_number() <= n_top, label, "Others")) %>%
     group_by(label) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(n)
   ggplot(f, aes(x = n, y = fct_reorder(label, n))) +

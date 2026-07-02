@@ -56,6 +56,18 @@ firm_table_df <- chr(firm_crop_key %>% count(key, crop, name = "certs") %>%
             `% of all private certificates in this crop` = share_of_crop) %>%
   arrange(desc(Certificates)))
 
+# Ranked overview of the largest private firms across all crops combined, so
+# a visitor can browse and recognise a name before searching for it. Reuses
+# top_firms_ranked() (same helper the charts use) rather than a separate
+# ranking pass.
+firm_n_crops <- firm_crop_key %>% distinct(key, crop) %>% count(key, name = "n_crops")
+firm_overview_df <- chr(top_firms_ranked(d) %>%
+  left_join(firm_n_crops, by = "key") %>%
+  slice_head(n = 25) %>%
+  transmute(Rank = row_number(), Firm = label, `Total certificates` = n,
+            `Crops active in` = n_crops,
+            `Share of all private certificates (%)` = round(pct, 1)))
+
 # Gini lookup by crop, computed once at render time (not recomputed per
 # dropdown click). Reuses gini() and the same canon_company()/alias_company()
 # merge already built above via firm_crop_key -- no separate dedup logic.
@@ -87,6 +99,7 @@ ojs_define(var_ojs    = var_df)
 ojs_define(cum_ojs    = cum_df)
 ojs_define(heat_ojs       = heat_df)
 ojs_define(firm_table_ojs = firm_table_df)
+ojs_define(firm_overview_ojs = firm_overview_df)
 ojs_define(gini_crops_ojs      = sort(gini_by_crop$crop))
 ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
 ojs_define(gini_bar_ojs        = gini_bar_df)
@@ -152,6 +165,71 @@ function pairedCropInput({catOptions = categories, cropOptions = crops,
 }
 ```
 
+```{ojs}
+//| echo: false
+// Inputs.table always shows a row-selection checkbox column, which none of
+// the tables on this page use (they're for browsing/searching, not feeding
+// a selection into another chart). Injected once, applies to every table
+// with this class regardless of where it appears on the page.
+html`<style>
+  .firm-lookup-table :is(th, td):first-child { display: none; }
+</style>`
+```
+
+```{ojs}
+//| echo: false
+// Shared helpers: turn any crop/category selection into a filename-safe
+// slug, and let a chart's SVG be saved as a PNG. Plot.plot() returns a bare
+// <svg> for simple charts but a <figure> wrapping an <svg> when a legend is
+// present, so downloadChartAsPng() checks for both.
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+}
+
+function downloadChartAsPng(chartNode, filename) {
+  const svgEl = chartNode instanceof SVGElement ? chartNode : chartNode.querySelector("svg");
+  if (!svgEl) return;
+  const scale = 2;
+  const w = svgEl.width && svgEl.width.baseVal ? svgEl.width.baseVal.value : svgEl.clientWidth;
+  const h = svgEl.height && svgEl.height.baseVal ? svgEl.height.baseVal.value : svgEl.clientHeight;
+  const svgString = new XMLSerializer().serializeToString(svgEl);
+  const svgBlob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = w * scale;
+    canvas.height = h * scale;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(scale, scale);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, 0, 0, w, h);
+    URL.revokeObjectURL(url);
+    canvas.toBlob((blob) => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename.endsWith(".png") ? filename : filename + ".png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+    });
+  };
+  img.src = url;
+}
+
+// Returns a div containing a "Save chart as PNG" button plus the chart
+// itself, so the two always sit together wherever this is used.
+function withExport(chartNode, filename) {
+  const btn = html`<button style="margin-bottom:0.5rem;padding:4px 12px;font-size:12px;
+    border:1px solid #d1d5db;border-radius:4px;background:#f9fafb;cursor:pointer">
+    ⬇ Save chart as PNG</button>`;
+  btn.onclick = () => downloadChartAsPng(chartNode, filename);
+  return html`<div>${btn}<div>${chartNode}</div></div>`;
+}
+```
+
 ## Cumulative ownership over time
 
 ```{ojs}
@@ -176,11 +254,11 @@ rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
 
 ```{ojs}
 //| echo: false
-Plot.plot({
-  marginLeft: 55,
+chartCum = Plot.plot({
+  marginLeft: 65,
   style: {fontSize: "13px"},
-  x: {label: "Year", tickFormat: "d"},
-  y: {label: "Cumulative certificates", grid: true},
+  x: {label: "Year", tickFormat: "d", tickPadding: 8},
+  y: {label: "Cumulative certificates", grid: true, tickPadding: 8},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
   marks: [
     Plot.line(rows5, {x: "issue_year", y: "cum", stroke: "sector", z: "sector"}),
@@ -188,6 +266,11 @@ Plot.plot({
     Plot.ruleY([0])
   ]
 })
+```
+
+```{ojs}
+//| echo: false
+withExport(chartCum, `cumulative_ownership_${slug(sel5)}_to_${yr5}`)
 ```
 
 Drag the year slider to watch ownership build up rather than just seeing the endpoint. This
@@ -221,21 +304,26 @@ rowsHeat = transpose(heat_ojs).filter(d => cropsPick.includes(d.crop))
 
 ```{ojs}
 //| echo: false
-rowsHeat.length === 0
+chartCompare = rowsHeat.length === 0 ? null : Plot.plot({
+  marginLeft: 110,
+  style: {fontSize: "13px"},
+  x: {label: modeHeat === "Percentage" ? "Share of certificates" : "Certificates",
+      percent: modeHeat === "Percentage", grid: true, tickPadding: 8},
+  y: {label: null, tickPadding: 8},
+  color: {legend: true, domain: sectorDomain, range: sectorRange},
+  marks: [
+    Plot.barX(rowsHeat, {x: "n", y: "crop", fill: "sector",
+      offset: modeHeat === "Percentage" ? "normalize" : null, tip: true}),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+chartCompare === null
   ? html`<p><em>Select at least one crop above.</em></p>`
-  : Plot.plot({
-      marginLeft: 100,
-      style: {fontSize: "13px"},
-      x: {label: modeHeat === "Percentage" ? "Share of certificates" : "Certificates",
-          percent: modeHeat === "Percentage", grid: true},
-      y: {label: null},
-      color: {legend: true, domain: sectorDomain, range: sectorRange},
-      marks: [
-        Plot.barX(rowsHeat, {x: "n", y: "crop", fill: "sector",
-          offset: modeHeat === "Percentage" ? "normalize" : null, tip: true}),
-        Plot.ruleX([0])
-      ]
-    })
+  : withExport(chartCompare, `crop_comparison_${cropsPick.map(slug).join("_")}_${slug(modeHeat)}`)
 ```
 
 Select one or more crops to compare their applicant composition. Toggle between raw
@@ -250,12 +338,12 @@ viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 
 ```{ojs}
 //| echo: false
-Plot.plot({
-  marginLeft: 55,
+chartTrends = Plot.plot({
+  marginLeft: 65,
   marginBottom: 55,
   style: {fontSize: "13px"},
-  x: {label: "Year", tickFormat: "d", tickRotate: -45},
-  y: {label: "Certificates", grid: true},
+  x: {label: "Year", tickFormat: "d", tickRotate: -45, tickPadding: 8},
+  y: {label: "Certificates", grid: true, tickPadding: 8},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
   marks: [
     Plot.barY(transpose(trends_ojs).filter(d => d.sel === sel1),
@@ -263,6 +351,11 @@ Plot.plot({
     Plot.ruleY([0])
   ]
 })
+```
+
+```{ojs}
+//| echo: false
+withExport(chartTrends, `certificate_trends_crop_${slug(sel1)}`)
 ```
 
 Annual certificates for the selected crop, stacked by applicant category.
@@ -290,12 +383,12 @@ rows2 = {
 
 ```{ojs}
 //| echo: false
-Plot.plot({
-  marginLeft: 90,
+chartComposition = Plot.plot({
+  marginLeft: 100,
   style: {fontSize: "13px"},
   x: {label: mode2 === "Percentage" ? "Share of certificates" : "Certificates",
-      percent: mode2 === "Percentage", grid: true},
-  y: {label: null},
+      percent: mode2 === "Percentage", grid: true, tickPadding: 8},
+  y: {label: null, tickPadding: 8},
   color: {legend: true, domain: sectorDomain, range: sectorRange},
   marks: [
     Plot.barX(rows2, {x: "n", y: "group", fill: "sector",
@@ -303,6 +396,11 @@ Plot.plot({
     Plot.ruleX([0])
   ]
 })
+```
+
+```{ojs}
+//| echo: false
+withExport(chartComposition, `applicant_composition_crop_${slug(sel2)}_${slug(mode2)}`)
 ```
 
 Two bars: all crops on top, your selection below. Switch to Percentage to compare shape
@@ -317,19 +415,24 @@ viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 
 ```{ojs}
 //| echo: false
-Plot.plot({
+chartFirms = Plot.plot({
   marginLeft: 220,
-  marginRight: 20,
+  marginRight: 30,
   width: 760,
   style: {fontSize: "13px"},
-  x: {label: "Certificates", grid: true},
-  y: {label: null},
+  x: {label: "Certificates", grid: true, tickPadding: 8},
+  y: {label: null, tickPadding: 8},
   marks: [
     Plot.barX(transpose(firm_ojs).filter(d => d.sel === sel3),
       {x: "n", y: "label", sort: {y: "x", reverse: true}, fill: "#377eb8", tip: true}),
     Plot.ruleX([0])
   ]
 })
+```
+
+```{ojs}
+//| echo: false
+withExport(chartFirms, `firm_concentration_crop_${slug(sel3)}`)
 ```
 
 The top ten private applicants for the selected crop.
@@ -362,25 +465,28 @@ giniBarRows = transpose(gini_bar_ojs).filter(d => d.crop === giniCrop)
 
 ```{ojs}
 //| echo: false
+chartGini = Plot.plot({
+  marginLeft: 220,
+  marginRight: 40,
+  width: 640,
+  height: giniBarRows.length * 32 + 60,
+  style: {fontSize: "12px"},
+  x: {label: "Certificates", grid: true, tickPadding: 8},
+  y: {label: null, tickPadding: 8},
+  marks: [
+    Plot.barX(giniBarRows, {x: "certs", y: "firm", sort: {y: "x", reverse: true}, fill: "#377eb8"}),
+    Plot.text(giniBarRows, {x: "certs", y: "firm", text: "certs", dx: 6, textAnchor: "start"}),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
 html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start">
-  <div>${
-    Plot.plot({
-      marginLeft: 220,
-      marginRight: 40,
-      width: 640,
-      height: giniBarRows.length * 32 + 60,
-      style: {fontSize: "12px"},
-      x: {label: "Certificates", grid: true},
-      y: {label: null},
-      marks: [
-        Plot.barX(giniBarRows, {x: "certs", y: "firm", sort: {y: "x", reverse: true}, fill: "#377eb8"}),
-        Plot.text(giniBarRows, {x: "certs", y: "firm", text: "certs", dx: 6, textAnchor: "start"}),
-        Plot.ruleX([0])
-      ]
-    })
-  }</div>
+  <div>${withExport(chartGini, `gini_concentration_crop_${slug(giniCrop)}`)}</div>
   <div style="flex:0 0 220px;text-align:center;padding-top:1rem">
-    <div style="font-size:3rem;font-weight:700;color:#377eb8">${giniValue === null ? "–" : giniValue.toFixed(2)}</div>
+    <div style="font-size:3rem;font-weight:700;color:#377eb8">${giniValue === null ? "N/A" : giniValue.toFixed(2)}</div>
     <div style="color:#6b7280;font-size:0.85rem;margin-top:0.25rem">0 = perfectly equal, 1 = one firm holds everything</div>
     <div style="font-weight:600;margin-top:0.75rem">${giniLabel}</div>
   </div>
@@ -414,12 +520,12 @@ rows4 = {
 
 ```{ojs}
 //| echo: false
-Plot.plot({
-  marginLeft: 55,
+chartVariety = Plot.plot({
+  marginLeft: 65,
   marginBottom: 80,
   style: {fontSize: "14px"},
-  x: {label: null, tickRotate: -30},
-  y: {label: "Certificates", grid: true},
+  x: {label: null, tickRotate: -30, tickPadding: 8},
+  y: {label: "Certificates", grid: true, tickPadding: 8},
   color: {legend: true, domain: catDomain, range: catRange},
   marks: [
     Plot.barY(rows4, {x: "variety_category", y: "n", fill: "variety_category", tip: true}),
@@ -428,10 +534,29 @@ Plot.plot({
 })
 ```
 
+```{ojs}
+//| echo: false
+withExport(chartVariety, `variety_category_crop_${slug(sel4)}_${slug(sec4)}`)
+```
+
 Certificates split across variety categories for the selected crop and applicant. Try
 Private together with Cotton.
 
 ## Look up a firm
+
+The 25 largest private firms across all crops combined, so you can browse and recognise
+a name before searching for it below.
+
+```{ojs}
+//| echo: false
+html`<div class="firm-lookup-table">${
+  Inputs.table(transpose(firm_overview_ojs), {
+    columns: ["Rank", "Firm", "Total certificates", "Crops active in", "Share of all private certificates (%)"],
+    rows: 25,
+    sort: "Rank"
+  })
+}</div>`
+```
 
 ```{ojs}
 //| echo: false
@@ -440,13 +565,15 @@ viewof firmSearch = Inputs.search(transpose(firm_table_ojs), {placeholder: "Sear
 
 ```{ojs}
 //| echo: false
-Inputs.table(firmSearch, {
-  columns: ["Firm", "Crop", "Certificates", "Total (all crops)",
-            "% of this firm's own certificates", "% of all private certificates in this crop"],
-  rows: 15,
-  sort: "Certificates",
-  reverse: true
-})
+html`<div class="firm-lookup-table">${
+  Inputs.table(firmSearch, {
+    columns: ["Firm", "Crop", "Certificates", "Total (all crops)",
+              "% of this firm's own certificates", "% of all private certificates in this crop"],
+    rows: 15,
+    sort: "Certificates",
+    reverse: true
+  })
+}</div>`
 ```
 
 Every private applicant, every crop they hold certificates in, how much of that firm's
