@@ -7,3 +7,9 @@
 data/pages/
 
 figures/
+
+_site/
+.quarto/
+
+/.quarto/
+**/*.quarto_ipynb

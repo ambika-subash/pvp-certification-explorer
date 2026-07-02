@@ -9,7 +9,7 @@ on:
   push:
     branches: [main]
     paths:                    # rebuild the site when the dashboard or code changes
-      - "index.qmd"
+      - "*.qmd"
       - "_quarto.yml"
       - "**/*.R"
       - ".github/workflows/weekly-update.yml"

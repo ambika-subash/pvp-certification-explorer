@@ -6,6 +6,12 @@ website:
   title: "PVP Certification Explorer (India)"
   reader-mode: true
   page-footer: "Data: Protection of Plant Varieties & Farmers' Rights Authority · Built with Quarto"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Explore the data"
+      - href: analysis.qmd
+        text: "Full analysis"
 
 format:
   html:
