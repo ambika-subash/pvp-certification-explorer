@@ -250,6 +250,7 @@ plot_ly(f10, x = ~issue_year, y = ~n, color = ~sector, colors = sector_cols,
 f11 <- cot %>% filter(!is.na(variety_category), !is.na(sector)) %>% count(variety_category, sector)
 ggplot(f11, aes(variety_category, n, fill = sector)) + geom_col() +
   scale_fill_manual(values = sector_cols) +
+  geom_text(aes(label = n), position = position_stack(vjust = 0.5), size = 3) +
   labs(title = "Cotton certificates by variety category and applicant",
        x = "Variety category", y = "Certificates", fill = NULL) +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
@@ -261,6 +262,7 @@ ggplot(f11, aes(variety_category, n, fill = sector)) + geom_col() +
 f12 <- cot %>% filter(applicant_category == "Private", !is.na(variety_category)) %>% count(issue_year, variety_category)
 ggplot(f12, aes(issue_year, n, fill = variety_category)) + geom_col() +
   scale_fill_manual(values = cat_cols) +
+  geom_text(aes(label = n), vjust = -0.4, size = 3) +
   scale_x_continuous(breaks = seq(yr_min, max(f12$issue_year), 2)) +
   labs(title = "Private cotton certificates by category",
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
