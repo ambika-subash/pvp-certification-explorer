@@ -1,0 +1,24 @@
+{
+  "title": "Who owns India's plant varieties? PVP Certification Explorer (India)",
+  "upload_type": "software",
+  "description": "An interactive, weekly-updated explorer of plant variety protection certification data from India's Protection of Plant Varieties and Farmers' Rights Authority (PPV&FRA). Covers all certified varieties from the Act's commencement through the present, with detailed analysis of applicant category composition, crop-wise certification trends, and cotton seed market structure. Developed as part of doctoral research on the political economy of agricultural biotechnology regulation in India.",
+  "creators": [
+    {
+      "name": "Subash, Ambika",
+      "affiliation": "Centre for Economic Studies and Planning, Jawaharlal Nehru University",
+      "orcid": "https://orcid.org/0000-0002-8636-7123"
+    }
+  ],
+  "keywords": [
+    "plant variety protection",
+    "PPVFRA",
+    "seed systems",
+    "India",
+    "cotton",
+    "agricultural biotechnology",
+    "political economy",
+    "intellectual property"
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open"
+}
