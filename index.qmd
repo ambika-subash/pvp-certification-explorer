@@ -30,6 +30,54 @@ cum_all <- dd %>% filter(!is.na(sector)) %>% count(issue_year, sector, name = "n
 cum_df  <- chr(bind_rows(cum_all, cum_sel) %>% arrange(sel, sector, issue_year) %>%
   group_by(sel, sector) %>% mutate(cum = cumsum(n)) %>% ungroup())
 
+# every crop x applicant category, uncapped, for the reference heatmap
+heat_df <- chr(d %>% filter(!is.na(crop), !is.na(sector)) %>% count(crop, sector, name = "n"))
+
+# firm x crop table for the searchable lookup: every private applicant, every
+# crop they hold certificates in, and their share of private certificates
+# within that crop specifically
+firm_crop_key <- d %>% filter(applicant_category == "Private", !is.na(crop)) %>%
+  mutate(key = alias_company(canon_company(applicant)))
+firm_crop_labels <- firm_crop_key %>% count(key, applicant) %>% group_by(key) %>%
+  slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+  transmute(key, firm = coalesce(unname(pretty_names[key]), applicant))
+crop_priv_totals <- d %>% filter(applicant_category == "Private", !is.na(crop)) %>%
+  count(crop, name = "crop_total")
+firm_totals <- firm_crop_key %>% count(key, name = "total")
+firm_table_df <- chr(firm_crop_key %>% count(key, crop, name = "certs") %>%
+  left_join(firm_crop_labels, by = "key") %>%
+  left_join(firm_totals, by = "key") %>%
+  left_join(crop_priv_totals, by = "crop") %>%
+  mutate(share_of_firm = round(100 * certs / total, 1),
+         share_of_crop = round(100 * certs / crop_total, 1)) %>%
+  transmute(Firm = firm, Crop = crop, Certificates = certs,
+            `Total (all crops)` = total,
+            `% of this firm's own certificates` = share_of_firm,
+            `% of all private certificates in this crop` = share_of_crop) %>%
+  arrange(desc(Certificates)))
+
+# Gini lookup by crop, computed once at render time (not recomputed per
+# dropdown click). Reuses gini() and the same canon_company()/alias_company()
+# merge already built above via firm_crop_key -- no separate dedup logic.
+firm_crop_counts <- firm_crop_key %>% count(key, crop, name = "certs")
+gini_by_crop <- firm_crop_counts %>%
+  group_by(crop) %>%
+  summarise(n_firms = n_distinct(key), gini = gini(certs), .groups = "drop") %>%
+  filter(n_firms >= 5)
+
+gini_bar_df <- chr(firm_crop_counts %>%
+  semi_join(gini_by_crop, by = "crop") %>%
+  left_join(firm_crop_labels, by = "key") %>%
+  group_by(crop) %>% slice_max(certs, n = 10, with_ties = FALSE) %>% ungroup() %>%
+  transmute(crop, firm, certs))
+
+gini_default_crop <- gini_by_crop %>% filter(str_detect(str_to_lower(crop), "tetraploid")) %>%
+  pull(crop) %>% first()
+if (is.na(gini_default_crop)) {
+  gini_default_crop <- first(gini_by_crop$crop[str_to_lower(gini_by_crop$crop) == "cotton"],
+                             default = sort(gini_by_crop$crop)[1])
+}
+
 ojs_define(categories_ojs = crop_categories)
 ojs_define(crops_ojs      = top_crops)
 ojs_define(trends_ojs = trends_df)
@@ -37,6 +85,12 @@ ojs_define(comp_ojs   = comp_df)
 ojs_define(firm_ojs   = firm_df)
 ojs_define(var_ojs    = var_df)
 ojs_define(cum_ojs    = cum_df)
+ojs_define(heat_ojs       = heat_df)
+ojs_define(firm_table_ojs = firm_table_df)
+ojs_define(gini_crops_ojs      = sort(gini_by_crop$crop))
+ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
+ojs_define(gini_bar_ojs        = gini_bar_df)
+ojs_define(gini_default_crop_ojs = gini_default_crop)
 ```
 
 ::: {.callout-note appearance="minimal"}
@@ -48,13 +102,15 @@ Last data refresh: **`r last_updated`**. This page rebuilds every week.
 Every chart below answers the same set of questions for whichever crop you pick: who holds
 certificates, is the market concentrated, and how has that changed over time. Certificates
 are filed by five applicant types: Farmer, Private, Public, SAU (State Agricultural
-Universities), and Individual Breeder. For the full write-up, background, and the cotton
-case study, see [Full analysis](analysis.qmd).
+Universities), and Individual Breeder (a person registering a variety in their own name,
+independent of any company or institution, and distinct from the Farmer category, which
+covers traditional and community-developed varieties). Individual Breeder certificates are
+rare in almost every crop. For the full write-up, background, and the cotton case study,
+see [Full analysis](analysis.qmd).
 
 ::: {.callout-important appearance="simple"}
-**These charts are interactive.** Each one has two dropdowns: a crop category (like
-Cereals) and a specific crop (like Brinjal). Pick one and the other greys out, so it's
-always clear which selection is driving the chart.
+The following charts are interactive. Use the dropdowns to filter by crop, crop category,
+or applicant category.
 :::
 
 ```{ojs}
@@ -79,7 +135,7 @@ function pairedCropInput({catOptions = categories, cropOptions = crops,
 
   // Both dropdowns stay fully clickable at all times. "Disabled" here is
   // purely visual (dimmed) so the inactive one can still be clicked to
-  // switch modes back — a truly HTML-disabled <select> can't be re-enabled
+  // switch modes back. A truly HTML-disabled <select> can't be re-enabled
   // by clicking it, which is why that approach doesn't work here.
   function setMode(mode) {
     const catActive = mode === "category";
@@ -95,6 +151,95 @@ function pairedCropInput({catOptions = categories, cropOptions = crops,
   return box;
 }
 ```
+
+## Cumulative ownership over time
+
+```{ojs}
+//| echo: false
+viewof sel5 = pairedCropInput({
+  catOptions: ["All crops"].concat(categories), catValue: "All crops",
+  cropValue: "Cotton", defaultMode: "category"})
+```
+
+```{ojs}
+//| echo: false
+viewof yr5 = Inputs.range(
+  [2009, d3.max(transpose(cum_ojs), d => d.issue_year)],
+  {step: 1, label: "Up to year",
+   value: d3.max(transpose(cum_ojs), d => d.issue_year)})
+```
+
+```{ojs}
+//| echo: false
+rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 55,
+  style: {fontSize: "13px"},
+  x: {label: "Year", tickFormat: "d"},
+  y: {label: "Cumulative certificates", grid: true},
+  color: {legend: true, domain: sectorDomain, range: sectorRange},
+  marks: [
+    Plot.line(rows5, {x: "issue_year", y: "cum", stroke: "sector", z: "sector"}),
+    Plot.dot(rows5, {x: "issue_year", y: "cum", fill: "sector", r: 3, tip: true}),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+Drag the year slider to watch ownership build up rather than just seeing the endpoint. This
+sets the broadest context, all crops, all time, before the sections below narrow in on
+specific crops and firms.
+
+## Every crop at a glance
+
+### Select crops to compare
+
+```{ojs}
+//| echo: false
+allCrops = Array.from(new Set(transpose(heat_ojs).map(d => d.crop))).sort()
+```
+
+```{ojs}
+//| echo: false
+viewof cropsPick = Inputs.select(allCrops, {multiple: true, size: 8,
+  label: "Crops (click, or Ctrl/Cmd-click for more than one)", value: ["Cotton", "Rice", "Wheat"]})
+```
+
+```{ojs}
+//| echo: false
+viewof modeHeat = Inputs.radio(["Percentage", "Counts"], {label: "Show", value: "Percentage"})
+```
+
+```{ojs}
+//| echo: false
+rowsHeat = transpose(heat_ojs).filter(d => cropsPick.includes(d.crop))
+```
+
+```{ojs}
+//| echo: false
+rowsHeat.length === 0
+  ? html`<p><em>Select at least one crop above.</em></p>`
+  : Plot.plot({
+      marginLeft: 100,
+      style: {fontSize: "13px"},
+      x: {label: modeHeat === "Percentage" ? "Share of certificates" : "Certificates",
+          percent: modeHeat === "Percentage", grid: true},
+      y: {label: null},
+      color: {legend: true, domain: sectorDomain, range: sectorRange},
+      marks: [
+        Plot.barX(rowsHeat, {x: "n", y: "crop", fill: "sector",
+          offset: modeHeat === "Percentage" ? "normalize" : null, tip: true}),
+        Plot.ruleX([0])
+      ]
+    })
+```
+
+Select one or more crops to compare their applicant composition. Toggle between raw
+counts and percentage shares. All crops in the register are available here.
 
 ## Certificate trends by crop
 
@@ -160,8 +305,8 @@ Plot.plot({
 })
 ```
 
-Two thin bars: all crops on top, your selection below. Switch to Percentage to compare
-shape rather than scale.
+Two bars: all crops on top, your selection below. Switch to Percentage to compare shape
+rather than scale.
 
 ## Firm-level concentration
 
@@ -188,6 +333,63 @@ Plot.plot({
 ```
 
 The top ten private applicants for the selected crop.
+
+## Private sector concentration by crop
+
+```{ojs}
+//| echo: false
+giniCrops = gini_crops_ojs
+giniLookup = transpose(gini_lookup_ojs)
+giniDefaultCrop = Array.isArray(gini_default_crop_ojs) ? gini_default_crop_ojs[0] : gini_default_crop_ojs
+```
+
+```{ojs}
+//| echo: false
+viewof giniCrop = Inputs.select(giniCrops, {label: "Crop", value: giniDefaultCrop})
+```
+
+```{ojs}
+//| echo: false
+giniRow   = giniLookup.find(d => d.crop === giniCrop)
+giniValue = giniRow ? +giniRow.gini : null
+giniLabel = giniValue === null ? ""
+  : giniValue > 0.6 ? "High concentration"
+  : giniValue >= 0.4 ? "Moderate concentration"
+  : "Low concentration"
+giniBarRows = transpose(gini_bar_ojs).filter(d => d.crop === giniCrop)
+  .sort((a, b) => d3.descending(+a.certs, +b.certs))
+```
+
+```{ojs}
+//| echo: false
+html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start">
+  <div>${
+    Plot.plot({
+      marginLeft: 220,
+      marginRight: 40,
+      width: 640,
+      height: giniBarRows.length * 32 + 60,
+      style: {fontSize: "12px"},
+      x: {label: "Certificates", grid: true},
+      y: {label: null},
+      marks: [
+        Plot.barX(giniBarRows, {x: "certs", y: "firm", sort: {y: "x", reverse: true}, fill: "#377eb8"}),
+        Plot.text(giniBarRows, {x: "certs", y: "firm", text: "certs", dx: 6, textAnchor: "start"}),
+        Plot.ruleX([0])
+      ]
+    })
+  }</div>
+  <div style="flex:0 0 220px;text-align:center;padding-top:1rem">
+    <div style="font-size:3rem;font-weight:700;color:#377eb8">${giniValue === null ? "–" : giniValue.toFixed(2)}</div>
+    <div style="color:#6b7280;font-size:0.85rem;margin-top:0.25rem">0 = perfectly equal, 1 = one firm holds everything</div>
+    <div style="font-weight:600;margin-top:0.75rem">${giniLabel}</div>
+  </div>
+</div>`
+```
+
+Gini coefficient measures concentration among private firms holding at least one
+certificate in the selected crop. Firms with no registrations in that crop are excluded.
+Crops with fewer than 5 private certificate holders are not shown.
 
 ## Variety category breakdown
 
@@ -229,45 +431,28 @@ Plot.plot({
 Certificates split across variety categories for the selected crop and applicant. Try
 Private together with Cotton.
 
-## Cumulative ownership over time
+## Look up a firm
 
 ```{ojs}
 //| echo: false
-viewof sel5 = pairedCropInput({
-  catOptions: ["All crops"].concat(categories), catValue: "All crops",
-  cropValue: "Cotton", defaultMode: "category"})
+viewof firmSearch = Inputs.search(transpose(firm_table_ojs), {placeholder: "Search firm name..."})
 ```
 
 ```{ojs}
 //| echo: false
-viewof yr5 = Inputs.range(
-  [2009, d3.max(transpose(cum_ojs), d => d.issue_year)],
-  {step: 1, label: "Up to year",
-   value: d3.max(transpose(cum_ojs), d => d.issue_year)})
-```
-
-```{ojs}
-//| echo: false
-rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
-```
-
-```{ojs}
-//| echo: false
-Plot.plot({
-  marginLeft: 55,
-  style: {fontSize: "13px"},
-  x: {label: "Year", tickFormat: "d"},
-  y: {label: "Cumulative certificates", grid: true},
-  color: {legend: true, domain: sectorDomain, range: sectorRange},
-  marks: [
-    Plot.line(rows5, {x: "issue_year", y: "cum", stroke: "sector", z: "sector"}),
-    Plot.dot(rows5, {x: "issue_year", y: "cum", fill: "sector", r: 3, tip: true}),
-    Plot.ruleY([0])
-  ]
+Inputs.table(firmSearch, {
+  columns: ["Firm", "Crop", "Certificates", "Total (all crops)",
+            "% of this firm's own certificates", "% of all private certificates in this crop"],
+  rows: 15,
+  sort: "Certificates",
+  reverse: true
 })
 ```
 
-Drag the year slider to watch ownership build up rather than just seeing the endpoint.
+Every private applicant, every crop they hold certificates in, how much of that firm's
+own total portfolio the crop represents, and separately, what share of all private
+certificates in that crop belong to them. Search a firm name (try "Nuziveedu") to see
+their full footprint across crops.
 
 ---
 

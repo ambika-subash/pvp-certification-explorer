@@ -65,9 +65,9 @@ jobs:
 
       - name: Scrape, clean, and build figures
         run: |
-          Rscript scrape_all_certificates.R
-          Rscript clean_pvp_certificates.R
-          Rscript analyze_pvp_certificates.R
+          Rscript R/scrape_all_certificates.R
+          Rscript R/clean_pvp_certificates.R
+          Rscript R/analyze_pvp_certificates.R
 
       - name: Commit refreshed data
         run: |

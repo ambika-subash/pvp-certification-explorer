@@ -13,10 +13,16 @@ source("R/prep_dashboard.R")
 Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
-The Protection of Plant Varieties and Farmers' Rights Act (PPVFRA), 2001 set out to
-protect breeders' rights while also recognising farmers as innovators. This page walks
-through what the certification record shows. To ask these questions of a specific crop
-yourself, use the [interactive explorer](index.qmd).
+The Protection of Plant Varieties and Farmers' Rights Act (PPVFRA), 2001 was designed as a
+sui generis intellectual property regime recognising three classes of right-holders:
+breeders, researchers, and farmers. The certification record covers every plant variety
+protection certificate issued since 2007. This page asks who has actually benefited from
+the Act's operation. Cotton receives separate treatment throughout: it is India's only
+commercially cultivated genetically modified crop, and the site where private
+concentration is most complete.
+
+To ask these questions of a specific crop yourself, use the
+[interactive explorer](index.qmd).
 
 # Certificates at a glance
 
@@ -38,8 +44,10 @@ plot_ly(f1, x = ~issue_year, y = ~n, type = "scatter", mode = "lines+markers",
            list(x = 2022, y = year_2022_n, text = "2022", showarrow = TRUE, arrowhead = 2, ay = -35)))
 ```
 
-Certificates spike in 2013 (`r comma(year_2013_n)` issued) and again in 2022
-(`r comma(year_2022_n)`).
+Certification grew slowly in the Act's early years, peaked in 2013-14 due to a surge in
+NGO-facilitated farmer variety registrations, then fell during the Covid years before
+recovering to its highest-ever levels in 2023-24. The post-2022 recovery is dominated by
+private applicants, particularly in cotton.
 
 ## Cotton, on its own
 
@@ -53,6 +61,10 @@ plot_ly(f2, x = ~issue_year, y = ~n, type = "scatter", mode = "lines+markers",
          yaxis = list(title = "No. of certificates", tickformat = ",d"))
 ```
 
+Cotton variety certification has accelerated sharply since 2022, reaching its highest-ever
+annual total in 2024. Private firms account for virtually all of this growth. SAU
+registrations, which were active until around 2014, have not recovered.
+
 ## What gets certified
 
 ```{r}
@@ -65,8 +77,10 @@ ggplot(f3, aes(crop_bucket, n)) +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
-Cereals lead by a wide margin. Vegetables are the second-largest group, followed by
-fibre crops (which are almost all cotton).
+Cereals dominate, driven by rice registrations. Vegetables are the second-largest group,
+ahead of fibre crops (which are entirely cotton). Cotton's outsized influence on the pages
+that follow reflects its commercial significance and the intensity of private breeding
+activity concentrated in a single crop, not its raw certificate count.
 
 ## By variety category
 
@@ -79,8 +93,13 @@ ggplot(f4, aes(variety_category, n, fill = variety_category)) +
   labs(title = "Certificates by variety category", x = NULL, y = "Certificates issued")
 ```
 
-Farmers' varieties are the largest single category overall. The sections below show that
-this total sits very differently across applicant types and crops.
+Farmers' varieties are the largest single category in aggregate, but this number requires
+qualification. Farmer registrations are concentrated in traditional food crops, confer no
+right to sell branded seed, and generate no royalties. In commercially significant crops,
+particularly cotton, the distribution inverts. Essentially Derived Varieties (EDVs), the
+category designed to trigger benefit-sharing when registered varieties are used as the
+basis for derivative breeding, account for just 14 certificates across the entire dataset.
+All 14 are in cotton. All 14 are privately held.
 
 ## Farmers' varieties over time
 
@@ -95,8 +114,10 @@ ggplot(f5, aes(issue_year, n)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-Farmer variety certification has effectively ceased in recent years. The bars that once
-built the largest single category on this page have trailed off to almost nothing.
+Farmer variety certification peaked between 2012 and 2015, driven by NGO-facilitated bulk
+registrations of traditional landraces. Since 2016 it has declined sharply, with near-zero
+issuances in recent years. No farmer has received a certificate for a new variety under
+the Act.
 
 ## Public applicants, by category
 
@@ -110,6 +131,12 @@ ggplot(f6, aes(issue_year, n, fill = variety_category)) + geom_col() +
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
 
+Public institution registrations are concentrated in extant and notified variety
+categories, reflecting existing varieties registered for protection rather than newly
+developed commercial innovations. ICAR's large registration count reflects Green
+Revolution-era breeding momentum rather than contemporary activity. New variety
+registrations by public institutions have declined significantly since the mid-2010s.
+
 ## Private applicants, by category
 
 ```{r}
@@ -121,6 +148,11 @@ ggplot(f7, aes(issue_year, n, fill = variety_category)) + geom_col() +
   labs(title = "Certificates to private applicants, by category",
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
+
+Private applicants register predominantly new varieties and Varieties of Common Knowledge
+(VCKs). The VCK category is significant: these are varieties already in the public domain
+that are converted into private assets through registration. Of 293 cotton VCKs in the
+dataset, 292 are privately held and 1 is held by a public institution.
 
 ## Ownership concentration beyond cotton
 
@@ -135,7 +167,7 @@ most extreme version of this pattern.
 # The headline findings
 
 ::: {.callout-note appearance="simple"}
-These four charts carry the argument of this page. A reader who only looks at this section
+These charts carry the argument of this page. A reader who only looks at this section
 should leave knowing the story.
 :::
 
@@ -152,10 +184,13 @@ ggplot(f8, aes(sector, n, fill = set)) +
        x = "Applicant category", y = "Certificates", fill = NULL)
 ```
 
-This is the central finding. Farmers hold the most certificates of any applicant type
-across all crops combined. In cotton, that order inverts almost completely: private firms
-hold nearly every certificate, and farmers are left with a handful. The applicant category
-that dominates the register overall is nearly absent in India's most commercial crop.
+Across all crops, farmers hold the largest share of certificates, driven by
+NGO-facilitated registrations of traditional varieties in food crops. In cotton the
+distribution inverts. Private firms hold 585 of 696 cotton certificates. Farmers hold 1.
+Transgenic hybrid production requires trait licensing agreements, backcross breeding
+infrastructure, and biosafety containment facilities. These are not administrative
+barriers reducible to policy adjustment; they are the technical conditions of production
+in commercial cotton, and they are inaccessible to farmers as a class.
 
 ## Cumulative ownership over time, all crops
 
@@ -195,8 +230,58 @@ every year of its growth. Public, SAU, and farmer lines stay close to flat by co
 top_firms_bar(cot, title = "Major private applicants, cotton")
 ```
 
-A small number of firms, led by Nuziveedu, hold most of the private cotton certificates.
-Varietal control in India's most commercial crop rests with a few companies.
+In cotton, five firms account for more than 60 percent of all private certificates issued
+between 2009 and 2024: Nuziveedu Seeds (30.1 percent), Prabhat Agri Biotech (11.8 percent),
+Mahyco (7.1 percent), Kaveri Seed Co (6.6 percent), and Rasi Seeds (6.1 percent). These
+figures cover direct variety registrations only. Trait-level control through
+sublicensing, particularly Monsanto/Bayer's Bt and BGII events embedded across virtually
+all tetraploid registrations, is not visible in registration data and is not captured
+here.
+
+## How concentrated is private cotton ownership?
+
+```{r}
+priv_cot_firms <- cot %>% filter(applicant_category == "Private") %>%
+  mutate(key = alias_company(canon_company(applicant))) %>%
+  count(key, name = "n") %>% arrange(n)
+lorenz_df <- priv_cot_firms %>%
+  mutate(cum_firms = row_number() / n(), cum_certs = cumsum(n) / sum(n)) %>%
+  select(cum_firms, cum_certs) %>%
+  bind_rows(tibble(cum_firms = 0, cum_certs = 0), .)
+gini_cotton <- gini(priv_cot_firms$n)
+
+ggplot(lorenz_df, aes(cum_firms, cum_certs)) +
+  geom_area(fill = sector_cols[["Private"]], alpha = 0.15) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = muted) +
+  geom_line(color = sector_cols[["Private"]], linewidth = 1.1) +
+  scale_x_continuous(labels = percent, limits = c(0, 1)) +
+  scale_y_continuous(labels = percent, limits = c(0, 1)) +
+  labs(title = "Concentration of private cotton certificates among firms",
+       x = "Share of firms, smallest to largest", y = "Cumulative share of certificates")
+```
+
+The dashed line is perfect equality, where every firm holds the same share. The further
+the solid line bows away from it, the more concentrated ownership is. The Gini
+coefficient here is **`r round(gini_cotton, 2)`**, on a scale from 0 (every firm holds an
+equal share) to 1 (one firm holds everything).
+
+## Public vs private innovation in cotton
+
+```{r}
+f_new_pubpriv <- cot %>% filter(variety_category == "New", sector %in% c("Public", "Private")) %>%
+  count(issue_year, sector)
+ggplot(f_new_pubpriv, aes(issue_year, n, color = sector)) +
+  geom_line(linewidth = 1.1) + geom_point(size = 1.5) +
+  scale_color_manual(values = sector_cols) +
+  scale_x_continuous(breaks = seq(yr_min, max(f_new_pubpriv$issue_year, na.rm = TRUE), 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "New cotton variety registrations, public vs private",
+       x = "Year of certificate issue", y = "New variety certificates", color = NULL)
+```
+
+This excludes VCKs and extant varieties, leaving only registrations of genuinely new
+material. It isolates active breeding from the registration of already-existing
+varieties, which is a separate process covered next.
 
 # Cotton in detail
 
@@ -215,8 +300,23 @@ ggplot(f9, aes(sector, n, fill = ploidy)) +
        y = "No. of PVP certificates", fill = NULL)
 ```
 
-Private cotton certification is mostly tetraploid, the hybrid and Bt lines. Diploid desi
-cotton makes up a small share for every type of applicant.
+Private cotton certification is almost entirely tetraploid, the hybrid and Bt lines
+preferred by the textile industry for their longer staple length. Diploid or desi cotton,
+historically adapted to low-input smallholder conditions, has been abandoned by both
+private and public breeders. SAUs show a more balanced ploidy profile, reflecting a
+residual public mandate to maintain crop diversity, but SAU cotton registrations have
+effectively ceased since 2014.
+
+```{r}
+farmer_cot <- cot %>% filter(sector == "Farmer") %>%
+  select(issue_year, variety_category, crop, applicant)
+```
+
+::: {.callout-note appearance="simple"}
+**The farmer presence in cotton, in full.** `r nrow(farmer_cot)` certificate(s) out of
+`r comma(nrow(cot))` cotton certificates were issued to a farmer applicant.
+`r if (nrow(farmer_cot) >= 1) paste0("The first was issued in ", farmer_cot$issue_year[1], ", category ", as.character(farmer_cot$variety_category[1]), ", crop ", farmer_cot$crop[1], ".") else ""`
+:::
 
 ## Variety category by applicant
 
@@ -231,6 +331,58 @@ ggplot(f11, aes(variety_category, n, fill = sector)) + geom_col() +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
+Private firms register primarily new varieties and VCKs. Public institutions register
+mostly extant and notified varieties. Farmers are confined to the farmers' variety
+category. EDVs appear only in the private column. Only 14 EDV certificates have been
+issued nationally across 17 years of the Act's operation, all in cotton. Whether firms
+avoid the EDV category because of its benefit-sharing obligations, or register derivative
+varieties as new varieties by meeting the DUS distinctness threshold through minor
+morphological modification, the registration data cannot resolve.
+
+## Every EDV certificate ever issued
+
+```{r}
+f_edv <- d %>% filter(variety_category == "EDV") %>% count(issue_year)
+edv_total  <- sum(d$variety_category == "EDV", na.rm = TRUE)
+edv_crops  <- paste(sort(unique(as.character(d$crop_bucket[d$variety_category == "EDV"]))), collapse = ", ")
+edv_years  <- sort(unique(f_edv$issue_year))
+edv_yr_txt <- if (length(edv_years) == 1) as.character(edv_years) else paste(range(edv_years), collapse = "-")
+
+edv_axis_max <- max(d$issue_year, na.rm = TRUE)
+ggplot(f_edv, aes(issue_year, n)) +
+  geom_segment(aes(xend = issue_year, y = 0, yend = n), color = cat_cols[["EDV"]], linewidth = 1) +
+  geom_point(size = 4, color = cat_cols[["EDV"]]) +
+  geom_text(aes(label = n), vjust = -1.2, size = 3.5) +
+  scale_x_continuous(breaks = seq(yr_min, edv_axis_max, 1),
+                      limits = c(yr_min - 1, edv_axis_max + 1)) +
+  scale_y_continuous(limits = c(0, max(f_edv$n) * 1.3), breaks = pretty_breaks()) +
+  labs(title = "Essentially Derived Variety (EDV) certificates, all years, all crops",
+       x = "Year of certificate issue", y = "EDV certificates issued") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+`r edv_total` EDV certificates have been issued nationally, all in `r edv_crops`,
+concentrated in `r edv_yr_txt`. No EDV has been registered before or after that window, in
+any crop.
+
+## Testing the VCK enclosure sequence
+
+```{r}
+f_vck_new <- cot %>% filter(applicant_category == "Private", variety_category %in% c("New", "Extant (VCK)")) %>%
+  count(issue_year, variety_category)
+ggplot(f_vck_new, aes(issue_year, n, fill = variety_category)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = cat_cols) +
+  scale_x_continuous(breaks = seq(yr_min, max(f_vck_new$issue_year, na.rm = TRUE), 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Private cotton: VCK vs New variety registrations over time",
+       x = "Year of certificate issue", y = "Certificates", fill = "Category")
+```
+
+One reading of the VCK category is a sequential strategy: register existing
+common-knowledge varieties first, then shift to new variety development once that
+low-cost registration opportunity is exhausted.
+
 ## Private cotton, by category over time
 
 ```{r}
@@ -244,9 +396,17 @@ ggplot(f12, aes(issue_year, n, fill = variety_category)) + geom_col() +
        x = "Year of certificate issue", y = "Certificates", fill = "Category")
 ```
 
+Private cotton certification shifted over time from VCK registrations toward new variety
+registrations, particularly after 2016. The 2024 surge is almost entirely new varieties.
+EDV registrations appeared briefly in 2019 and have not recurred.
+
 ---
 
 ::: {.callout-tip appearance="minimal"}
-Full pipeline (scrape, clean, figures, and this page) is in the
+Data source: Protection of Plant Varieties and Farmers' Rights Authority public
+certificate register, scraped weekly. Applicant categories are normalised from raw
+register entries. All figures use year of certificate issue. Full pipeline is open source
+and available in the
 [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
+Built with R and Quarto.
 :::

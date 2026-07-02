@@ -35,7 +35,9 @@ cot <- dd %>% filter(is_cotton) %>%
 
 ## collapse company-name spelling variants (Ltd / Ltd. / Limited, Pvt / Private…)
 canon_company <- function(x){
-  y <- str_to_lower(x); y <- str_replace_all(y, "[.,()]", " ")
+  y <- str_to_lower(x)
+  y <- str_replace(y, "^\\s*(m/s\\.?|messrs\\.?)\\s+", "")  # strip "M/S" / "Messrs" prefix
+  y <- str_replace_all(y, "[.,()/]", " ")
   y <- str_replace_all(y, "&", " and "); y <- str_replace_all(y, "\\bseeds\\b", "seed")
   y <- str_replace_all(y, "\\b(private|pvt|limited|ltd|llp|company|co|corporation|corp|incorporated|inc)\\b", " ")
   str_squish(y)
@@ -44,6 +46,15 @@ alias_company <- function(key) case_when(
   str_detect(key, "maharashtra hybrid seed") | key == "mahyco" ~ "mahyco",
   str_detect(key, "^monsanto") ~ "monsanto", TRUE ~ key)
 pretty_names <- c("mahyco" = "Mahyco (Maharashtra Hybrid Seeds)", "monsanto" = "Monsanto")
+
+# Gini coefficient of a vector of firm-level counts: 0 = every firm holds an
+# equal share, 1 = one firm holds everything.
+gini <- function(x){
+  x <- sort(x)
+  n <- length(x)
+  if (n <= 1 || sum(x) == 0) return(NA_real_)
+  (2 * sum(seq_len(n) * x) / (n * sum(x))) - (n + 1) / n
+}
 
 top_firms_bar <- function(df, n_top = 8, title){
   priv <- df %>% filter(applicant_category == "Private") %>%
@@ -65,6 +76,12 @@ top_firms_bar <- function(df, n_top = 8, title){
 ## ---- shared prep for the interactive explorer (index.qmd) ----------------
 top_crops <- d %>% filter(!is.na(crop)) %>% count(crop, sort = TRUE) %>%
   slice_head(n = 20) %>% pull(crop)
+# diploid cotton is a small share of an already-small subset, so it rarely
+# clears the top-20-by-volume cutoff above; force it into the dropdown list
+# regardless of rank so it stays explorable
+diploid_crops <- d %>% filter(!is.na(crop), str_detect(str_to_lower(crop), "diploid")) %>%
+  distinct(crop) %>% pull(crop)
+top_crops <- union(top_crops, diploid_crops)
 crop_categories <- sort(unique(na.omit(d$crop_bucket)))
 
 # tag rows under both their crop group and individual crop name, so either
