@@ -150,12 +150,6 @@ as two. Full methodology, including how every statistic on this page is computed
 documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
 :::
 
-**A note on Individual Breeders.** Individual Breeders are private persons who develop
-varieties independently, outside any company or institution. This is distinct from
-Farmers, who are recognised separately under the Act's farmers' rights provisions and
-whose registrations mostly cover traditional and community-developed varieties rather
-than newly bred ones. Individual Breeder certificates are rare in almost every crop.
-
 ::: {.callout-important appearance="simple"}
 The following charts are interactive. Use the dropdowns to filter by crop, crop category,
 or applicant category.
@@ -343,6 +337,7 @@ rowsHeat = transpose(heat_ojs).filter(d => cropsPick.includes(d.crop))
 //| echo: false
 chartCompare = rowsHeat.length === 0 ? null : Plot.plot({
   marginLeft: 110,
+  marginBottom: 45,
   style: {fontSize: "13px"},
   x: {label: modeHeat === "Percentage" ? "Share of certificates" : "Certificates",
       percent: modeHeat === "Percentage", grid: true, tickPadding: 8},
@@ -422,6 +417,7 @@ rows2 = {
 //| echo: false
 chartComposition = Plot.plot({
   marginLeft: 100,
+  marginBottom: 45,
   style: {fontSize: "13px"},
   x: {label: mode2 === "Percentage" ? "Share of certificates" : "Certificates",
       percent: mode2 === "Percentage", grid: true, tickPadding: 8},
@@ -455,6 +451,7 @@ viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
 chartFirms = Plot.plot({
   marginLeft: 220,
   marginRight: 30,
+  marginBottom: 45,
   width: 760,
   style: {fontSize: "13px"},
   x: {label: "Certificates", grid: true, tickPadding: 8},
@@ -505,8 +502,9 @@ giniBarRows = transpose(gini_bar_ojs).filter(d => d.crop === giniCrop)
 chartGini = Plot.plot({
   marginLeft: 220,
   marginRight: 40,
+  marginBottom: 45,
   width: 640,
-  height: giniBarRows.length * 32 + 60,
+  height: giniBarRows.length * 32 + 80,
   style: {fontSize: "12px"},
   x: {label: "Certificates", grid: true, tickPadding: 8},
   y: {label: null, tickPadding: 8},
@@ -600,37 +598,56 @@ Private together with Cotton.
 
 ## Look up a firm
 
-Start typing a firm name (try "Nuziveedu") and pick it from the suggestions.
+Search any firm, or click one of the largest below to jump straight in.
 
 ```{ojs}
 //| echo: false
 firmOverviewRows = transpose(firm_overview_ojs)
 firmNames = firmOverviewRows.map(d => d.Firm).sort()
+featuredFirms = firmOverviewRows.slice(0, 6).map(d => d.Firm)
 
 // A native browser combobox: a text input with a <datalist> of suggestions.
 // Typing filters the dropdown automatically (built into the browser, no
-// custom filtering logic needed), and it still accepts free text, so this
-// behaves as one unified search-and-select control rather than a separate
-// search box plus a separate results table.
-function firmCombobox(names) {
+// custom filtering logic needed), and it still accepts free text. The
+// datalist dropdown itself only appears on click/keystroke though (browsers
+// don't show it automatically, and Chrome/Firefox/Safari don't even agree
+// on when it appears), so a row of always-visible "featured firm" chips
+// sits below the input, real names on the page immediately, no interaction
+// required to notice them, clicking one fills the box and looks it up.
+function firmCombobox(names, featured) {
   const listId = "firm-datalist-" + Math.random().toString(36).slice(2);
   const input = html`<input type="text" list="${listId}" placeholder="Search or select a firm..."
     style="padding:6px 10px;font-size:14px;width:340px;border:1px solid #d1d5db;border-radius:4px">`;
   const options = names.map(n => html`<option value="${n}">`);
   const datalist = html`<datalist id="${listId}">${options}</datalist>`;
-  const box = html`<div>${input}${datalist}</div>`;
-  box.value = "";
-  input.addEventListener("input", () => {
+
+  function fire() {
     box.value = input.value;
     box.dispatchEvent(new CustomEvent("input", {bubbles: true}));
+  }
+  input.addEventListener("input", fire);
+
+  const chips = featured.map(name => {
+    const chip = html`<button type="button" style="margin:0 6px 6px 0;padding:3px 11px;font-size:12px;
+      border:1px solid #d1d5db;border-radius:999px;background:#f3f4f6;color:#374151;cursor:pointer">${name}</button>`;
+    chip.addEventListener("click", () => { input.value = name; fire(); });
+    return chip;
   });
+
+  const box = html`<div>
+    <div>${input}${datalist}</div>
+    <div style="margin-top:8px">
+      <span style="font-size:12px;color:#6b7280;margin-right:2px">Try:</span> ${chips}
+    </div>
+  </div>`;
+  box.value = "";
   return box;
 }
 ```
 
 ```{ojs}
 //| echo: false
-viewof firmPick = firmCombobox(firmNames)
+viewof firmPick = firmCombobox(firmNames, featuredFirms)
 ```
 
 ```{ojs}

@@ -21,6 +21,7 @@ format:
     page-layout: full
     fig-width: 9
     fig-height: 5
+    css: styles.css
 
 execute:
   echo: false

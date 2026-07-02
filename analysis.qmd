@@ -96,10 +96,6 @@ methodology is documented in the
 [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
 :::
 
-**A note on Individual Breeders.** Individual Breeders are private persons who develop
-varieties independently, outside any company or institution. This is distinct from
-Farmers, who are recognised separately under the Act's farmers' rights provisions.
-
 # Certificates at a glance
 
 ## Certificates issued over time
