@@ -3,9 +3,11 @@ title: "Who owns India's plant varieties?"
 subtitle: "Explore the PPV&FRA certification data"
 ---
 
-::: {style="margin-top:-0.75rem;margin-bottom:1.5rem"}
-[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
-:::
+```{=html}
+<p style="margin-top:-0.75rem;margin-bottom:1.5rem">
+<a href="https://doi.org/10.5281/zenodo.21140353"><img src="https://zenodo.org/badge/1112427994.svg" alt="DOI"></a>
+</p>
+```
 
 ```{r setup}
 source("R/prep_dashboard.R")
