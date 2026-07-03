@@ -3,6 +3,10 @@ title: "Full analysis"
 subtitle: "Certificates at a glance, the headline findings, and the cotton case study"
 ---
 
+::: {style="margin-top:-0.75rem;margin-bottom:1.5rem"}
+[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
+:::
+
 ```{r setup}
 source("R/prep_dashboard.R")
 
@@ -43,8 +47,6 @@ top5_firms_txt <- top_firms_prose(cotton_firms_ranked, 5)
 sau_cotton_years <- cot %>% filter(sector == "SAU") %>% pull(issue_year)
 sau_cotton_last  <- if (length(sau_cotton_years)) max(sau_cotton_years, na.rm = TRUE) else NA_integer_
 ```
-
-[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
 
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the

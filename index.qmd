@@ -3,6 +3,10 @@ title: "Who owns India's plant varieties?"
 subtitle: "Explore the PPV&FRA certification data"
 ---
 
+::: {style="margin-top:-0.75rem;margin-bottom:1.5rem"}
+[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
+:::
+
 ```{r setup}
 source("R/prep_dashboard.R")
 
@@ -107,8 +111,6 @@ ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
 ojs_define(gini_bar_ojs        = gini_bar_df)
 ojs_define(gini_default_crop_ojs = gini_default_crop)
 ```
-
-[![DOI](https://zenodo.org/badge/1112427994.svg)](https://doi.org/10.5281/zenodo.21140353)
 
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
@@ -608,6 +610,11 @@ firmOverviewRows = transpose(firm_overview_ojs)
 firmNames = firmOverviewRows.map(d => d.Firm).sort()
 featuredFirms = firmOverviewRows.slice(0, 6).map(d => d.Firm)
 
+// Default the lookup to Nuziveedu so the panel loads populated rather than
+// empty, giving a first-time visitor a worked example straight away. Falls
+// back to the largest firm if no Nuziveedu entry is present in the data.
+defaultFirm = firmNames.find(n => /nuziveedu/i.test(n)) ?? firmNames[0]
+
 // A native browser combobox: a text input with a <datalist> of suggestions.
 // Typing filters the dropdown automatically (built into the browser, no
 // custom filtering logic needed), and it still accepts free text. The
@@ -616,9 +623,10 @@ featuredFirms = firmOverviewRows.slice(0, 6).map(d => d.Firm)
 // on when it appears), so a row of always-visible "featured firm" chips
 // sits below the input, real names on the page immediately, no interaction
 // required to notice them, clicking one fills the box and looks it up.
-function firmCombobox(names, featured) {
+function firmCombobox(names, featured, initial) {
   const listId = "firm-datalist-" + Math.random().toString(36).slice(2);
   const input = html`<input type="text" list="${listId}" placeholder="Search or select a firm..."
+    value="${initial ?? ""}"
     style="padding:6px 10px;font-size:14px;width:340px;border:1px solid #d1d5db;border-radius:4px">`;
   const options = names.map(n => html`<option value="${n}">`);
   const datalist = html`<datalist id="${listId}">${options}</datalist>`;
@@ -642,14 +650,14 @@ function firmCombobox(names, featured) {
       <span style="font-size:12px;color:#6b7280;margin-right:2px">Try:</span> ${chips}
     </div>
   </div>`;
-  box.value = "";
+  box.value = initial ?? "";
   return box;
 }
 ```
 
 ```{ojs}
 //| echo: false
-viewof firmPick = firmCombobox(firmNames, featuredFirms)
+viewof firmPick = firmCombobox(firmNames, featuredFirms, defaultFirm)
 ```
 
 ```{ojs}
