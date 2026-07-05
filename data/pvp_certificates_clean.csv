@@ -4167,7 +4167,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 4166,257 of 2020,2020,4213,Farmer,CHIKNI LAL JUWAR,Sorghum,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F6 SB6 16 106,1-Mar-2016,04 August 2020,2016,2020,Farmer,FALSE,TRUE
 4167,258 of 2020,2020,4214,Extant (Notified),Phule Ekadashi (KOPLM 83),Little Millet,Cereals,Mahatma Phule Krishi Vidyapeeth,Public,E1 PE1 18 122,21-Mar-2018,04 August 2020,2018,2020,SAU,FALSE,TRUE
 4168,259 of 2020,2020,4215,Extant (Notified),WH 1142,Wheat,Cereals,CCS Haryana Agricultural University,Public,E1 TA1 19 16,7-Mar-2019,04 August 2020,2019,2020,SAU,FALSE,TRUE
-4169,260 of 2020,2020,4216,Extant (Notified),HAVFB-41 (Swarna Safal),Faba Bean,Vegetables,Indian Council of Agricultural Research,Public,E1 VF3 18 597,4-Jul-2018,04 August 2020,2018,2020,Public,FALSE,TRUE
+4169,260 of 2020,2020,4216,Extant (Notified),HAVFB-41 (Swarna Safal),Faba Bean,Legumes,Indian Council of Agricultural Research,Public,E1 VF3 18 597,4-Jul-2018,04 August 2020,2018,2020,Public,FALSE,TRUE
 4170,261 of 2020,2020,4217,Extant (Notified),Bhima Light Red,Onion,Vegetables,Indian Council of Agricultural Research,Public,N1 AC2 17 1796,22-Aug-2017,04 August 2020,2017,2020,Public,FALSE,TRUE
 4171,262 of 2020,2020,4218,Extant (Notified),Phule Vikram (Phule G-08108),Chickpea,Legumes,Mahatma Phule Krishi Vidyapeeth,Public,E1 CA1 18 95,1-Mar-2018,04 August 2020,2018,2020,SAU,FALSE,TRUE
 4172,263 of 2020,2020,4219,Extant (Notified),Gujarat Gram 5 (GJG 0809),Chickpea,Legumes,Junagadh Agricultural University,Public,E5 CA22 16 1746,20-Oct-2016,04 August 2020,2016,2020,SAU,FALSE,TRUE
@@ -4206,7 +4206,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 4205,REG/2019/72 B,2019,4252,Extant (Notified),PSP94,pearl millet,Cereals,Bayer Crop Science LP,Private,E1 PG1 19 72,6-May-2019,20 August 2020,2019,2020,Private,FALSE,TRUE
 4206,REG/2019/72 R,2019,4253,Extant (Notified),PP106,pearl millet,Cereals,Bayer Crop Science LP,Private,E1 PG1 19 72,6-May-2019,20 August 2020,2019,2020,Private,FALSE,TRUE
 4207,REG/2012/246,2012,4254,New,BY070-nm,Maize,Cereals,DCM Shriram Limited,Private,N11 ZM20 12 246,29-Jun-2012,04 September 2020,2012,2020,Private,FALSE,TRUE
-4208,REG/2018/318,2018,4255,Extant (Notified),Phule Kartiki (RGAS 92-10-1),Rajgeera,Cereals,Mahatma Phule Krishi Vidyapeeth,Public,E1 AHY1 18 318,7-May-2018,07 September 2020,2018,2020,SAU,FALSE,TRUE
+4208,REG/2018/318,2018,4255,Extant (Notified),Phule Kartiki (RGAS 92-10-1),Rajgeera,Vegetables,Mahatma Phule Krishi Vidyapeeth,Public,E1 AHY1 18 318,7-May-2018,07 September 2020,2018,2020,SAU,FALSE,TRUE
 4209,REG/2014/823,2014,4256,Extant (Notified),Gujarat Junagarh Brinjal-2 (GJB-2) (JBR-02-11),brinjal,Vegetables,Junagadh Agricultural University,Public,E2 SM9 14 823,1-Apr-2014,07 September 2020,2014,2020,SAU,FALSE,TRUE
 4210,REG/2012/17,2012,4257,New,PHRRC,Maize,Cereals,Pioneer Overseas Corporation,Private,N5 ZM5 12 17,8-Feb-2012,14 September 2020,2012,2020,Private,FALSE,TRUE
 4211,REG/2015/441,2015,4258,New,HR411126R,Rice,Cereals,DCM Shriram Limited,Private,N12 OS170 15 441,25-Mar-2015,16 September 2020,2015,2020,Private,FALSE,TRUE
@@ -4506,7 +4506,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 4505,REG/2018/96,2018,4563,Extant (Notified),CSV 33 MF (SPV-2242),Sorghum,Cereals,Indian Council of Agricultural Research,Public,E2 SB1 18 96,5-Mar-2018,24 June 2021,2018,2021,Public,FALSE,TRUE
 4506,REG/2019/175,2019,4564,Extant (Notified),Phule Vimukta GKOK-S-4 (GKOS-12-15),Okra/Lady's Finger,Vegetables,Mahatma Phule Krishi Vidyapeeth,Public,E1 AE3 19 175,18-Nov-2019,24 June 2021,2019,2021,SAU,FALSE,TRUE
 4507,REG/2020/27,2020,4565,Extant (Notified),Karan Maltsona (DWRB 160),Barley,Cereals,Indian Council of Agricultural Research,Public,E1 HV1 20 27,26-Feb-2020,24 June 2021,2020,2021,Public,FALSE,TRUE
-4508,REG/2020/51,2020,4566,Extant (Notified),KBGA-1,Rajgeera,Cereals,"University of Agricultural Sciences, Bengaluru",Public,E1 AH(g. Amaranth)1 20 51,10-Jun-2020,24 June 2021,2020,2021,Public,FALSE,TRUE
+4508,REG/2020/51,2020,4566,Extant (Notified),KBGA-1,Rajgeera,Vegetables,"University of Agricultural Sciences, Bengaluru",Public,E1 AH(g. Amaranth)1 20 51,10-Jun-2020,24 June 2021,2020,2021,Public,FALSE,TRUE
 4509,REG/2020/103,2020,4567,Extant (Notified),CO 30,Sorghum,Cereals,Tamil Nadu Agricultural University,Public,E1 SB1 20 103,7-Jul-2020,24 June 2021,2020,2021,SAU,FALSE,TRUE
 4510,REG/2020/107,2020,4568,Extant (Notified),K-12,Sorghum,Cereals,Tamil Nadu Agricultural University,Public,E2 SB2 20 107,7-Jul-2020,24 June 2021,2020,2021,SAU,FALSE,TRUE
 4511,REG/2020/108,2020,4569,Extant (Notified),Paiyur (Ra)2,Finger millet,Cereals,Tamil Nadu Agricultural University,Public,E1 EL6 20 108,7-Jul-2020,24 June 2021,2020,2021,SAU,FALSE,TRUE
@@ -4808,7 +4808,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 4807,REG/2021/0018,2021,4866,Extant (Notified),MACS 4058 (d),Durum wheat,Cereals,"Agharkar Research Institute, Pune, Maharashtra",Private,E2 TD2 21 18,4-Jan-2021,02 November 2021,2021,2021,Private,FALSE,TRUE
 4808,REG/2021/0044,2021,4867,Extant (Notified),Gujarat Urd 2 (GJU 1509),Black Gram,Legumes,"Junagadh Agricultural University, Junagadh, Gujarat",Public,E1 VM1 21 44,28-Jan-2021,02 November 2021,2021,2021,SAU,FALSE,TRUE
 4809,REG/2021/0060,2021,4868,Extant (Notified),PDKV Sardar (AKAW -4210-6),Wheat,Cereals,"Dr. Panjabrao Deshmukh Krishi Vidyapeeth, Akola",Public,E1 TA3 21 60,12-Feb-2021,02 November 2021,2021,2021,SAU,FALSE,TRUE
-4810,REG/2021/0067,2021,4869,Extant (Notified),PKB 6,Cowpea,Vegetables,"University of Agricultural Sciences, Bengaluru",Public,E1 VU1 21 67,15-Feb-2021,02 November 2021,2021,2021,Public,FALSE,TRUE
+4810,REG/2021/0067,2021,4869,Extant (Notified),PKB 6,Cowpea,Legumes,"University of Agricultural Sciences, Bengaluru",Public,E1 VU1 21 67,15-Feb-2021,02 November 2021,2021,2021,Public,FALSE,TRUE
 4811,REG/2021/0068,2021,4870,Extant (Notified),PDKV Blackgold (AKU 10-1),Black Gram,Legumes,"Dr. Panjabrao Deshmukh Krishi Vidyapeeth, Akola",Public,E2 VM2 21 68,9-Mar-2021,02 November 2021,2021,2021,SAU,FALSE,TRUE
 4812,REG/2021/0076,2021,4871,Extant (Notified),DBW 303 (Karan Vaishnavi),Wheat,Cereals,Indian Council of Agricultural Research,Public,E4 TA6 21 76,18-Mar-2021,02 November 2021,2021,2021,Public,FALSE,TRUE
 4813,REG/2021/0077,2021,4872,Extant (Notified),DDW 48 (Durum),Durum wheat,Cereals,Indian Council of Agricultural Research,Public,E3 TD3 21 77,18-Mar-2021,02 November 2021,2021,2021,Public,FALSE,TRUE
@@ -5060,7 +5060,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 5059,REG/2020/375,2020,-,Extant (Notified),RAJ VIJAY GRAM 202 (RVG 202),Chickpea,Legumes,Rajmata Vijayaraje Scindia Krishi Vishwa Vidyalaya,Public,E4 CA4 20 375,"Wednesday, December 16, 2020",15-November-2022,2020,2022,SAU,FALSE,TRUE
 5060,REG/2020/385,2020,-,Extant (Notified),Phule Satwik (NIAW 3170),Wheat,Cereals,Mahatma Phule Krishi Vidyapeeth,Public,E20 TA23 20 385,"Friday, December 18, 2020",15-November-2022,2020,2022,SAU,FALSE,TRUE
 5061,REG/2021/0070,2021,-,Extant (Notified),CG 1029 (Kanishika),Wheat,Cereals,Indira Gandhi Krishi Vishwavidyalaya,Public,E3 TA5 21 70,"Tuesday, March 16, 2021",15-November-2022,2021,2022,SAU,FALSE,TRUE
-5062,REG/2021/0075,2021,-,Extant (Notified),KBC-9,Cowpea,Vegetables,University of Agricultural Sciences,Public,E3 VU3 21 75,"Monday, February 15, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
+5062,REG/2021/0075,2021,-,Extant (Notified),KBC-9,Cowpea,Legumes,University of Agricultural Sciences,Public,E3 VU3 21 75,"Monday, February 15, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5063,REG/2021/0137,2021,-,Extant (Notified),DWRB 182,Barley,Cereals,Indian Council of Agricultural Research,Public,E1 HV1 21 137,"Monday, July 12, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5064,REG/2021/0065,2021,-,Extant (Notified),Him Palam Chana 1 (DKG 986),Chickpea,Legumes,CSK Himachal Pradesh Krishi Vishvavidyalaya,Public,E1 CA1 21 65,"Thursday, February 25, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5065,REG/2021/0173,2021,-,Extant (Notified),HD 3298,Wheat,Cereals,ICAR-Indian Agricultural Research Institute,Public,E11 TA14 21 173,"Wednesday, September 22, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
@@ -5071,7 +5071,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 5070,REG/2021/0164,2021,-,Extant (Notified),HI 1633 (Pusa Vani),Wheat,Cereals,Indian Council of Agricultural Research,Public,E9 TA11 21 164,"Tuesday, September 07, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5071,REG/2021/0165,2021,-,Extant (Notified),HI 1634 (Pusa Ahilya),Wheat,Cereals,Indian Council of Agricultural Research,Public,E10 TA12 21 165,"Tuesday, September 07, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5072,REG/2021/0069,2021,-,Extant (Notified),Chhattisgarh Hanse Wheat (CG 1023),Wheat,Cereals,Indira Gandhi Krishi Vishwavidyalaya,Public,E2 TA4 21 69,"Tuesday, March 16, 2021",15-November-2022,2021,2022,SAU,FALSE,TRUE
-5073,REG/2021/0074,2021,-,Extant (Notified),PKB 4,Cowpea,Vegetables,University of Agricultural Sciences,Public,E2 VU2 21 74,"Monday, February 15, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
+5073,REG/2021/0074,2021,-,Extant (Notified),PKB 4,Cowpea,Legumes,University of Agricultural Sciences,Public,E2 VU2 21 74,"Monday, February 15, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
 5074,REG/2021/0156,2021,-,Extant (Notified),NIDW 1149 (Durum),Durum wheat,Cereals,Mahatma Phule Krishi Vidyapeeth,Public,E4 TD4 21 156,"Monday, July 26, 2021",15-November-2022,2021,2022,SAU,FALSE,TRUE
 5075,REG/2021/0184,2021,-,Extant (Notified),HIMA,Finger millet,Cereals,Acharya N.G. Ranga Agricultural University,Public,E1 EL3 21 184,"Wednesday, September 22, 2021",15-November-2022,2021,2022,SAU,FALSE,TRUE
 5076,REG/2021/0215 H,2021,-,Extant (Notified),Pusa 1201 (MH 1849),Pearl millet,Cereals,ICAR-Indian Agricultural Research Institute,Public,E1 PG12 21 215,"Thursday, December 30, 2021",15-November-2022,2021,2022,Public,FALSE,TRUE
@@ -7316,7 +7316,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 7315,REG/2014/2470,2014,-,New,GK2018,Sunflower,Oilseeds,Ganga Kaveri Seeds Pvt Ltd,Private,N19 HA19 14 2470,11 December 2014,22 May 2024,2014,2024,Private,FALSE,TRUE
 7316,REG/2015/194,2015,-,Farmer,Hempal,Rice,Cereals,Babulal Dahiya,Farmer,F90 OS94 15 194,28 January 2015,22 May 2024,2015,2024,Farmer,FALSE,TRUE
 7317,REG/2015/595,2015,-,Farmer,Kunhar,Rice,Cereals,Dr. Richariya Kisani Samwardhan Samiti,Farmer,F282 OS311 15 595,08 April 2015,22 May 2024,2015,2024,Farmer,FALSE,TRUE
-7318,REG/2016/894,2016,-,New,CITH-W-5,Walnut,,ICAR-Central Institute of Temperate Horticulture,Public,N5 JR5 16 894,01 July 2016,22 May 2024,2016,2024,Public,,TRUE
+7318,REG/2016/894,2016,-,New,CITH-W-5,Walnut,Fruits,ICAR-Central Institute of Temperate Horticulture,Public,N5 JR5 16 894,01 July 2016,22 May 2024,2016,2024,Public,FALSE,TRUE
 7319,REG/2016/1461,2016,-,Farmer,Divy Bhog,Rice,Cereals,Rohit Sahu,Farmer,F287 OS382 16 1461,12 September 2016,22 May 2024,2016,2024,Farmer,FALSE,TRUE
 7320,REG/2016/2343,2016,-,Farmer,Dahia-A,Rice,Cereals,Ashok Oraon,Farmer,F546 OS678 16 2343,30 December 2016,22 May 2024,2016,2024,Farmer,FALSE,TRUE
 7321,REG/2017/1821,2017,-,Farmer,SURAJMUNI,Rice,Cereals,Surajmuni Devi,Farmer,F526 OS544 17 1821,06 September 2017,22 May 2024,2017,2024,Farmer,FALSE,TRUE
@@ -8082,7 +8082,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 8081,REG/2024/0090,2024,-,Extant (Notified),GUJARAT ANAND VEGETABLE CHILLI 141 (GAVC141: ANAND TEJ),Chilli,Vegetables,Anand Agricultural University,Public,E2 CA(C )2 24 90,13 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
 8082,REG/2024/0091,2024,-,Extant (Notified),Gujarat Anand Okra 8 (GAO 8: Anand Komal),Okra/Lady's Finger,Vegetables,Anand Agricultural University,Public,E1 AE2 24 91,13 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
 8083,REG/2024/0104,2024,-,Extant (Notified),CSV 46F (Tapi Chari),Sorghum,Cereals,Navsari Agricultural University,Public,E1 SB1 24 104,14 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
-8084,REG/2024/0105,2024,-,Extant (Notified),PHULE SONALI (PCP 1123),Cowpea,Vegetables,Mahatma Phule Krishi Vidyapeeth,Public,E1 VU1 24 105,14 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
+8084,REG/2024/0105,2024,-,Extant (Notified),PHULE SONALI (PCP 1123),Cowpea,Legumes,Mahatma Phule Krishi Vidyapeeth,Public,E1 VU1 24 105,14 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
 8085,REG/2024/0124,2024,-,Extant (Notified),GUJARAT JOWAR-44 (MADHU),Sorghum,Cereals,Navsari Agricultural University,Public,E2 SB3 24 124,15 May 2024,27 November 2024,2024,2024,SAU,FALSE,TRUE
 8086,REG/2020/259,2020,-,Farmer,TANU,Rice,Cereals,Krishi Prayoga Pariwara,Public,F58 OS94 20 259,04 September 2020,28 November 2024,2020,2024,Public,FALSE,TRUE
 8087,REG/2024/0071,2024,-,Extant (Notified),GUJARAT ANAND TOMATO 8 (GAT 8: Anand Roma),Tomato,Vegetables,Anand Agricultural University,Public,E4 LL7 24 71,25 April 2024,28 November 2024,2024,2024,SAU,FALSE,TRUE
@@ -9050,7 +9050,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 9049,REG/2020/92 H,2020,-,Extant (VCK),KHPH214,Chilli,Vegetables,Kaveri Seed Company Ltd,Private,E6 CA(C)8 20 92,29 June 2020,09 June 2025,2020,2025,Private,FALSE,TRUE
 9050,REG/2020/93 H,2020,-,Extant (VCK),KHPH1204,Chilli,Vegetables,Kaveri Seed Company Ltd,Private,E7 CA(C)9 20 93,29 June 2020,09 June 2025,2020,2025,Private,FALSE,TRUE
 9051,REG/2020/238,2020,-,New,BIO GN116,Tetraploid Cotton,Fibre Crops,DCM Shriram Limited,Private,N4 GH12 20 238,27 August 2020,09 June 2025,2020,2025,Private,TRUE,TRUE
-9052,REG/2020/365,2020,-,Extant (VCK),Swarna Raktim,Vegetable Amaranthus,Vegetables,Indian Council of Agricultural Research,Public,E1 AT1 20 365,10 November 2020,09 June 2025,2020,2025,Public,FALSE,TRUE
+9052,REG/2020/365,2020,-,Extant (VCK),Swarna Raktim,Vegetable Amaranth,Vegetables,Indian Council of Agricultural Research,Public,E1 AT1 20 365,10 November 2020,09 June 2025,2020,2025,Public,FALSE,TRUE
 9053,REG/2020/390 H,2020,-,Extant (VCK),NCH-2902,Chilli,Vegetables,Nuziveedu Seeds Ltd,Private,E8 CA(C )13 20 390,31 December 2020,09 June 2025,2020,2025,Private,FALSE,TRUE
 9054,REG/2021/0046,2021,-,New,VASISTA (CoA 14321),Sugarcane,Sugar Crops,Acharya N.G. Ranga Agricultural University,Public,N1 SA1 21 46,18 January 2021,09 June 2025,2021,2025,SAU,FALSE,TRUE
 9055,REG/2021/0047,2021,-,New,NAVEEN (CoA 14323),Sugarcane,Sugar Crops,Acharya N.G. Ranga Agricultural University,Public,N2 SA2 21 47,18 January 2021,09 June 2025,2021,2025,SAU,FALSE,TRUE
@@ -9317,8 +9317,8 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 9316,REG/2017/198,2017,-,New,MHCP-334,Chilli,Vegetables,Mahyco Private Limited,Private,N14 CA(C )25 17 198,22 March 2017,07 July 2025,2017,2025,Private,FALSE,TRUE
 9317,REG/2017/199,2017,-,Extant (VCK),MHCP-319,Chilli,Vegetables,Mahyco Private Limited,Private,E10 CA(C )26 17 199,22 March 2017,07 July 2025,2017,2025,Private,FALSE,TRUE
 9318,REG/2017/798,2017,-,Farmer,,Field Pea,Legumes,Vinod Sukhman Dhurve,Farmer,F16 PS16 17 798,28 March 2017,07 July 2025,2017,2025,Farmer,FALSE,FALSE
-9319,REG/2017/993,2017,-,Farmer,SAWAN SIRPOOT,Barnyard millet,Legumes,Sirpat Khapre,Farmer,F15 EF15 17 993,30 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
-9320,REG/2017/1016,2017,-,Farmer,SAWAN CHANDRA,Barnyard millet,Legumes,Sahab Chandra Marpe,Farmer,F16 EF16 17 1016,30 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
+9319,REG/2017/993,2017,-,Farmer,SAWAN SIRPOOT,Barnyard millet,Cereals,Sirpat Khapre,Farmer,F15 EF15 17 993,30 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
+9320,REG/2017/1016,2017,-,Farmer,SAWAN CHANDRA,Barnyard millet,Cereals,Sahab Chandra Marpe,Farmer,F16 EF16 17 1016,30 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
 9321,REG/2017/1140,2017,-,Farmer,SUNIL MOONG,Green Gram,Legumes,Sunil Kushwaha,Farmer,F9 VR9 17 1140,31 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
 9322,REG/2017/1226,2017,-,Farmer,GOLIYA,Field Pea,Legumes,Ram Lal Patel,Farmer,F48 PS48 17 1226,31 March 2017,07 July 2025,2017,2025,Farmer,FALSE,TRUE
 9323,REG/2017/1379,2017,-,New,BISG002,Bitter Gourd,Vegetables,DCM Shriram Limited,Private,N6 MC9 17 1379,05 April 2017,07 July 2025,2017,2025,Private,FALSE,TRUE
@@ -9928,14 +9928,14 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 9927,REG/2024/0057,2024,-,Extant (VCK),ZCH-545 BGII,Rice,Cereals,Dhanlaxmi Crop Science Limited,Private,E5 GH6 24 57,28 March 2024,03 October 2025,2024,2025,Private,FALSE,TRUE
 9928,REG/2024/0092,2024,-,Farmer,Pariga (P.R.L-1),Brinjal,Vegetables,Balasaheb Rambhau Laware,Farmer,F1 SM3 24 92,13 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9929,REG/2024/0116,2024,-,Farmer,DANA MAISINGA,Sorghum,Cereals,Smt. Dayamati Debbarma,Farmer,F1 SB2 24 116,14 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
-9930,REG/2024/0118,2024,-,Farmer,MOGAI SEEM,Doilchos Bean,Legumes,Sh. Pramod Lal Das,Farmer,F1 LP1 24 118,14 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
+9930,REG/2024/0118,2024,-,Farmer,MOGAI SEEM,Dolichos bean,Vegetables,Sh. Pramod Lal Das,Farmer,F1 LP1 24 118,14 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9931,REG/2024/0119,2024,-,Farmer,HUNTOK,Brinjal,Vegetables,Smt. Chinta Rani Debbarma,Farmer,F2 SM4 24 119,14 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9932,REG/2024/0134,2024,-,Farmer,PPR-6,Kidney Bean,Legumes,Nisar Ah. Malik,Farmer,F1 PV1 24 134,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9933,REG/2024/0136,2024,-,Farmer,PPR-13,Kidney Bean,Legumes,Ab. Rahman Mir,Farmer,F3 PV3 24 136,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9934,REG/2024/0137,2024,-,Farmer,PPR-5,Kidney Bean,Legumes,Manzoor Ah. Mir,Farmer,F4 PV4 24 137,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9935,REG/2024/0138,2024,-,Farmer,PPR-17,Kidney Bean,Legumes,Ab. Rahman Padder,Farmer,F5 PV5 24 138,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9936,REG/2024/0139,2024,-,Farmer,PPR-16,Kidney Bean,Legumes,Ab. Rashid Mir,Farmer,F6 PV6 24 139,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
-9937,REG/2024/0141,2024,-,Farmer,NIRMALA SEM,Doilchos Bean,Legumes,Sh. Chotelal Soren,Farmer,F2 LP2 24 141,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
+9937,REG/2024/0141,2024,-,Farmer,NIRMALA SEM,Dolichos bean,Vegetables,Sh. Chotelal Soren,Farmer,F2 LP2 24 141,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9938,REG/2024/0142,2024,-,Farmer,Arhar ANBP-95,Pigeon pea,Legumes,Narayan Chandra Dey,Farmer,F1 CC3 24 142,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9939,REG/2024/0143,2024,-,Farmer,Joshphin Masoor,Lentil,Legumes,Joshpin Kisku,Farmer,F1 LC1 24 143,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9940,REG/2024/0148,2024,-,Farmer,VASUNDHARA BADSHAH,Pigeon pea,Legumes,Chandra Shekhar Singh,Farmer,F2 CC4 24 148,20 May 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
@@ -9958,8 +9958,8 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 9957,REG/2024/0447,2024,-,Extant (VCK),JOCKEY,Chilli,Vegetables,ACSEN AGRISCIENCE PVT LTD,Private,E10 CA(C )15 24 447,01 August 2024,03 October 2025,2024,2025,Private,FALSE,TRUE
 9958,REG/2024/0448,2024,-,Extant (VCK),AASTHA,Chilli,Vegetables,ACSEN AGRISCIENCE PVT LTD,Private,E11 CA(C )16 24 448,01 August 2024,03 October 2025,2024,2025,Private,FALSE,TRUE
 9959,REG/2024/0449,2024,-,Extant (VCK),HYVEG-48,Chilli,Vegetables,ACSEN AGRISCIENCE PVT LTD,Private,E12 CA(C )17 24 449,01 August 2024,03 October 2025,2024,2025,Private,FALSE,TRUE
-9960,REG/2024/0558,2024,-,Extant (VCK),ARKA SAMBHRAM,Doilchos Bean,Legumes,Indian Institute of Horticultural Research,Public,E1 LP3 24 558,23 September 2024,03 October 2025,2024,2025,Public,FALSE,TRUE
-9961,REG/2024/0559,2024,-,Extant (VCK),ARKA PRASIDHI,Doilchos Bean,Legumes,Indian Institute of Horticultural Research,Public,E2 LP4 24 559,23 September 2024,03 October 2025,2024,2025,Public,FALSE,TRUE
+9960,REG/2024/0558,2024,-,Extant (VCK),ARKA SAMBHRAM,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E1 LP3 24 558,23 September 2024,03 October 2025,2024,2025,Public,FALSE,TRUE
+9961,REG/2024/0559,2024,-,Extant (VCK),ARKA PRASIDHI,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E2 LP4 24 559,23 September 2024,03 October 2025,2024,2025,Public,FALSE,TRUE
 9962,REG/2024/0563,2024,-,Farmer,Sai Amrit Imli,Tamarind,"Tree, Forest And Plantation Crop",Dilip Amritrao Gondkar,Farmer,F1 TAM1 24 563,24 September 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9963,REG/2024/0564,2024,-,Farmer,BHUDEV TISI,Linseed,Oilseeds,Bhudev Mahto,Farmer,F1 LU1 24 564,26 September 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
 9964,REG/2024/0596,2024,-,Farmer,DESHI CHIKNA,Linseed,Oilseeds,Anjani Kumar,Farmer,F4 LU4 24 596,04 October 2024,03 October 2025,2024,2025,Farmer,FALSE,TRUE
@@ -9985,8 +9985,8 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 9984,REG/2024/0759,2024,-,Farmer,CHAKRATA RAJMASH-6,Kidney Bean,Legumes,Khajan Singh,Farmer,F14 PV14 24 759,22 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
 9985,REG/2024/0042,2024,-,Extant (VCK),ARKA VEERA,Cucumber,Vegetables,Indian Institute of Horticultural Research,Public,E12 CS12 24 42,12 February 2024,06 October 2025,2024,2025,Public,FALSE,TRUE
 9986,REG/2024/0067,2024,-,Extant (VCK),MCP2881,Chilli,Vegetables,Mahyco Private Limited,Private,E1 CA(C )1 24 67,24 April 2024,06 October 2025,2024,2025,Private,FALSE,TRUE
-9987,REG/2024/0731,2024,-,Farmer,NANHA SIM,Doilchos Bean,Vegetables,Vijay Kumar Roy,Farmer,F4 LP8 24 731,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
-9988,REG/2024/0732,2024,-,Farmer,KALA SEM,Doilchos Bean,Vegetables,Shashi Bhushan Singh,Farmer,F5 LP9 24 732,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
+9987,REG/2024/0731,2024,-,Farmer,NANHA SIM,Dolichos bean,Vegetables,Vijay Kumar Roy,Farmer,F4 LP8 24 731,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
+9988,REG/2024/0732,2024,-,Farmer,KALA SEM,Dolichos bean,Vegetables,Shashi Bhushan Singh,Farmer,F5 LP9 24 732,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
 9989,REG/2024/0737,2024,-,Farmer,DONE MASOOR,Lentil,Legumes,Loknath Kumar,Farmer,F3 LC7 24 737,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
 9990,REG/2024/0738,2024,-,Farmer,ANAND MASOOR DESHALA,Lentil,Legumes,Anand Mohan Singh,Farmer,F4 LC8 24 738,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
 9991,REG/2024/0739,2024,-,Farmer,VINAY MASOOR,Lentil,Legumes,Vinay Kumar,Farmer,F5 LC9 24 739,14 October 2024,06 October 2025,2024,2025,Farmer,FALSE,TRUE
@@ -10121,8 +10121,8 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10120,REG/2024/0233,2024,-,Extant (VCK),KP19SB021,Pearl Millet,Cereals,Kaveri Seed Company Ltd,Private,E2 PG8 24 233,28 May 2024,14 November 2025,2024,2025,Private,FALSE,TRUE
 10121,REG/2024/0234,2024,-,Extant (VCK),KP19SR022,Pearl Millet,Cereals,Kaveri Seed Company Ltd,Private,E3 PG9 24 234,28 May 2024,14 November 2025,2024,2025,Private,FALSE,TRUE
 10122,REG/2024/0373,2024,-,Farmer,JHABUA GULABI CHANA,Chickpea,Legumes,Asha Jaiv Vividhta Samooh,Farmer,F1 CA2 24 373,10 July 2024,14 November 2025,2024,2025,Farmer,FALSE,TRUE
-10123,REG/2024/0560,2024,-,Extant (VCK),ARKA BHAVANI,Doilchos Bean,Vegetables,Indian Institute of Horticultural Research,Public,E3 LP5 24 560,23 September 2024,14 November 2025,2024,2025,Public,FALSE,TRUE
-10124,REG/2024/0561,2024,-,Extant (VCK),ARKA AMOGH,Doilchos Bean,Vegetables,Indian Institute of Horticultural Research,Public,E4 LP6 24 561,23 September 2024,14 November 2025,2024,2025,Public,FALSE,TRUE
+10123,REG/2024/0560,2024,-,Extant (VCK),ARKA BHAVANI,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E3 LP5 24 560,23 September 2024,14 November 2025,2024,2025,Public,FALSE,TRUE
+10124,REG/2024/0561,2024,-,Extant (VCK),ARKA AMOGH,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E4 LP6 24 561,23 September 2024,14 November 2025,2024,2025,Public,FALSE,TRUE
 10125,REG/2024/0730,2024,-,Farmer,ROA CHANA,Chickpea,Legumes,Raj Pratap Bharti & Group of Farmers,Farmer,F3 CA12 24 730,14 October 2024,14 November 2025,2024,2025,Farmer,FALSE,TRUE
 10126,REG/2024/0742,2024,-,Farmer,NITI CHANA,Chickpea,Legumes,Neeti Ranjan Pratap,Farmer,F4 CA13 24 742,14 October 2024,14 November 2025,2024,2025,Farmer,FALSE,TRUE
 10127,REG/2024/0743,2024,-,Farmer,ANSHU CHANA GREEN,Chickpea,Legumes,Arjun Singh,Farmer,F5 CA14 24 743,14 October 2024,14 November 2025,2024,2025,Farmer,FALSE,TRUE
@@ -10276,7 +10276,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10275,REG/2025/0534,2025,-,Extant (Notified),Pusa HM4 Male Sterile Baby Corn-2 (ABSH4-2),Maize,Cereals,Indian Agricultural Research Institute,Public,E37 ZM81 25 534,"Friday, May 02, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10276,REG/2025/0535,2025,-,Extant (Notified),Pusa Popcorn Hybrid-1 (APCH-2),Maize,Cereals,Indian Agricultural Research Institute,Public,E38 ZM82 25 535,"Friday, May 02, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10277,REG/2022/0108 H,2022,-,New,SCFH-1014,Cauliflower,Vegetables,Mahyco Private Limited,Private,N1 BB1 22 108,"Friday, June 10, 2022",04 December 2025,2022,2025,Private,FALSE,TRUE
-10278,REG/2025/0949,2025,-,Extant (Notified),Kashi Vishan (VRCP-12),Cowpea,Vegetables,Indian Council of Agricultural Research,Public,E1 VU3 25 949,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
+10278,REG/2025/0949,2025,-,Extant (Notified),Kashi Vishan (VRCP-12),Cowpea,Legumes,Indian Council of Agricultural Research,Public,E1 VU3 25 949,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10279,REG/2025/0945,2025,-,Extant (Notified),Karan Saanvi (DBW-443),Wheat,Cereals,Indian Council of Agricultural Research,Public,E4 TA16 25 945,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10280,REG/2020/320,2020,-,New,ALVERSTONE RUSSET,Potato,Vegetables,IPR BV,Private,N3 ST3 20 320,"Tuesday, September 15, 2020",04 December 2025,2020,2025,Private,FALSE,TRUE
 10281,REG/2025/0641,2025,-,Extant (Notified),Gujarat Vegetable Chilli 113 (GVC 113: Anand Jwala),Chilli,Vegetables,Anand Agricultural University,Public,E12 CA(C )39 25 641,"Wednesday, May 28, 2025",04 December 2025,2025,2025,SAU,FALSE,TRUE
@@ -10373,7 +10373,7 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10372,REG/2024/1185,2024,-,Farmer,LAXMAN KATHAL,Jackfruit,Fruits,Laxman Hasda,Farmer,F55 AHL55 24 1185,"Thursday, December 12, 2024",04 December 2025,2024,2025,Farmer,FALSE,TRUE
 10373,REG/2025/0958,2025,-,Extant (Notified),KASHI BARAMASI (VRPLK-2),Spinach Beet,Vegetables,Indian Council of Agricultural Research,Public,E1 BV1 25 958,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10374,REG/2025/0951,2025,-,Extant (Notified),KASHI AARDRA (VRRAD-150),Radish,Vegetables,Indian Council of Agricultural Research,Public,E2 RAS2 25 951,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
-10375,REG/2022/0040,2022,-,Extant (VCK),Swarna Mukut,Cowpea,Vegetables,Indian Council of Agricultural Research,Public,E1 VU1 22 40,"Wednesday, March 30, 2022",04 December 2025,2022,2025,Public,FALSE,TRUE
+10375,REG/2022/0040,2022,-,Extant (VCK),Swarna Mukut,Cowpea,Legumes,Indian Council of Agricultural Research,Public,E1 VU1 22 40,"Wednesday, March 30, 2022",04 December 2025,2022,2025,Public,FALSE,TRUE
 10376,REG/2025/0766,2025,-,Extant (Notified),SAHYADRI JALAMUKTHI (KHP-14 / IET-30872),Rice,Cereals,Keladi Shivappa Nayaka University of Agricultural and Horticultural Sciences,Public,E37 OS177 25 766,"Wednesday, July 09, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
 10377,REG/2025/0491,2025,-,Extant (Notified),PBNR 03-2,Rice,Cereals,Vasantrao Naik Marathwada Krishi Vidyapeeth,Public,E23 OS119 25 491,"Tuesday, April 22, 2025",04 December 2025,2025,2025,SAU,FALSE,TRUE
 10378,REG/2025/0961,2025,-,Extant (Notified),Kashi Parakram (VR0-119),Okra/Lady's Finger,Vegetables,Indian Council of Agricultural Research,Public,E6 AE9 25 961,"Thursday, August 14, 2025",04 December 2025,2025,2025,Public,FALSE,TRUE
@@ -10567,17 +10567,151 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10566,REG/2025/0558,2025,-,Extant (VCK),KMH8116,Maize,Cereals,Kaveri Seed Company Ltd,Private,E43 ZM87 25 558,"Wednesday, May 14, 2025",05 May 2026,2025,2026,Private,FALSE,TRUE
 10567,REG/2025/0559,2025,-,Extant (VCK),KM20SX023,Maize,Cereals,Kaveri Seed Company Ltd,Private,E44 ZM88 25 559,"Wednesday, May 14, 2025",05 May 2026,2025,2026,Private,FALSE,TRUE
 10568,REG/2025/0560,2025,-,Extant (VCK),KM20SX021,Maize,Cereals,Kaveri Seed Company Ltd,Private,E45 ZM89 25 560,"Wednesday, May 14, 2025",05 May 2026,2025,2026,Private,FALSE,TRUE
-10569,REG/2015/226,2015,-,Farmer,3 EYE BUDS KHUDRAT KA KARISHMA,Sugarcane,Sugar Crops,Mohammed Idris Ahmed Quadri,Farmer,F6 SA6 15 226,"Friday, February 06, 2015",06 May 2026,2015,2026,Farmer,FALSE,TRUE
-10570,REG/2015/415,2015,-,Extant (VCK),Konkan Bhatye Coconut Hybrid-1,Coconut,"Tree, Forest And Plantation Crop",Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth,Public,E3 CN3 15 415,"Wednesday, March 18, 2015",06 May 2026,2015,2026,SAU,FALSE,TRUE
-10571,REG/2015/1586,2015,-,Farmer,CAPTAN-BASTI,Sugarcane,Sugar Crops,Aagya Ram Verma,Farmer,F11 SA11 15 1586,"Thursday, August 06, 2015",06 May 2026,2015,2026,Farmer,FALSE,TRUE
-10572,REG/2023/0168,2023,-,New,Co 16030 (Karan-16),Sugarcane,Sugar Crops,Indian Council of Agricultural Research,Public,N3 SA4 23 168,"Friday, December 15, 2023",06 May 2026,2023,2026,Public,FALSE,TRUE
-10573,REG/2024/0026,2024,-,Extant (VCK),DR8101,Rice,Cereals,Rallis India Limited,Private,E55 OS1 24 26,"Monday, January 29, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
-10574,REG/2024/0236,2024,-,Extant (VCK),INH 220221,Rice,Cereals,Bayer Crop Science LP,Private,E52 OS53 24 236,"Wednesday, May 29, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
-10575,REG/2024/0243,2024,-,Extant (VCK),INH19188,Rice,Cereals,Bayer Crop Science LP,Private,E58 OS56 24 243,"Thursday, May 30, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
-10576,REG/2024/0389,2024,-,Farmer,NAGAURI PAAN METHI,Fenugreek,Spices,Mrs. Geeta Devi,Farmer,F1 TC1 24 389,"Friday, July 19, 2024",06 May 2026,2024,2026,Farmer,FALSE,TRUE
-10577,REG/2025/0188,2025,-,Extant (VCK),SYN-CO- NK 6110,Maize,Cereals,Syngenta India Pvt Ltd,Private,E6 ZM20 25 188,"Tuesday, March 04, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
-10578,REG/2025/0429,2025,-,Extant (VCK),DKC9233,Maize,Cereals,Bayer CropScience Ltd.,Private,E12 ZM59 25 429,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
-10579,REG/2025/0430,2025,-,Extant (VCK),DKC7240,Maize,Cereals,Bayer CropScience Ltd.,Private,E13 ZM60 25 430,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
-10580,REG/2025/0432,2025,-,Extant (VCK),DKC8174,Maize,Cereals,Bayer CropScience Ltd.,Private,E14 ZM62 25 432,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
-10581,REG/2025/0740,2025,-,Farmer,BILLOUWA-22,Guava,Fruits,Pran Singh,Farmer,F1 PSG6 25 740,"Friday, June 20, 2025",06 May 2026,2025,2026,Farmer,FALSE,TRUE
-10582,REG/2024/0258,2024,-,Extant (VCK),INH 18169 (Arize 6677 ST),Rice,Cereals,Bayer Crop Science LP,Private,E57 OS61 24 258,"Wednesday, June 05, 2024",08 May 2026,2024,2026,Private,FALSE,TRUE
+10569,REG/2025/0787,2025,-,Extant (VCK),NOKH-1009,Okra/Lady's Finger,Vegetables,Nuziveedu Seeds Ltd,Private,E3 AE6 25 787,"Thursday, July 24, 2025",05 May 2026,2025,2026,Private,FALSE,TRUE
+10570,REG/2015/226,2015,-,Farmer,3 EYE BUDS KHUDRAT KA KARISHMA,Sugarcane,Sugar Crops,Mohammed Idris Ahmed Quadri,Farmer,F6 SA6 15 226,"Friday, February 06, 2015",06 May 2026,2015,2026,Farmer,FALSE,TRUE
+10571,REG/2015/415,2015,-,Extant (VCK),Konkan Bhatye Coconut Hybrid-1,Coconut,"Tree, Forest And Plantation Crop",Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth,Public,E3 CN3 15 415,"Wednesday, March 18, 2015",06 May 2026,2015,2026,SAU,FALSE,TRUE
+10572,REG/2015/1586,2015,-,Farmer,CAPTAN-BASTI,Sugarcane,Sugar Crops,Aagya Ram Verma,Farmer,F11 SA11 15 1586,"Thursday, August 06, 2015",06 May 2026,2015,2026,Farmer,FALSE,TRUE
+10573,REG/2023/0168,2023,-,New,Co 16030 (Karan-16),Sugarcane,Sugar Crops,Indian Council of Agricultural Research,Public,N3 SA4 23 168,"Friday, December 15, 2023",06 May 2026,2023,2026,Public,FALSE,TRUE
+10574,REG/2024/0026,2024,-,Extant (VCK),DR8101,Rice,Cereals,Rallis India Limited,Private,E55 OS1 24 26,"Monday, January 29, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
+10575,REG/2024/0236,2024,-,Extant (VCK),INH 220221,Rice,Cereals,Bayer Crop Science LP,Private,E52 OS53 24 236,"Wednesday, May 29, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
+10576,REG/2024/0243,2024,-,Extant (VCK),INH19188,Rice,Cereals,Bayer Crop Science LP,Private,E58 OS56 24 243,"Thursday, May 30, 2024",06 May 2026,2024,2026,Private,FALSE,TRUE
+10577,REG/2024/0389,2024,-,Farmer,NAGAURI PAAN METHI,Fenugreek,Spices,Mrs. Geeta Devi,Farmer,F1 TC1 24 389,"Friday, July 19, 2024",06 May 2026,2024,2026,Farmer,FALSE,TRUE
+10578,REG/2025/0188,2025,-,Extant (VCK),SYN-CO- NK 6110,Maize,Cereals,Syngenta India Pvt Ltd,Private,E6 ZM20 25 188,"Tuesday, March 04, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
+10579,REG/2025/0429,2025,-,Extant (VCK),DKC9233,Maize,Cereals,Bayer CropScience Ltd.,Private,E12 ZM59 25 429,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
+10580,REG/2025/0430,2025,-,Extant (VCK),DKC7240,Maize,Cereals,Bayer CropScience Ltd.,Private,E13 ZM60 25 430,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
+10581,REG/2025/0432,2025,-,Extant (VCK),DKC8174,Maize,Cereals,Bayer CropScience Ltd.,Private,E14 ZM62 25 432,"Friday, April 11, 2025",06 May 2026,2025,2026,Private,FALSE,TRUE
+10582,REG/2025/0740,2025,-,Farmer,BILLOUWA-22,Guava,Fruits,Pran Singh,Farmer,F1 PSG6 25 740,"Friday, June 20, 2025",06 May 2026,2025,2026,Farmer,FALSE,TRUE
+10583,REG/2024/0258,2024,-,Extant (VCK),INH 18169 (Arize 6677 ST),Rice,Cereals,Bayer Crop Science LP,Private,E57 OS61 24 258,"Wednesday, June 05, 2024",08 May 2026,2024,2026,Private,FALSE,TRUE
+10584,REG/2022/0184,2022,-,Extant (Notified),GR 16 (Tapi) (NVSR 2233),Rice,Cereals,Navsari Agricultural University,Public,E17 OS61 22 184,"Monday, September 26, 2022",03 June 2026,2022,2026,SAU,FALSE,TRUE
+10585,REG/2014/2196,2014,-,Farmer,JASHUA,Rice,Cereals,Shyam Chandra Lala,Farmer,F1105 OS1197 14 2196,"Friday, October 31, 2014",03 June 2026,2014,2026,Farmer,FALSE,TRUE
+10586,REG/2014/2210,2014,-,Farmer,MALSARA,Rice,Cereals,Papu Pal,Farmer,F1119 OS1211 14 2210,"Friday, October 31, 2014",03 June 2026,2014,2026,Farmer,FALSE,TRUE
+10587,REG/2015/1245,2015,-,Farmer,CHENGUR,Rice,Cereals,Baban Mondal,Farmer,F536 OS583 15 1245,"Monday, June 29, 2015",03 June 2026,2015,2026,Farmer,FALSE,TRUE
+10588,REG/2015/1783,2015,-,Farmer,MOHIT-GOLD,Wheat,Cereals,Satveer Singh,Farmer,F24 TA35 15 1783,"Thursday, September 10, 2015",03 June 2026,2015,2026,Farmer,FALSE,TRUE
+10589,REG/2017/810,2017,-,Farmer,Lal Makka,Maize,Cereals,Punaram,Farmer,F62 ZM70 17 810,"Wednesday, March 29, 2017",03 June 2026,2017,2026,Farmer,FALSE,TRUE
+10590,REG/2017/1348,2017,-,Farmer,Ratiri Makka,Maize,Cereals,Kuriya Bai Kumre,Farmer,F119 ZM127 17 1348,"Friday, March 31, 2017",03 June 2026,2017,2026,Farmer,FALSE,TRUE
+10591,REG/2017/1369,2017,-,Farmer,Mahesh Kutki,Barnyard Millet,Cereals,Mahesh,Farmer,F33 EF33 17 1369,"Friday, March 31, 2017",03 June 2026,2017,2026,Farmer,FALSE,TRUE
+10592,REG/2017/1373,2017,-,Farmer,CHHINDWALA MAKKA,Maize,Cereals,Tulasiya Dhurve,Farmer,F130 ZM138 17 1373,"Friday, March 31, 2017",03 June 2026,2017,2026,Farmer,FALSE,TRUE
+10593,REG/2023/0085 H,2023,-,New,ARKA BHANU,Marigold,Flowers,Indian Institute of Horticultural Research,Public,N1 TS1 23 85,"Tuesday, June 13, 2023",03 June 2026,2023,2026,Public,FALSE,TRUE
+10594,REG/2023/0085 P2,2023,-,New,IIHRMY 1-4 (Pollen parent of Arka Bhanu),Marigold,Flowers,Indian Institute of Horticultural Research,Public,N1 TS1 23 85,"Tuesday, June 13, 2023",03 June 2026,2023,2026,Public,FALSE,TRUE
+10595,REG/2023/0086 H,2023,-,New,ARKA ABHI,Marigold,Flowers,Indian Institute of Horticultural Research,Public,N2 TS2 23 86,"Tuesday, June 13, 2023",03 June 2026,2023,2026,Public,FALSE,TRUE
+10596,REG/2023/0086 P2,2023,-,New,IIHRMY 2-1 (Pollen parent of Hybrid Arka Abhi),Marigold,Flowers,Indian Institute of Horticultural Research,Public,N2 TS2 23 86,"Tuesday, June 13, 2023",03 June 2026,2023,2026,Public,FALSE,TRUE
+10597,REG/2023/0101,2023,-,Extant (Notified),Mandya Jyothi (KMP-220),Rice,Cereals,University of Agricultural Sciences,Public,E7 OS20 23 101,"Monday, August 28, 2023",03 June 2026,2023,2026,Public,FALSE,TRUE
+10598,REG/2023/0115,2023,-,Farmer,ANNPURNA,Wheat,Cereals,Ranjit Kumar Singh,Farmer,F1 TA5 23 115,"Wednesday, August 30, 2023",03 June 2026,2023,2026,Farmer,FALSE,TRUE
+10599,REG/2023/0128,2023,-,Farmer,SAFED DHAN,Rice,Cereals,Lok Chetana Manch,Farmer,F2 OS23 23 128,"Friday, October 13, 2023",03 June 2026,2023,2026,Farmer,FALSE,TRUE
+10600,REG/2024/0100,2024,-,Extant (Notified),P34407 (PM-21111 L),Maize,Cereals,Pioneer Overseas Corporation,Private,E30 ZM6 24 100,"Tuesday, May 14, 2024",03 June 2026,2024,2026,Private,FALSE,TRUE
+10601,REG/2024/0289,2024,-,Extant (Notified),KMP-225,Rice,Cereals,University of Agricultural Sciences,Public,E61 OS71 24 289,"Friday, June 14, 2024",03 June 2026,2024,2026,Public,FALSE,TRUE
+10602,REG/2024/0344,2024,-,Farmer,VASUNDHARA RUCHI,Rice,Cereals,Pankaj Singh,Farmer,F6 OS72 24 344,"Wednesday, June 26, 2024",03 June 2026,2024,2026,Farmer,FALSE,TRUE
+10603,REG/2024/0345,2024,-,Farmer,VASUNDHARA SURUCHI,Rice,Cereals,Pankaj Singh,Farmer,F7 OS73 24 345,"Wednesday, June 26, 2024",03 June 2026,2024,2026,Farmer,FALSE,TRUE
+10604,REG/2024/0461,2024,-,Farmer,LOHA SWARNA,Rice,Cereals,Sumanta Misra,Farmer,F13 OS92 24 461,"Friday, August 16, 2024",03 June 2026,2024,2026,Farmer,FALSE,TRUE
+10605,REG/2024/0463,2024,-,Farmer,DUNGRU,Rice,Cereals,Sumanta Misra,Farmer,F15 OS94 24 463,"Friday, August 16, 2024",03 June 2026,2024,2026,Farmer,FALSE,TRUE
+10606,REG/2025/0025,2025,-,Extant (Notified),C.G. TEJAS DHAN (IGKV DH Rice 2),Rice,Cereals,Indira Gandhi Krishi Vishwavidyalaya,Public,E13 OS4 25 25,"Wednesday, January 01, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10607,REG/2025/0105,2025,-,Extant (VCK),PAN-2150,Rice,Cereals,Pan Seeds Pvt Ltd,Private,E14 OS26 25 105,"Friday, January 24, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10608,REG/2025/0106,2025,-,Extant (VCK),PAN-2140,Rice,Cereals,Pan Seeds Pvt Ltd,Private,E15 OS27 25 106,"Friday, January 24, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10609,REG/2025/0107,2025,-,Extant (VCK),PAN-2145,Rice,Cereals,Pan Seeds Pvt Ltd,Private,E16 OS28 25 107,"Friday, January 24, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10610,REG/2025/0108,2025,-,Extant (VCK),PAN-2430,Rice,Cereals,Pan Seeds Pvt Ltd,Private,E17 OS29 25 108,"Friday, January 24, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10611,REG/2025/0126,2025,-,Extant (VCK),27S45,Rice,Cereals,Pioneer Overseas Corporation,Private,E18 OS33 25 126,"Monday, February 03, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10612,REG/2025/0152,2025,-,Extant (VCK),NP 7008,Rice,Cereals,Nuziveedu Seeds Ltd,Private,E20 OS41 25 152,"Thursday, February 20, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10613,REG/2025/0154,2025,-,Extant (VCK),SRD 55,Rice,Cereals,Savannah Seeds Pvt. Ltd.,Private,E21 OS42 25 154,"Friday, February 21, 2025",03 June 2026,2025,2026,Private,FALSE,TRUE
+10614,REG/2025/1125,2025,-,Extant (Notified),INDIRA MATAR-1 (RFP 2009-1),Field Pea,Legumes,Indira Gandhi Krishi Vishwavidyalaya,Public,E7 PS14 25 1125,"Tuesday, September 16, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10615,REG/2025/1210,2025,-,Extant (Notified),CO 7 (COBG 10-05),Black Gram,Legumes,Tamil Nadu Agricultural University,Public,E3 VM10 25 1210,"Thursday, September 25, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10616,REG/2025/1211,2025,-,Extant (Notified),CO 9 (COGG 13-19),Green Gram,Legumes,Tamil Nadu Agricultural University,Public,E4 VR10 25 1211,"Thursday, September 25, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10617,REG/2025/1223,2025,-,Extant (Notified),DAPOLI-3 (DPLN 2),Finger Millet,Cereals,Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth,Public,E4 EL30 25 1223,"Tuesday, October 14, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10618,REG/2025/1224,2025,-,Extant (Notified),Konkan Satwik (DPLV-1) (LMV 548),Little Millet,Cereals,Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth,Public,E3 PE19 25 1224,"Tuesday, October 14, 2025",03 June 2026,2025,2026,SAU,FALSE,TRUE
+10619,REG/2025/1297,2025,-,Extant (Notified),Kalpa Suvarna,Coconut,"Tree, Forest And Plantation Crop",Indian Council of Agricultural Research,Public,E1 CN1 25 1297,"Wednesday, November 26, 2025",03 June 2026,2025,2026,Public,FALSE,TRUE
+10620,REG/2025/1298,2025,-,Extant (Notified),Kalpa Shatabdi,Coconut,"Tree, Forest And Plantation Crop",Indian Council of Agricultural Research,Public,E2 CN2 25 1298,"Wednesday, November 26, 2025",03 June 2026,2025,2026,Public,FALSE,TRUE
+10621,REG/2026/0079,2026,-,Extant (Notified),JHO-2009-1 (Bundel Jai-2009-1),Oat,Cereals,ICAR- Indian Grassland and Fodder Research Institute,Public,E2 AVS2 26 79,"Thursday, January 29, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10622,REG/2026/0080,2026,-,Extant (Notified),Bundel Jai-2015-1,Oat,Cereals,ICAR- Indian Grassland and Fodder Research Institute,Public,E3 AVS3 26 80,"Thursday, January 29, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10623,REG/2026/0093,2026,-,Extant (Notified),IPL 230,Lentil,Legumes,Indian Council of Agricultural Research,Public,E1 LC1 26 93,"Tuesday, February 03, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10624,REG/2026/0094,2026,-,Extant (Notified),IPL 329,Lentil,Legumes,Indian Council of Agricultural Research,Public,E2 LC2 26 94,"Tuesday, February 03, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10625,REG/2026/0095,2026,-,Extant (Notified),IPU13-6(Tapti),Black Gram,Legumes,Indian Council of Agricultural Research,Public,E1 VM1 26 95,"Tuesday, February 03, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10626,REG/2026/0099,2026,-,Extant (Notified),Kashi Annapurna (VRWB-30),Winged Bean,Vegetables,Indian Council of Agricultural Research,Public,E1 PST1 26 99,"Monday, February 09, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10627,REG/2026/0100,2026,-,Extant (Notified),Kashi Hari (VRM-11-1),Round Melon,Vegetables,Indian Council of Agricultural Research,Public,E1 PRF1 26 100,"Monday, February 09, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10628,REG/2026/0101,2026,-,Extant (Notified),Kashi Vidhi (VRLM-1),Long Melon,Vegetables,Indian Council of Agricultural Research,Public,E1 CMF1 26 101,"Monday, February 09, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10629,REG/2026/0116,2026,-,Extant (Notified),DWRB 223,Barley,Cereals,Indian Council of Agricultural Research,Public,E1 HV1 26 116,"Friday, February 13, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10630,REG/2026/0123,2026,-,Extant (Notified),ARKA KRISHNA,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E1 LP1 26 123,"Monday, February 16, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10631,REG/2026/0124,2026,-,Extant (Notified),ARKA SUPRIYA,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E2 LP2 26 124,"Monday, February 16, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10632,REG/2026/0125,2026,-,Extant (Notified),ARKA PRADHAN,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E3 LP3 26 125,"Monday, February 16, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10633,REG/2026/0126,2026,-,Extant (Notified),ARKA VISTAR,Dolichos bean,Vegetables,Indian Institute of Horticultural Research,Public,E4 LP4 26 126,"Monday, February 16, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10634,REG/2026/0127,2026,-,Extant (Notified),ARKA PRIYA,Garden Pea,Legumes,Indian Institute of Horticultural Research,Public,E1 PS1 26 127,"Monday, February 16, 2026",03 June 2026,2026,2026,Public,FALSE,TRUE
+10635,REG/2025/0190,2025,-,Extant (VCK),SYN-CO-NK 6514,Maize,Cereals,Syngenta India Pvt Ltd,Private,E7 ZM22 25 190,"Tuesday, March 04, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10636,REG/2025/0240,2025,-,Extant (VCK),SYN-CO-NP5940,Maize,Cereals,Syngenta Crop Protection AG,Private,E28 ZM33 25 240,"Tuesday, March 18, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10637,REG/2025/0245,2025,-,Extant (VCK),SYN-CO-NP5387,Maize,Cereals,Syngenta Crop Protection AG,Private,E34 ZM38 25 245,"Tuesday, March 18, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10638,REG/2025/0250,2025,-,Extant (VCK),SYN-CO-NP5935,Maize,Cereals,Syngenta Crop Protection AG,Private,E24 ZM43 25 250,"Tuesday, March 18, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10639,REG/2025/0253,2025,-,Extant (VCK),SYN-CO-NP5416,Maize,Cereals,Syngenta Crop Protection AG,Private,E25 ZM46 25 253,"Tuesday, March 18, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10640,REG/2025/0296,2025,-,Extant (VCK),KRH7428,Rice,Cereals,Kaveri Seed Company Ltd,Private,E22 OS73 25 296,"Wednesday, March 26, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10641,REG/2025/0607,2025,-,Extant (Notified),SAVA 7501 (SHX-468) (IET 28128),Rice,Cereals,Savannah Seeds Pvt. Ltd.,Private,E30 OS150 25 607,"Monday, May 26, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10642,REG/2025/0942,2025,-,Extant (Notified),Sel. 10-3 (Phule Nilima),Garlic,Vegetables,Mahatma Phule Krishi Vidyapeeth,Public,E1 AS1 25 942,"Sunday, October 12, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10643,REG/2025/1068,2025,-,Extant (Notified),ADV 768 (ADV 7251),Maize,Cereals,Advanta Enterprises Limited,Private,E53 ZM110 25 1068,"Thursday, September 04, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10644,REG/2025/1069,2025,-,Extant (Notified),ADV 7132 (ADV 765),Maize,Cereals,Advanta Enterprises Limited,Private,E54 ZM111 25 1069,"Thursday, September 04, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10645,REG/2025/1088,2025,-,Extant (Notified),CO 54 (CB 12588),Rice,Cereals,Tamil Nadu Agricultural University,Public,E60 OS271 25 1088,"Tuesday, September 09, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10646,REG/2025/1089,2025,-,Extant (Notified),CO 55 (CB 15714) 4 (IET 27873),Rice,Cereals,Tamil Nadu Agricultural University,Public,E61 OS272 25 1089,"Tuesday, September 09, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10647,REG/2025/1090,2025,-,Extant (Notified),CO 56 (CB 12132) (IET 27408 & IET 25531),Rice,Cereals,Tamil Nadu Agricultural University,Public,E62 OS273 25 1090,"Tuesday, September 09, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10648,REG/2025/1091,2025,-,Extant (Notified),CO 57 (IET 31924),Rice,Cereals,Tamil Nadu Agricultural University,Public,E63 OS274 25 1091,"Tuesday, September 09, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10649,REG/2025/1119,2025,-,Extant (Notified),IMH 226 (IMHSB 17R-17),Maize,Cereals,Indian Council of Agricultural Research,Public,E55 ZM112 25 1119,"Tuesday, September 16, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10650,REG/2025/1120,2025,-,Extant (Notified),IMH 225 (IMHSB 17R-16),Maize,Cereals,Indian Council of Agricultural Research,Public,E56 ZM113 25 1120,"Tuesday, September 16, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10651,REG/2025/1219,2025,-,Extant (Notified),PA-5252,Indian Mustard (Sarso),Oilseeds,Crystal Crop Protection Limited,Private,E11 BJ39 25 1219,"Friday, October 03, 2025",04 June 2026,2025,2026,Private,FALSE,TRUE
+10652,REG/2025/1222,2025,-,Extant (Notified),KBSH-90,Sunflower,Oilseeds,University of Agricultural Sciences,Public,E2 HA3 25 1222,"Tuesday, October 14, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10653,REG/2025/1348,2025,-,Extant (Notified),Karan 17 (Co-17018),Sugarcane,Sugar Crops,Indian Council of Agricultural Research,Public,E12 SA12 25 1348,"Friday, December 19, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10654,REG/2025/1349,2025,-,Extant (Notified),Bharani (GKVKS-1),Sesame,Oilseeds,University of Agricultural Sciences,Public,E3 SI7 25 1349,"Friday, December 19, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10655,REG/2025/1358,2025,-,Extant (Notified),CITH-Red Grem (CITH-O-2),Onion,Vegetables,Central Institute of Temperate Horticulture,Public,E2 AC4 25 1358,"Friday, December 19, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10656,REG/2025/1359,2025,-,Extant (Notified),CITH-JUMBO (CITH-G-60),Garlic,Vegetables,Central Institute of Temperate Horticulture,Public,E2 AS3 25 1359,"Friday, December 19, 2025",04 June 2026,2025,2026,Public,FALSE,TRUE
+10657,REG/2025/1371,2025,-,Extant (Notified),PHULE VIJAYA (GKPS-2-7),Papaya,Fruits,Mahatma Phule Krishi Vidyapeeth,Public,E1 CP2 25 1371,"Tuesday, December 23, 2025",04 June 2026,2025,2026,SAU,FALSE,TRUE
+10658,REG/2026/0054,2026,-,Extant (Notified),CNFS-1 (Chamaraja Nagara Fodder Sorghum-1),Sorghum,Cereals,University of Agricultural Sciences,Public,E1 SB1 26 54,"Friday, January 09, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10659,REG/2026/0059,2026,-,Extant (Notified),RTS-43,Sorghum,Cereals,University of Agricultural Sciences,Public,E2 SB2 26 59,"Friday, January 16, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10660,REG/2026/0078,2026,-,Extant (Notified),Bundel Jai 20211 (JHO 2012-2),Oat,Cereals,ICAR- Indian Grassland and Fodder Research Institute,Public,E1 AVS1 26 78,"Thursday, January 29, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10661,REG/2026/0120,2026,-,Extant (Notified),ARKA ARCHANA,China Aster,Flowers,Indian Institute of Horticultural Research,Public,E1 CCA1 26 120,"Friday, February 13, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10662,REG/2026/0121,2026,-,Extant (Notified),ARKA AADYA,China Aster,Flowers,Indian Institute of Horticultural Research,Public,E2 CCA2 26 121,"Friday, February 13, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10663,REG/2026/0122,2026,-,Extant (Notified),ARKA KAMINI,China Aster,Flowers,Indian Institute of Horticultural Research,Public,E3 CCA3 26 122,"Friday, February 13, 2026",04 June 2026,2026,2026,Public,FALSE,TRUE
+10664,REG/2025/1092,2025,-,Extant (Notified),CO 58 (IET 25577),Rice,Cereals,Tamil Nadu Agricultural University,Public,E64 OS275 25 1092,"Tuesday, September 09, 2025",05 June 2026,2025,2026,SAU,FALSE,TRUE
+10665,REG/2025/1093,2025,-,Extant (Notified),CO RH 5 (IET 24986),Rice,Cereals,Tamil Nadu Agricultural University,Public,E65 OS276 25 1093,"Tuesday, September 09, 2025",05 June 2026,2025,2026,SAU,FALSE,TRUE
+10666,REG/2025/1124,2025,-,Extant (Notified),IMH 229 (DMRH-1410),Maize,Cereals,Indian Council of Agricultural Research,Public,E60 ZM117 25 1124,"Tuesday, September 16, 2025",05 June 2026,2025,2026,Public,FALSE,TRUE
+10667,REG/2025/1126,2025,-,Extant (Notified),Chhattisgarh Devbhog (IET 23879) (R-1656-1146-5-513-1),Rice,Cereals,Indira Gandhi Krishi Vishwavidyalaya,Public,E66 OS284 25 1126,"Tuesday, September 16, 2025",05 June 2026,2025,2026,SAU,FALSE,TRUE
+10668,REG/2025/1139,2025,-,Extant (Notified),IBCH 402 (IBH 11-227),Maize,Cereals,Indian Council of Agricultural Research,Public,E61 ZM118 25 1139,"Monday, September 22, 2025",05 June 2026,2025,2026,Public,FALSE,TRUE
+10669,REG/2010/81,2010,-,New,PCH-877 Bt2,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,N43 GH48 10 81,"Wednesday, March 10, 2010",08 June 2026,2010,2026,Private,TRUE,TRUE
+10670,REG/2013/102,2013,-,Extant (VCK),NCS-8899 BG-II,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,E48 GH25 13 102,"Wednesday, March 06, 2013",08 June 2026,2013,2026,Private,TRUE,TRUE
+10671,REG/2017/364,2017,-,Farmer,HEMPURI MAKKA,Maize,Cereals,Hemant Kumar,Farmer,F20 ZM28 17 364,"Friday, March 24, 2017",08 June 2026,2017,2026,Farmer,FALSE,TRUE
+10672,REG/2017/422,2017,-,Farmer,PEELA MAKKA MOHGAON,Maize,Cereals,Kamla Bai Sahu,Farmer,F25 ZM33 17 422,"Monday, March 27, 2017",08 June 2026,2017,2026,Farmer,FALSE,TRUE
+10673,REG/2017/484,2017,-,Farmer,LAIKUR MAKAI,Maize,Cereals,Pyaribai Thakur,Farmer,F33 ZM41 17 484,"Monday, March 27, 2017",08 June 2026,2017,2026,Farmer,FALSE,TRUE
+10674,REG/2017/485,2017,-,Farmer,Molai Makka,Maize,Cereals,Ramgopal Yadav,Farmer,F34 ZM42 17 485,"Monday, March 27, 2017",08 June 2026,2017,2026,Farmer,FALSE,TRUE
+10675,REG/2017/1366,2017,-,Farmer,Kamshi Makka,Maize,Cereals,Ganeshi Uikey,Farmer,F125 ZM133 17 1366,"Friday, March 31, 2017",08 June 2026,2017,2026,Farmer,FALSE,TRUE
+10676,REG/2025/1070,2025,-,Extant (Notified),ADV 8283 (IET-29690),Rice,Cereals,Advanta Enterprises Limited,Private,E50 OS253 25 1070,"Thursday, September 04, 2025",08 June 2026,2025,2026,Private,FALSE,TRUE
+10677,REG/2025/1084,2025,-,Extant (Notified),"CR Dhan 807 (CR 4333-35-2-2-1, IET 30438)",Rice,Cereals,Indian Council of Agricultural Research,Public,E57 OS267 25 1084,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10678,REG/2025/1080,2025,-,Extant (Notified),CR Dhan 414 (IET 27051),Rice,Cereals,Indian Council of Agricultural Research,Public,E53 OS263 25 1080,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10679,REG/2025/1081,2025,-,Extant (Notified),CR Dhan 324 (Abhaya Paushtik),Rice,Cereals,Indian Council of Agricultural Research,Public,E54 OS264 25 1081,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10680,REG/2025/1082,2025,-,Extant (Notified),CR Dhan 911 (Basudev) (IET 28414),Rice,Cereals,Indian Council of Agricultural Research,Public,E55 OS265 25 1082,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10681,REG/2025/1083,2025,-,Extant (Notified),CR Dhan 312 (CR 3808-13) (IET 25997),Rice,Cereals,Indian Council of Agricultural Research,Public,E56 OS266 25 1083,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10682,REG/2025/1085,2025,-,Extant (Notified),CR Dhan 809 (IET 30282),Rice,Cereals,Indian Council of Agricultural Research,Public,E74 OS268 25 1085,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10683,REG/2025/1086,2025,-,Extant (Notified),CR Dhan 323 (Jyotsna),Rice,Cereals,Indian Council of Agricultural Research,Public,E58 OS269 25 1086,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10684,REG/2025/1087,2025,-,Extant (Notified),CR Dhan 704 (Shyamdev),Rice,Cereals,Indian Council of Agricultural Research,Public,E59 OS270 25 1087,"Thursday, September 04, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10685,REG/2025/1121,2025,-,Extant (Notified),IBCH 401 (IMHSB 19KB-2),Maize,Cereals,Indian Council of Agricultural Research,Public,E57 ZM114 25 1121,"Tuesday, September 16, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10686,REG/2025/1122,2025,-,Extant (Notified),IMH-231 (IMHSB 20K-10),Maize,Cereals,Indian Council of Agricultural Research,Public,E58 ZM115 25 1122,"Tuesday, September 16, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10687,REG/2025/1123,2025,-,Extant (Notified),IMH-230 (IMHSB 20R-6),Maize,Cereals,Indian Council of Agricultural Research,Public,E59 ZM116 25 1123,"Tuesday, September 16, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10688,REG/2025/1129,2025,-,Extant (Notified),Him Palam Dhan 3 (IET 27472) (HPR 2865),Rice,Cereals,Chaudhary Sarwan Kumar Himachal Pradesh Krishi Vishvavidyalaya,Public,E69 OS287 25 1129,"Wednesday, September 17, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10689,REG/2025/1130,2025,-,Extant (Notified),Him Palam Dhan 4 (IET 28882) (HPR 3201),Rice,Cereals,Chaudhary Sarwan Kumar Himachal Pradesh Krishi Vishvavidyalaya,Public,E70 OS288 25 1130,"Wednesday, September 17, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10690,REG/2025/1131,2025,-,Extant (Notified),ICAR-CRIJAF Jute JRC-9 (Namita),Jute,Fibre Crops,Indian Council of Agricultural Research,Public,E1 JC1 25 1131,"Friday, September 19, 2025",08 June 2026,2025,2026,Public,TRUE,TRUE
+10691,REG/2025/1252,2025,-,Extant (Notified),DRR DHAN 79 (IET-29859),Rice,Cereals,Indian Council of Agricultural Research,Public,E71 OS354 25 1252,"Monday, October 27, 2025",08 June 2026,2025,2026,Public,FALSE,TRUE
+10692,REG/2025/1290,2025,-,Extant (Notified),CICR B Cotton 55 (CCB 51-2),Tetraploid Cotton,Fibre Crops,Indian Council of Agricultural Research,Public,E1 GB1 25 1290,"Monday, November 24, 2025",08 June 2026,2025,2026,Public,TRUE,TRUE
+10693,REG/2025/1299,2025,-,Extant (Notified),CP333 Hybrid,Maize,Cereals,M/s Charoen Pokphand Seeds India Pvt. Ltd.,Private,E71 ZM137 25 1299,"Wednesday, November 26, 2025",16 June 2026,2025,2026,Private,FALSE,TRUE
+10694,REG/2025/1300,2025,-,Extant (Notified),CP 858,Maize,Cereals,M/s Charoen Pokphand Seeds India Pvt. Ltd.,Private,E72 ZM138 25 1300,"Wednesday, November 26, 2025",16 June 2026,2025,2026,Private,FALSE,TRUE
+10695,REG/2025/1303,2025,-,Extant (Notified),CICR-H Bt Cotton 65/ ICAR-CICR 18 Bt,Tetraploid Cotton,Fibre Crops,Indian Council of Agricultural Research,Public,E31 GH45 25 1303,"Thursday, November 27, 2025",16 June 2026,2025,2026,Public,TRUE,TRUE
+10696,REG/2025/1304,2025,-,Extant (Notified),CICR H Bt Cotton 66/ ICAR-CICR Bt 20-31 Bt,Tetraploid Cotton,Fibre Crops,Indian Council of Agricultural Research,Public,E32 GH46 25 1304,"Thursday, November 27, 2025",16 June 2026,2025,2026,Public,TRUE,TRUE
+10697,REG/2025/1311,2025,-,Extant (Notified),CNH 18529 (CICR-H NC Cotton 64),Tetraploid Cotton,Fibre Crops,Indian Council of Agricultural Research,Public,E33 GH47 25 1311,"Tuesday, December 02, 2025",16 June 2026,2025,2026,Public,TRUE,TRUE
+10698,REG/2025/1312,2025,-,Extant (Notified),CO 18 (TCB 37),Tetraploid Cotton,Fibre Crops,Tamil Nadu Agricultural University,Public,E2 GB2 25 1312,"Wednesday, December 03, 2025",16 June 2026,2025,2026,SAU,TRUE,TRUE
+10699,REG/2025/1370,2025,-,Extant (Notified),CICR-H BT Cotton 40,Tetraploid Cotton,Fibre Crops,Indian Council of Agricultural Research,Public,E34 GH48 25 1370,"Monday, December 22, 2025",16 June 2026,2025,2026,Public,TRUE,TRUE
+10700,REG/2025/1384,2025,-,Extant (Notified),PDKV Aarambha (BMH 18-2),Maize,Cereals,Dr. Panjabrao Deshmukh Krishi Vidyapeeth,Public,E74 ZM142 25 1384,"Wednesday, December 24, 2025",16 June 2026,2025,2026,SAU,FALSE,TRUE
+10701,REG/2025/1385,2025,-,Extant (Notified),PHULE JLA-1110,Diploid Cotton,Fibre Crops,Mahatma Phule Krishi Vidyapeeth,Public,E1 GA2 25 1385,"Friday, December 26, 2025",16 June 2026,2025,2026,SAU,TRUE,TRUE
+10702,REG/2025/1386,2025,-,Extant (Notified),Phule Satpuda (JLA-1207),Diploid Cotton,Fibre Crops,Mahatma Phule Krishi Vidyapeeth,Public,E2 GA3 25 1386,"Friday, December 26, 2025",16 June 2026,2025,2026,SAU,TRUE,TRUE
+10703,REG/2026/0052,2026,-,Extant (Notified),Phule Super Pawana (IGP-13-12-19),Rice,Cereals,Mahatma Phule Krishi Vidyapeeth,Public,E1 OS10 26 52,"Tuesday, January 06, 2026",16 June 2026,2026,2026,SAU,FALSE,TRUE
+10704,REG/2026/0117,2026,-,Extant (Notified),Jai Ho BG-II,Tetraploid Cotton,Fibre Crops,Eldorado Agritech Limited,Private,E1 GH1 26 117,"Friday, February 13, 2026",16 June 2026,2026,2026,Private,TRUE,TRUE
+10705,REG/2026/0118,2026,-,Extant (Notified),Srikar 2123 (SRH 333) (IET-30573),Rice,Cereals,Eldorado Agritech Limited,Private,E4 OS21 26 118,"Friday, February 13, 2026",16 June 2026,2026,2026,Private,FALSE,TRUE
+10706,REG/2025/0179,2025,-,Extant (Notified),NK-7660 (SYN-207660),Maize,Cereals,Syngenta India Pvt Ltd,Private,E1 ZM11 25 179,"Tuesday, March 04, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10707,REG/2025/0182,2025,-,Extant (VCK),SYN-CO-NK 6802,Maize,Cereals,Syngenta India Pvt Ltd,Private,E3 ZM14 25 182,"Tuesday, March 04, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10708,REG/2025/0183,2025,-,Extant (VCK),SYN-CO-NK-6540,Maize,Cereals,Syngenta India Pvt Ltd,Private,E4 ZM15 25 183,"Tuesday, March 04, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10709,REG/2025/0184,2025,-,Extant (VCK),SYN-CO-TA 6214,Maize,Cereals,Syngenta India Pvt Ltd,Private,E11 ZM16 25 184,"Tuesday, March 04, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10710,REG/2025/0186,2025,-,Extant (VCK),SYN-CO-TA 5084,Maize,Cereals,Syngenta India Pvt Ltd,Private,E5 ZM18 25 186,"Tuesday, March 04, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10711,REG/2025/0242,2025,-,Extant (VCK),SYN-CO-NPE0028,Maize,Cereals,Syngenta Crop Protection AG,Private,E23 ZM35 25 242,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10712,REG/2025/0247,2025,-,Extant (VCK),SYN-CO-NP5272,Maize,Cereals,Syngenta Crop Protection AG,Private,E30 ZM40 25 247,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10713,REG/2025/0251,2025,-,Extant (VCK),SYN-CO-NP5388,Maize,Cereals,Syngenta Crop Protection AG,Private,E20 ZM44 25 251,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10714,REG/2025/0252,2025,-,Extant (VCK),SYN-CO-NP 5383,Maize,Cereals,Syngenta Crop Protection AG,Private,E29 ZM45 25 252,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10715,REG/2025/0256,2025,-,Extant (Notified),NK-7884 (SYN-207884),Maize,Cereals,Syngenta India Pvt Ltd,Private,E10 ZM49 25 256,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10716,REG/2025/0258,2025,-,Extant (VCK),SYN-CO-NP2405,Maize,Cereals,Syngenta Crop Protection AG,Private,E26 ZM51 25 258,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
