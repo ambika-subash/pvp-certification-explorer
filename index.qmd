@@ -314,7 +314,7 @@ driven largely by a surge in cotton registrations. Drag the year slider to watch
 build up rather than just seeing the endpoint. This sets the broadest context, all crops,
 all time, before the sections below narrow in on specific crops and firms.
 
-## Every crop at a glance
+## Crops at a glance
 
 ### Select crops to compare
 
@@ -705,8 +705,7 @@ For the headline findings, the cotton case study, and full methodology, see
 Data and content: [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA).
 
 **How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
-Certification Explorer (India).* Centre for Economic Studies and Planning, Jawaharlal
-Nehru University. <https://doi.org/10.5281/zenodo.21140353>
+Certification Explorer (India).* <https://doi.org/10.5281/zenodo.21140353>
 
 <details><summary style="cursor:pointer;display:inline-block;padding:2px 10px;margin-top:0.25rem;background:#eef2f7;border-radius:4px;font-weight:600;color:#374151;font-size:0.78rem">Show BibTeX</summary>
 
