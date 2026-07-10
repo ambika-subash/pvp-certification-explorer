@@ -98,8 +98,20 @@ if (is.na(gini_default_crop)) {
                              default = sort(gini_by_crop$crop)[1])
 }
 
+# Total certificates per year (all crops, all applicants)
+total_per_year <- dd %>% filter(!is.na(issue_year)) %>%
+  count(issue_year, name = "n")
+total_per_year_df <- chr(total_per_year)
+
+# Certificates by crop group and year
+crop_group_year <- dd %>% filter(!is.na(crop_bucket), !is.na(issue_year)) %>%
+  count(issue_year, crop_bucket, name = "n")
+crop_group_df <- chr(crop_group_year)
+
 ojs_define(categories_ojs = crop_categories)
-ojs_define(crops_ojs      = top_crops)
+ojs_define(crops_ojs      = crops_with_cotton_all)
+ojs_define(firm_list_ojs  = firm_list)
+ojs_define(firm_year_crop_ojs = firm_year_crop_df)
 ojs_define(trends_ojs = trends_df)
 ojs_define(comp_ojs   = comp_df)
 ojs_define(firm_ojs   = firm_df)
@@ -112,7 +124,31 @@ ojs_define(gini_crops_ojs      = sort(gini_by_crop$crop))
 ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
 ojs_define(gini_bar_ojs        = gini_bar_df)
 ojs_define(gini_default_crop_ojs = gini_default_crop)
+ojs_define(total_per_year_ojs = total_per_year_df)
+ojs_define(crop_group_ojs = crop_group_df)
 ```
+# Add aggregated Cotton option (tetraploid + diploid combined)
+# Expand crops list to include "Cotton (All)" if not already there
+crops_with_cotton_all <- unique(c(top_crops, "Cotton (All)"))
+
+# Prepare company trend data: every private firm's certificates per year per crop
+firm_year_crop <- d %>% 
+  filter(applicant_category == "Private", !is.na(issue_year), !is.na(crop)) %>%
+  mutate(firm_key = alias_company(canon_company(applicant))) %>%
+  count(firm_key, issue_year, crop, name = "certs") %>%
+  left_join(
+    d %>% filter(applicant_category == "Private") %>%
+      mutate(firm_key = alias_company(canon_company(applicant))) %>%
+      count(firm_key, applicant) %>% group_by(firm_key) %>%
+      slice_max(n, n = 1, with_ties = FALSE) %>% ungroup() %>%
+      transmute(firm_key, firm_label = coalesce(unname(pretty_names[firm_key]), applicant)),
+    by = "firm_key"
+  ) %>%
+  arrange(firm_key, issue_year, crop)
+
+firm_list <- sort(unique(firm_year_crop$firm_label))
+firm_year_crop_df <- chr(firm_year_crop %>% 
+  transmute(firm = firm_label, year = issue_year, crop = crop, certs = certs))
 
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
@@ -162,10 +198,42 @@ The following charts are interactive. Use the dropdowns to filter by crop, crop 
 or applicant category.
 :::
 
+## Total certificates issued per year
+
+```{ojs}
+//| echo: false
+rows_total = transpose(total_per_year_ojs)
+
+//| echo: false
+chartTotal = Plot.plot({
+  marginLeft: 65,
+  style: {fontSize: "13px"},
+  x: {label: "Year", tickFormat: "d", tickRotate: -45, tickPadding: 8},
+  y: {label: "Certificates", grid: true, tickPadding: 8},
+  marks: [
+    Plot.line(rows_total, {x: "issue_year", y: "n", stroke: "#0d9488", strokeWidth: 2}),
+    Plot.dot(rows_total, {x: "issue_year", y: "n", fill: "#0d9488", r: 4, tip: true}),
+    Plot.ruleY([0])
+  ]
+})
+
+//| echo: false
+withExport(chartTotal, `total_certificates_per_year`)
+
+
 ```{ojs}
 //| echo: false
 categories = categories_ojs
 crops = crops_ojs
+// Handle Cotton (All) - aggregate tetraploid + diploid when selected
+function getCropFilter(selectedCrop, dataArray) {
+  if (selectedCrop === "Cotton (All)") {
+    return dataArray.filter(d => 
+      /cotton/i.test(d.crop) || (d.sel && /cotton/i.test(d.sel))
+    );
+  }
+  return dataArray.filter(d => d.crop === selectedCrop || d.sel === selectedCrop);
+}
 sectorDomain = ["Farmer", "Private", "Public", "SAU", "Individual Breeder"]
 sectorRange  = ["#4daf4a", "#377eb8", "#e41a1c", "#ff7f00", "#984ea3"]
 catDomain = ["Farmer", "New", "Extant", "Extant (Notified)", "Extant (VCK)", "EDV"]
