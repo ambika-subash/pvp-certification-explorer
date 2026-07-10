@@ -121,8 +121,7 @@ Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
 Every chart below answers the same set of questions for whichever crop you pick: who holds
-certificates, is the market concentrated, and how has that changed over time. For the full
-write-up, background, and the cotton case study, see [Full analysis](analysis.qmd).
+certificates, is the market concentrated, and how has that changed over time. 
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **About this data.** A certificate under the PPVFRA confers intellectual property rights
@@ -155,6 +154,8 @@ lookup, so a genuine typo or an unlisted acronym could still cause one real firm
 as two. Full methodology, including how every statistic on this page is computed, is
 documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
 :::
+
+For the full written analysis of this data, visit [The Lone Researcher](https://theloneresearcher.substack.com/).
 
 ::: {.callout-important appearance="simple"}
 The following charts are interactive. Use the dropdowns to filter by crop, crop category,
@@ -697,7 +698,7 @@ firmPick.trim() === ""
 
 ::: {.callout-tip appearance="minimal"}
 For the headline findings, the cotton case study, and full methodology, see
-[Full analysis](analysis.qmd). Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
+Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
 :::
 
 ::: {style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;font-size:0.82rem;color:#4b5563;line-height:1.7"}

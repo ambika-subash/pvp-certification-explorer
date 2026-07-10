@@ -10,8 +10,6 @@ website:
     left:
       - href: index.qmd
         text: "Explore the data"
-      - href: analysis.qmd
-        text: "Full analysis"
 
 format:
   html:
