@@ -214,6 +214,8 @@ rows_total = transpose(total_per_year_ojs)
 ```{ojs}
 //| echo: false
 chartTotal = Plot.plot({
+  title: "Total PPVFRA certificates issued per year",
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 55,
   style: {fontSize: "13px"},
@@ -339,11 +341,10 @@ function downloadChartAsPng(chartNode, filename) {
 // Returns a div containing a "Save chart as PNG" button plus the chart
 // itself, so the two always sit together wherever this is used.
 function withExport(chartNode, filename) {
-  const btn = html`<button style="margin-bottom:0.5rem;padding:4px 12px;font-size:12px;
-    border:1px solid #d1d5db;border-radius:4px;background:#f9fafb;cursor:pointer">
+  const btn = html`<button style="margin-bottom:0.5rem;padding:4px 12px;font-size:12px;border-radius:4px;cursor:pointer" aria-label="Save chart as PNG">
     ⬇ Save chart as PNG</button>`;
   btn.onclick = () => downloadChartAsPng(chartNode, filename);
-  return html`<div>${btn}<div>${chartNode}</div></div>`;
+  return html`<div class="chart-card">${btn}<div>${chartNode}</div></div>`;
 }
 ```
 
@@ -372,6 +373,8 @@ rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
 ```{ojs}
 //| echo: false
 chartCum = Plot.plot({
+  title: `Cumulative certificates: ${sel5}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 65,
   style: {fontSize: "13px"},
   x: {label: "Year", tickFormat: "d", tickPadding: 8},
@@ -422,6 +425,8 @@ rowsHeat = transpose(heat_ojs).filter(d => cropsPick.includes(d.crop))
 ```{ojs}
 //| echo: false
 chartCompare = rowsHeat.length === 0 ? null : Plot.plot({
+  title: `Applicant composition: ${cropsPick.join(", ")}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 110,
   marginBottom: 45,
   style: {fontSize: "13px"},
@@ -457,6 +462,8 @@ viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", d
 ```{ojs}
 //| echo: false
 chartTrends = Plot.plot({
+  title: `Certificate trends: ${sel1}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 55,
   style: {fontSize: "13px"},
@@ -502,6 +509,8 @@ rows2 = {
 ```{ojs}
 //| echo: false
 chartComposition = Plot.plot({
+  title: `Applicant composition: ${sel2}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 100,
   marginBottom: 45,
   style: {fontSize: "13px"},
@@ -535,6 +544,8 @@ viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", d
 ```{ojs}
 //| echo: false
 chartFirms = Plot.plot({
+  title: `Firm-level concentration: ${sel3}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 220,
   marginRight: 30,
   marginBottom: 45,
@@ -586,6 +597,8 @@ giniBarRows = transpose(gini_bar_ojs).filter(d => d.crop === giniCrop)
 ```{ojs}
 //| echo: false
 chartGini = Plot.plot({
+  title: `Private sector concentration: ${giniCrop}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 220,
   marginRight: 40,
   marginBottom: 45,
@@ -661,6 +674,8 @@ rows4 = {
 ```{ojs}
 //| echo: false
 chartVariety = Plot.plot({
+  title: `Variety category breakdown: ${sel4}${sec4 !== "All" ? " (" + sec4 + ")" : ""}`,
+  subtitle: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 80,
   style: {fontSize: "14px"},
@@ -779,7 +794,7 @@ firmPick.trim() === ""
 Full methodology and source code: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
 :::
 
-::: {style="margin-top:2rem;font-size:0.75rem;color:#6b7280;line-height:1.6"}
+::: {.site-footer}
 **License:** [MIT](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE) (code) · [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA) (data)
 
 **Cite:** Subash, A. (2026). *Who owns India's plant varieties? PVP Certification Explorer.* <https://doi.org/10.5281/zenodo.21140353>
