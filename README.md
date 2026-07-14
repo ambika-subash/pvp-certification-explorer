@@ -4,8 +4,8 @@
 
 An R + Quarto project on India's Plant Variety Protection (PVP) certificates, issued
 under the Protection of Plant Varieties & Farmers' Rights Act (PPVFRA), 2001. The full
-register is scraped, cleaned, and analysed automatically every week and published as a
-two-page interactive dashboard.
+register is scraped, cleaned, and analysed automatically every week and published as an
+interactive dashboard.
 
 **Live site**: <https://ambika-subash.github.io/pvp-certification-explorer/>
 
@@ -22,17 +22,39 @@ tech-policy analytics.
 
 ## The dashboard
 
-The site is a two-page [Quarto](https://quarto.org) website, rebuilt automatically every
-week from the latest data.
+The site is a single-page [Quarto](https://quarto.org) website (`index.qmd`), rebuilt
+automatically every week from the latest data. It's an interactive explorer, not a
+write-up: charts (built with Observable Plot inside Quarto's OJS engine) let you ask the
+same set of questions of *any* crop, not just cotton, including a **"Cotton (All)"**
+option that merges diploid and tetraploid cotton together.
 
-| Page | File | What it's for |
-|------|------|----------------|
-| **Explore the data** | `index.qmd` | The landing page. Interactive charts (built with Observable Plot inside Quarto's OJS engine) that let you ask the paper's questions of *any* crop, not just cotton: certificate trends, applicant composition, firm-level concentration, a per-crop Gini concentration score, variety category breakdown, cumulative ownership over time, and a full crop-comparison tool. Every chart has a "Save chart as PNG" export button. Firm lookup starts with a browsable top-25 ranking, then a searchable table of every private applicant's crop-by-crop footprint. |
-| **Full analysis** | `analysis.qmd` | The write-up: an overview of the register, the headline findings (including a Lorenz curve and Gini coefficient for private cotton ownership), and a detailed cotton case study covering ploidy, VCK enclosure, and EDV registrations. |
+Covered on the page: total certificates issued per year, certificates by crop group,
+certificate trends and applicant composition by crop, firm-level concentration, a
+per-crop Gini concentration score, variety category breakdown, cumulative ownership over
+time, a full crop-comparison tool, and a searchable firm lookup (every private applicant's
+crop-by-crop footprint).
 
-Both pages source `R/prep_dashboard.R`, which is the single place data loading, colour
-palettes, the company-name deduplication logic, and the Gini function live. That way both
-pages always agree on the numbers.
+A longer written analysis, including the cotton case study, Lorenz curve, and EDV/VCK
+detail that used to live on a second page (`analysis.qmd`) here, is now published
+separately on [The Lone Researcher](https://theloneresearcher.substack.com/), linked from
+the dashboard. `analysis.qmd` still exists in this repository and still renders correctly
+if you build it locally, it's just no longer linked from the site's navigation.
+
+**Dashboard features**
+- **Dark mode**: a light/dark theme toggle in the navbar, defaulting to your system
+  preference and remembered on return visits. Charts themselves stay on a light card
+  regardless of theme, since their colour encoding is tuned for a light background.
+- **Sticky section navigation**: a left-hand table of contents jumps directly to any
+  section.
+- **Chart export**: every chart has a "Save chart as PNG" button. The exported image
+  includes the chart's title, current filter selection, and a data source line, so it
+  reads correctly once it's out of the page context.
+- **Data download**: the full cleaned dataset is downloadable as CSV directly from the
+  page, kept in sync with the weekly refresh.
+
+All of this sources `R/prep_dashboard.R`, the single place data loading, colour palettes,
+the company-name deduplication logic, and the Gini function live. That way the numbers
+never drift out of sync across charts.
 
 ---
 
@@ -269,9 +291,10 @@ the same pipeline on your own machine instead of the cloud.
 
 ```
 .
-├── index.qmd                      # Explore the data (dashboard homepage)
-├── analysis.qmd                   # Full analysis (write-up + cotton case study)
-├── _quarto.yml                    # Quarto project + navbar config
+├── index.qmd                      # Explore the data (dashboard homepage, only page in site nav)
+├── analysis.qmd                   # Full analysis (write-up + cotton case study); not linked in site nav
+├── _quarto.yml                    # Quarto project + navbar + light/dark theme config
+├── styles.css                     # Section dividers, chart-card styling, dark-mode-safe colours
 ├── R/
 │   ├── prep_dashboard.R           # shared data prep, palettes, dedup, gini() -- sourced by both .qmd pages
 │   ├── scrape_all_certificates.R  # 1. scrape
@@ -320,7 +343,7 @@ BibTeX:
   institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
   doi         = {10.5281/zenodo.21140353},
   url         = {https://doi.org/10.5281/zenodo.21140353},
-  note        = {Data updated weekly. Accessed: [date]}
+  note        = {Data updated weekly}
 }
 ```
 
