@@ -236,15 +236,6 @@ withExport(chartTotal, `total_certificates_per_year`)
 //| echo: false
 categories = categories_ojs
 crops = crops_ojs
-// Handle Cotton (All) - aggregate tetraploid + diploid when selected
-function getCropFilter(selectedCrop, dataArray) {
-  if (selectedCrop === "Cotton (All)") {
-    return dataArray.filter(d =>
-      /cotton/i.test(d.crop) || (d.sel && /cotton/i.test(d.sel))
-    );
-  }
-  return dataArray.filter(d => d.crop === selectedCrop || d.sel === selectedCrop);
-}
 sectorDomain = ["Farmer", "Private", "Public", "SAU", "Individual Breeder"]
 sectorRange  = ["#4daf4a", "#377eb8", "#e41a1c", "#ff7f00", "#984ea3"]
 catDomain = ["Farmer", "New", "Extant", "Extant (Notified)", "Extant (VCK)", "EDV"]
