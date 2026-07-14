@@ -2,12 +2,14 @@
    pages. Each section gets a clear top divider and generous breathing
    room, so scrolling through the page reads as distinct chunks rather
    than one continuous, undifferentiated flow. Level-1 (#) headings get
-   even more room since they mark the biggest structural breaks. */
+   even more room since they mark the biggest structural breaks.
+   Border colour uses a Bootstrap theme variable rather than a hardcoded
+   hex so it adapts automatically between the light and dark themes. */
 
 h2 {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--bs-border-color);
 }
 
 h2:first-of-type {
@@ -26,5 +28,67 @@ h1:first-of-type {
 /* level-3 subheadings sit inside a section, so they get room without a
    divider line of their own -- that would over-fragment the page */
 h3 {
-  margin-top: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Every chart (and its "Save as PNG" button) sits on a fixed light card
+   regardless of the page theme. Observable Plot's default text/axis
+   colours are tuned for a light background, and re-theming every chart's
+   internal styling for dark mode isn't worth the risk here, so charts
+   stay legible and consistent by keeping their own light surface. */
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.25rem;
+  margin: 0.5rem 0 1rem;
+  color: #1f2937;
+  overflow-x: auto;
+}
+
+.chart-card button {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #1f2937;
+}
+
+/* Filter rows (the paired crop/category dropdowns above most charts) get
+   a touch of visual separation from the chart below them without a full
+   card treatment, since they're controls, not output. */
+.filter-row {
+  margin-bottom: 0.75rem;
+}
+
+/* Footer / citation block: uses theme variables throughout so it inverts
+   correctly in dark mode instead of staying a hardcoded light-grey box. */
+.site-footer {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--bs-secondary-color);
+  line-height: 1.6;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Sticky in-page section navigation (rendered by Quarto's built-in TOC,
+   toc-location: left in _quarto.yml). This just tightens its type scale
+   so it reads as wayfinding chrome rather than competing with the page's
+   own headings. */
+#TOC {
+  font-size: 0.85rem;
+}
+
+/* Visible focus ring for keyboard navigation across all interactive
+   controls (dropdowns, buttons, the firm search box, chips). Browsers
+   already do this by default in most cases, but Safari and some custom
+   buttons drop the outline, so this makes it consistent everywhere. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #377eb8;
+  outline-offset: 2px;
 }
