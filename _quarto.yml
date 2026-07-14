@@ -13,10 +13,12 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: darkly
     toc: true
     toc-location: left
-    page-layout: full
+    toc-title: "Jump to section"
     fig-width: 9
     fig-height: 5
     css: styles.css
