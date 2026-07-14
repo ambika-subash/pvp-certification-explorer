@@ -108,25 +108,6 @@ crop_group_year <- dd %>% filter(!is.na(crop_bucket), !is.na(issue_year)) %>%
   count(issue_year, crop_bucket, name = "n")
 crop_group_df <- chr(crop_group_year)
 
-ojs_define(categories_ojs = crop_categories)
-ojs_define(crops_ojs      = crops_with_cotton_all)
-ojs_define(firm_list_ojs  = firm_list)
-ojs_define(firm_year_crop_ojs = firm_year_crop_df)
-ojs_define(trends_ojs = trends_df)
-ojs_define(comp_ojs   = comp_df)
-ojs_define(firm_ojs   = firm_df)
-ojs_define(var_ojs    = var_df)
-ojs_define(cum_ojs    = cum_df)
-ojs_define(heat_ojs       = heat_df)
-ojs_define(firm_table_ojs = firm_table_df)
-ojs_define(firm_overview_ojs = firm_overview_df)
-ojs_define(gini_crops_ojs      = sort(gini_by_crop$crop))
-ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
-ojs_define(gini_bar_ojs        = gini_bar_df)
-ojs_define(gini_default_crop_ojs = gini_default_crop)
-ojs_define(total_per_year_ojs = total_per_year_df)
-ojs_define(crop_group_ojs = crop_group_df)
-
 # Add aggregated Cotton option (tetraploid + diploid combined)
 # Expand crops list to include "Cotton (All)" if not already there
 crops_with_cotton_all <- unique(c(top_crops, "Cotton (All)"))
@@ -149,6 +130,26 @@ firm_year_crop <- d %>%
 firm_list <- sort(unique(firm_year_crop$firm_label))
 firm_year_crop_df <- chr(firm_year_crop %>% 
   transmute(firm = firm_label, year = issue_year, crop = crop, certs = certs))
+
+ojs_define(categories_ojs = crop_categories)
+ojs_define(crops_ojs      = crops_with_cotton_all)
+ojs_define(firm_list_ojs  = firm_list)
+ojs_define(firm_year_crop_ojs = firm_year_crop_df)
+ojs_define(trends_ojs = trends_df)
+ojs_define(comp_ojs   = comp_df)
+ojs_define(firm_ojs   = firm_df)
+ojs_define(var_ojs    = var_df)
+ojs_define(cum_ojs    = cum_df)
+ojs_define(heat_ojs       = heat_df)
+ojs_define(firm_table_ojs = firm_table_df)
+ojs_define(firm_overview_ojs = firm_overview_df)
+ojs_define(gini_crops_ojs      = sort(gini_by_crop$crop))
+ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
+ojs_define(gini_bar_ojs        = gini_bar_df)
+ojs_define(gini_default_crop_ojs = gini_default_crop)
+ojs_define(total_per_year_ojs = total_per_year_df)
+ojs_define(crop_group_ojs = crop_group_df)
+
 ```
 
 ::: {.callout-note appearance="minimal"}
