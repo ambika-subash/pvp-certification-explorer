@@ -98,9 +98,6 @@ if (is.na(gini_default_crop)) {
                              default = sort(gini_by_crop$crop)[1])
 }
 
-
-
-
 cotton_private_pct <- round(100 * sum(cot$sector == "Private", na.rm = TRUE) / nrow(cot), 0)
 cotton_farmer_n    <- sum(cot$sector == "Farmer", na.rm = TRUE)
 
@@ -119,7 +116,7 @@ crop_group_df <- chr(crop_group_year)
 crops_with_cotton_all <- unique(c(top_crops, "Cotton (All)"))
 
 # Prepare company trend data: every private firm's certificates per year per crop
-firm_year_crop <- d %>% 
+firm_year_crop <- d %>%
   filter(applicant_category == "Private", !is.na(issue_year), !is.na(crop)) %>%
   mutate(firm_key = alias_company(canon_company(applicant))) %>%
   count(firm_key, issue_year, crop, name = "certs") %>%
@@ -134,7 +131,7 @@ firm_year_crop <- d %>%
   arrange(firm_key, issue_year, crop)
 
 firm_list <- sort(unique(firm_year_crop$firm_label))
-firm_year_crop_df <- chr(firm_year_crop %>% 
+firm_year_crop_df <- chr(firm_year_crop %>%
   transmute(firm = firm_label, year = issue_year, crop = crop, certs = certs))
 
 ojs_define(categories_ojs = crop_categories)
@@ -155,17 +152,16 @@ ojs_define(gini_bar_ojs        = gini_bar_df)
 ojs_define(gini_default_crop_ojs = gini_default_crop)
 ojs_define(total_per_year_ojs = total_per_year_df)
 ojs_define(crop_group_ojs = crop_group_df)
-
 ```
 
 Certificates are overwhelmingly held by private firms. In cotton, India's only commercially
-cultivated GM crop, private firms hold r cotton_private_pct percent of all certificates.
-Farmers hold r cotton_farmer_n.
+cultivated GM crop, private firms hold `r cotton_private_pct` percent of all certificates.
+Farmers hold `r cotton_farmer_n`.
 
 ::: {.callout-note appearance="minimal"}
-r format(n_total, big.mark=",") certificates analysed, from the
-PPV&FR Authority register.
-Last data refresh: r last_updated. This page rebuilds every week.
+**`r format(n_total, big.mark=",")` certificates** analysed, from the
+[PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
+Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
 ::: {.callout-note appearance="minimal" icon="false"}
@@ -213,7 +209,9 @@ or applicant category.
 ```{ojs}
 //| echo: false
 rows_total = transpose(total_per_year_ojs)
+```
 
+```{ojs}
 //| echo: false
 chartTotal = Plot.plot({
   marginLeft: 65,
@@ -227,10 +225,12 @@ chartTotal = Plot.plot({
     Plot.ruleY([0])
   ]
 })
+```
 
+```{ojs}
 //| echo: false
 withExport(chartTotal, `total_certificates_per_year`)
-
+```
 
 ```{ojs}
 //| echo: false
@@ -239,7 +239,7 @@ crops = crops_ojs
 // Handle Cotton (All) - aggregate tetraploid + diploid when selected
 function getCropFilter(selectedCrop, dataArray) {
   if (selectedCrop === "Cotton (All)") {
-    return dataArray.filter(d => 
+    return dataArray.filter(d =>
       /cotton/i.test(d.crop) || (d.sel && /cotton/i.test(d.sel))
     );
   }
@@ -276,7 +276,6 @@ function pairedCropInput({catOptions = categories, cropOptions = crops,
   catSel.addEventListener("input",  (e) => { e.stopPropagation(); setMode("category"); });
   cropSel.addEventListener("input", (e) => { e.stopPropagation(); setMode("crop"); });
   setMode(defaultMode === "crop" ? "crop" : "category");
-  box.append(html`<div style="font-size:0.75rem;color:#6b7280;margin-top:2px">Filtering by: ${defaultMode === "crop" ? cropSel.value : catSel.value}</div>`);
   return box;
 }
 ```
@@ -492,7 +491,7 @@ Annual certificates for the selected crop, stacked by applicant category.
 
 ```{ojs}
 //| echo: false
-viewof sel2 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
+viewof sel2 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
 ```
 
 ```{ojs}
@@ -539,7 +538,7 @@ composition independently of crop size.
 
 ```{ojs}
 //| echo: false
-viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
+viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
 ```
 
 ```{ojs}
@@ -651,7 +650,7 @@ Crops with fewer than 5 private certificate holders are not shown.
 
 ```{ojs}
 //| echo: false
-viewof sel4 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
+viewof sel4 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
 ```
 
 ```{ojs}
@@ -695,6 +694,7 @@ Certificates by variety category for the selected crop and applicant type.
 
 Search by firm name to see certificate count, crop coverage, and share of private
 certificates nationally.
+
 ```{ojs}
 //| echo: false
 firmOverviewRows = transpose(firm_overview_ojs)
