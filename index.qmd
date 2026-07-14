@@ -126,7 +126,7 @@ ojs_define(gini_bar_ojs        = gini_bar_df)
 ojs_define(gini_default_crop_ojs = gini_default_crop)
 ojs_define(total_per_year_ojs = total_per_year_df)
 ojs_define(crop_group_ojs = crop_group_df)
-```
+
 # Add aggregated Cotton option (tetraploid + diploid combined)
 # Expand crops list to include "Cotton (All)" if not already there
 crops_with_cotton_all <- unique(c(top_crops, "Cotton (All)"))
@@ -149,6 +149,7 @@ firm_year_crop <- d %>%
 firm_list <- sort(unique(firm_year_crop$firm_label))
 firm_year_crop_df <- chr(firm_year_crop %>% 
   transmute(firm = firm_label, year = issue_year, crop = crop, certs = certs))
+```
 
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
