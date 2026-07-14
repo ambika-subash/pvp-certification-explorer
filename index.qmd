@@ -158,9 +158,6 @@ ojs_define(crop_group_ojs = crop_group_df)
 Last data refresh: **`r last_updated`**. This page rebuilds every week.
 :::
 
-Every chart below answers the same set of questions for whichever crop you pick: who holds
-certificates, is the market concentrated, and how has that changed over time. 
-
 ::: {.callout-note appearance="minimal" icon="false"}
 **About this data.** A certificate under the PPVFRA confers intellectual property rights
 over a registered plant variety: the right to control commercial sale, reproduction, and
@@ -209,6 +206,7 @@ rows_total = transpose(total_per_year_ojs)
 //| echo: false
 chartTotal = Plot.plot({
   marginLeft: 65,
+  marginBottom: 55,
   style: {fontSize: "13px"},
   x: {label: "Year", tickFormat: "d", tickRotate: -45, tickPadding: 8},
   y: {label: "Certificates", grid: true, tickPadding: 8},
@@ -293,21 +291,19 @@ function slug(s) {
 }
 
 function downloadChartAsPng(chartNode, filename) {
-  const svgEl = chartNode instanceof SVGElement ? chartNode : chartNode.querySelector("svg");
+  const figEl = chartNode instanceof HTMLElement ? chartNode : chartNode;
+  const svgEl = figEl instanceof SVGElement ? figEl : figEl.querySelector("svg");
   if (!svgEl) return;
-  const scale = 2;
-  const w = svgEl.width && svgEl.width.baseVal ? svgEl.width.baseVal.value : svgEl.clientWidth;
-  const h = svgEl.height && svgEl.height.baseVal ? svgEl.height.baseVal.value : svgEl.clientHeight;
+  const w = 800, h = 500;
   const svgString = new XMLSerializer().serializeToString(svgEl);
   const svgBlob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
   const url = URL.createObjectURL(svgBlob);
   const img = new Image();
   img.onload = () => {
     const canvas = document.createElement("canvas");
-    canvas.width = w * scale;
-    canvas.height = h * scale;
+    canvas.width = w;
+    canvas.height = h;
     const ctx = canvas.getContext("2d");
-    ctx.scale(scale, scale);
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, w, h);
     ctx.drawImage(img, 0, 0, w, h);
@@ -319,7 +315,6 @@ function downloadChartAsPng(chartNode, filename) {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(a.href);
     });
   };
   img.src = url;
@@ -771,14 +766,12 @@ For the headline findings, the cotton case study, and full methodology, see
 Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
 :::
 
-::: {style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;font-size:0.82rem;color:#4b5563;line-height:1.7"}
-**License.** Code: [MIT License](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE).
-Data and content: [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA).
+::: {style="margin-top:2rem;font-size:0.75rem;color:#6b7280;line-height:1.6"}
+**License:** [MIT](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE) (code) · [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA) (data)
 
-**How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
-Certification Explorer (India).* <https://doi.org/10.5281/zenodo.21140353>
+**Cite:** Subash, A. (2026). *Who owns India's plant varieties? PVP Certification Explorer.* <https://doi.org/10.5281/zenodo.21140353>
 
-<details><summary style="cursor:pointer;display:inline-block;padding:2px 10px;margin-top:0.25rem;background:#eef2f7;border-radius:4px;font-weight:600;color:#374151;font-size:0.78rem">Show BibTeX</summary>
+<details style="font-size:0.7rem"><summary style="cursor:pointer;font-weight:600">BibTeX</summary>
 
 ```
 @misc{subash2026pvp,
