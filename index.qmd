@@ -162,6 +162,7 @@ Farmers hold `r cotton_farmer_n`.
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
 [PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
 Last data refresh: **`r last_updated`**. This page rebuilds every week.
+[Download the full dataset (CSV)](https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv).
 :::
 
 ::: {.callout-note appearance="minimal" icon="false"}
