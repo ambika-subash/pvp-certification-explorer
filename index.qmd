@@ -216,7 +216,7 @@ rows_total = transpose(total_per_year_ojs)
 //| echo: false
 chartTotal = Plot.plot({
   title: "Total PPVFRA certificates issued per year",
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 55,
   style: {fontSize: "13px"},
@@ -375,7 +375,7 @@ rows5 = transpose(cum_ojs).filter(d => d.sel === sel5 && d.issue_year <= yr5)
 //| echo: false
 chartCum = Plot.plot({
   title: `Cumulative certificates: ${sel5}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 65,
   style: {fontSize: "13px"},
   x: {label: "Year", tickFormat: "d", tickPadding: 8},
@@ -427,7 +427,7 @@ rowsHeat = transpose(heat_ojs).filter(d => cropsPick.includes(d.crop))
 //| echo: false
 chartCompare = rowsHeat.length === 0 ? null : Plot.plot({
   title: `Applicant composition: ${cropsPick.join(", ")}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 110,
   marginBottom: 45,
   style: {fontSize: "13px"},
@@ -464,7 +464,7 @@ viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", d
 //| echo: false
 chartTrends = Plot.plot({
   title: `Certificate trends: ${sel1}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 55,
   style: {fontSize: "13px"},
@@ -511,7 +511,7 @@ rows2 = {
 //| echo: false
 chartComposition = Plot.plot({
   title: `Applicant composition: ${sel2}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 100,
   marginBottom: 45,
   style: {fontSize: "13px"},
@@ -546,7 +546,7 @@ viewof sel3 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", d
 //| echo: false
 chartFirms = Plot.plot({
   title: `Firm-level concentration: ${sel3}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 220,
   marginRight: 30,
   marginBottom: 45,
@@ -599,7 +599,7 @@ giniBarRows = transpose(gini_bar_ojs).filter(d => d.crop === giniCrop)
 //| echo: false
 chartGini = Plot.plot({
   title: `Private sector concentration: ${giniCrop}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 220,
   marginRight: 40,
   marginBottom: 45,
@@ -676,7 +676,7 @@ rows4 = {
 //| echo: false
 chartVariety = Plot.plot({
   title: `Variety category breakdown: ${sel4}${sec4 !== "All" ? " (" + sec4 + ")" : ""}`,
-  subtitle: "Source: PPV&FR Authority register",
+  caption: "Source: PPV&FR Authority register",
   marginLeft: 65,
   marginBottom: 80,
   style: {fontSize: "14px"},
