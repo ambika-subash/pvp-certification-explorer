@@ -26,6 +26,7 @@ cat_levels    <- c("Farmer","New","Extant","Extant (Notified)","Extant (VCK)","E
 paper_groups  <- c("Cereals","Fibre Crops","Vegetables","Legumes","Oilseeds","Fruits","Sugar Crops")
 
 d <- d %>% mutate(
+  crop             = str_to_title(str_squish(crop)),
   crop_bucket      = ifelse(crop_group %in% paper_groups, crop_group, "Others"),
   sector           = factor(sector, levels = sector_levels),
   variety_category = factor(variety_category, levels = cat_levels))
@@ -135,11 +136,14 @@ diploid_crops <- d %>% filter(!is.na(crop), str_detect(str_to_lower(crop), "dipl
 top_crops <- union(top_crops, diploid_crops)
 crop_categories <- sort(unique(na.omit(d$crop_bucket)))
 
-# tag rows under both their crop group and individual crop name, so either
-# the category dropdown or the crop dropdown can filter the same dataset
+# tag rows under their crop group, their individual crop name, and (for
+# cotton specifically) an aggregate "Cotton (All)" label that merges diploid
+# and tetraploid together, so the category dropdown, the crop dropdown, or
+# the aggregate cotton option can all filter the same underlying dataset
 sel_for <- function(df) bind_rows(
   df %>% filter(!is.na(crop_bucket)) %>% mutate(sel = as.character(crop_bucket)),
-  df %>% filter(crop %in% top_crops)  %>% mutate(sel = crop))
+  df %>% filter(crop %in% top_crops)  %>% mutate(sel = crop),
+  df %>% filter(is_cotton)            %>% mutate(sel = "Cotton (All)"))
 chr <- function(df) df %>% mutate(across(where(is.factor), as.character))
 
 n_total <- nrow(d)
