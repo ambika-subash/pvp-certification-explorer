@@ -98,6 +98,12 @@ if (is.na(gini_default_crop)) {
                              default = sort(gini_by_crop$crop)[1])
 }
 
+
+
+
+cotton_private_pct <- round(100 * sum(cot$sector == "Private", na.rm = TRUE) / nrow(cot), 0)
+cotton_farmer_n    <- sum(cot$sector == "Farmer", na.rm = TRUE)
+
 # Total certificates per year (all crops, all applicants)
 total_per_year <- dd %>% filter(!is.na(issue_year)) %>%
   count(issue_year, name = "n")
@@ -152,10 +158,14 @@ ojs_define(crop_group_ojs = crop_group_df)
 
 ```
 
+Certificates are overwhelmingly held by private firms. In cotton, India's only commercially
+cultivated GM crop, private firms hold r cotton_private_pct percent of all certificates.
+Farmers hold r cotton_farmer_n.
+
 ::: {.callout-note appearance="minimal"}
-**`r format(n_total, big.mark=",")` certificates** analysed, from the
-[PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
-Last data refresh: **`r last_updated`**. This page rebuilds every week.
+r format(n_total, big.mark=",") certificates analysed, from the
+PPV&FR Authority register.
+Last data refresh: r last_updated. This page rebuilds every week.
 :::
 
 ::: {.callout-note appearance="minimal" icon="false"}
@@ -164,7 +174,8 @@ over a registered plant variety: the right to control commercial sale, reproduct
 licensing for a fixed term. This register records certificates granted, not applications
 filed or rejected. Certificates are issued to five applicant categories: Private firms,
 State Agricultural Universities (SAUs), Public institutions, Farmers, and Individual
-Breeders.
+Breeders. Individual Breeder certificates are rare across the register and absent from most
+crops.
 :::
 
 ::: {.callout-note collapse="true" appearance="simple"}
@@ -265,6 +276,7 @@ function pairedCropInput({catOptions = categories, cropOptions = crops,
   catSel.addEventListener("input",  (e) => { e.stopPropagation(); setMode("category"); });
   cropSel.addEventListener("input", (e) => { e.stopPropagation(); setMode("crop"); });
   setMode(defaultMode === "crop" ? "crop" : "category");
+  box.append(html`<div style="font-size:0.75rem;color:#6b7280;margin-top:2px">Filtering by: ${defaultMode === "crop" ? cropSel.value : catSel.value}</div>`);
   return box;
 }
 ```
@@ -291,19 +303,32 @@ function slug(s) {
 }
 
 function downloadChartAsPng(chartNode, filename) {
-  const figEl = chartNode instanceof HTMLElement ? chartNode : chartNode;
-  const svgEl = figEl instanceof SVGElement ? figEl : figEl.querySelector("svg");
+  let svgEl = null;
+  if (chartNode instanceof SVGElement) {
+    svgEl = chartNode;
+  } else {
+    const svgs = chartNode.querySelectorAll ? Array.from(chartNode.querySelectorAll("svg")) : [];
+    svgEl = svgs.reduce((best, cur) => {
+      const area = el => (el.width?.baseVal?.value || el.clientWidth || 0) *
+                          (el.height?.baseVal?.value || el.clientHeight || 0);
+      return area(cur) > area(best ?? cur) ? cur : (best ?? cur);
+    }, null);
+  }
   if (!svgEl) return;
-  const w = 800, h = 500;
+
+  const w = svgEl.width?.baseVal?.value || svgEl.clientWidth || 760;
+  const h = svgEl.height?.baseVal?.value || svgEl.clientHeight || 500;
+  const scale = 2;
   const svgString = new XMLSerializer().serializeToString(svgEl);
   const svgBlob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
   const url = URL.createObjectURL(svgBlob);
   const img = new Image();
   img.onload = () => {
     const canvas = document.createElement("canvas");
-    canvas.width = w;
-    canvas.height = h;
+    canvas.width = w * scale;
+    canvas.height = h * scale;
     const ctx = canvas.getContext("2d");
+    ctx.scale(scale, scale);
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, w, h);
     ctx.drawImage(img, 0, 0, w, h);
@@ -315,6 +340,7 @@ function downloadChartAsPng(chartNode, filename) {
       document.body.appendChild(a);
       a.click();
       a.remove();
+      URL.revokeObjectURL(a.href);
     });
   };
   img.src = url;
@@ -375,10 +401,8 @@ withExport(chartCum, `cumulative_ownership_${slug(sel5)}_to_${yr5}`)
 ```
 
 Private firms have dominated cumulative certifications throughout the register's history.
-The gap between private and all other categories has widened consistently since 2014,
-driven largely by a surge in cotton registrations. Drag the year slider to watch this
-build up rather than just seeing the endpoint. This sets the broadest context, all crops,
-all time, before the sections below narrow in on specific crops and firms.
+The gap between private and all other categories has widened since 2014. Use the year
+slider and crop filter to explore any crop or time period.
 
 ## Crops at a glance
 
@@ -437,7 +461,7 @@ counts and percentage shares. All crops in the register are available here.
 
 ```{ojs}
 //| echo: false
-viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton"})
+viewof sel1 = pairedCropInput({catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
 ```
 
 ```{ojs}
@@ -508,8 +532,8 @@ chartComposition = Plot.plot({
 withExport(chartComposition, `applicant_composition_crop_${slug(sel2)}_${slug(mode2)}`)
 ```
 
-Two bars: all crops on top, your selection below. Switch to Percentage to compare shape
-rather than scale.
+All crops shown above, selected crop below. Switch to Percentage to compare applicant
+composition independently of crop size.
 
 ## Firm-level concentration
 
@@ -608,9 +632,9 @@ giniHighShare = {
   return eligible.length > 0 ? high.length / eligible.length : null;
 }
 giniInterp = giniValue === null ? "" : giniValue > 0.6
-  ? "A Gini above 0.6 indicates high concentration: a small number of large seed companies dominate this crop."
+  ? "A Gini above 0.6 indicates high concentration: certificates are held by a small number of firms."
   : giniValue >= 0.4
-  ? "A Gini between 0.4 and 0.6 indicates moderate concentration: certificates are split among a wider set of firms than in a highly concentrated crop, but still unevenly."
+  ? "A Gini between 0.4 and 0.6 indicates moderate concentration: certificates are distributed across a wider set of firms, but unevenly."
   : "A Gini below 0.4 indicates relatively low concentration: certificates are spread more evenly across private firms in this crop."
 ```
 
@@ -665,13 +689,12 @@ chartVariety = Plot.plot({
 withExport(chartVariety, `variety_category_crop_${slug(sel4)}_${slug(sec4)}`)
 ```
 
-Certificates split across variety categories for the selected crop and applicant. Try
-Private together with Cotton.
+Certificates by variety category for the selected crop and applicant type.
 
 ## Look up a firm
 
-Search any firm, or click one of the largest below to jump straight in.
-
+Search by firm name to see certificate count, crop coverage, and share of private
+certificates nationally.
 ```{ojs}
 //| echo: false
 firmOverviewRows = transpose(firm_overview_ojs)
@@ -762,8 +785,7 @@ firmPick.trim() === ""
 ---
 
 ::: {.callout-tip appearance="minimal"}
-For the headline findings, the cotton case study, and full methodology, see
-Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
+Full methodology and source code: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
 :::
 
 ::: {style="margin-top:2rem;font-size:0.75rem;color:#6b7280;line-height:1.6"}
@@ -781,7 +803,7 @@ Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certi
   institution = {Centre for Economic Studies and Planning, Jawaharlal Nehru University},
   doi         = {10.5281/zenodo.21140353},
   url         = {https://doi.org/10.5281/zenodo.21140353},
-  note        = {Data updated weekly. Accessed: [date]}
+  note        = {Data updated weekly}
 }
 ```
 
@@ -789,7 +811,7 @@ Pipeline source: [project repository](https://github.com/ambika-subash/pvp-certi
 
 **About the author.** Built by Ambika Subash, Centre for Economic Studies and Planning,
 Jawaharlal Nehru University. Her research examines the political economy of agricultural
-biotechnology regulation, seed systems, and regulatory governance in India.
+biotechnology regulation, seed systems, and agrarian change in India.
 [Substack](https://theloneresearcher.substack.com/) |
 [ORCID](https://orcid.org/0000-0002-8636-7123) |
 [Google Scholar](https://scholar.google.com/citations?user=QbSSDTAAAAAJ&hl=en)
