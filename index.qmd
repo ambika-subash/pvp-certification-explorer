@@ -171,7 +171,9 @@ ojs_define(crop_group_ojs = crop_group_df)
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
 [PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
 Last data refresh: **`r last_updated`**.
-[Download the full dataset (CSV)](https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv).
+```{=html}
+<a href="https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv" onclick="if (typeof gtag === 'function') { gtag('event', 'csv_download'); }">Download the full dataset (CSV)</a>.
+```
 :::
 
 ## Total certificates issued per year
@@ -313,7 +315,13 @@ function downloadChartAsPng(chartNode, filename) {
 function withExport(chartNode, filename) {
   const btn = html`<button style="margin-bottom:0.5rem;padding:4px 12px;font-size:12px;border-radius:4px;cursor:pointer" aria-label="Save chart as PNG">
     ⬇ Save chart as PNG</button>`;
-  btn.onclick = () => downloadChartAsPng(chartNode, filename);
+  btn.onclick = () => {
+    // Fires only if Google Analytics is configured (google-analytics: in
+    // _quarto.yml injects the gtag() function); a no-op otherwise, so this
+    // works with or without analytics enabled.
+    if (typeof gtag === "function") gtag("event", "chart_export", {chart_name: filename});
+    downloadChartAsPng(chartNode, filename);
+  };
   return html`<div class="chart-card">${btn}<div>${chartNode}</div></div>`;
 }
 ```
