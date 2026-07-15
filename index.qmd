@@ -172,7 +172,7 @@ ojs_define(crop_group_ojs = crop_group_df)
 [PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
 Last data refresh: **`r last_updated`**.
 ```{=html}
-<a href="https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv" onclick="if (typeof gtag === 'function') { gtag('event', 'csv_download'); }">Download the full dataset (CSV)</a>.
+<a href="https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv" onclick="if (typeof window.gtag === 'function') { window.gtag('event', 'csv_download'); }">Download the full dataset (CSV)</a>.
 ```
 :::
 
@@ -318,8 +318,11 @@ function withExport(chartNode, filename) {
   btn.onclick = () => {
     // Fires only if Google Analytics is configured (google-analytics: in
     // _quarto.yml injects the gtag() function); a no-op otherwise, so this
-    // works with or without analytics enabled.
-    if (typeof gtag === "function") gtag("event", "chart_export", {chart_name: filename});
+    // works with or without analytics enabled. Goes through window.gtag
+    // rather than the bare name -- OJS treats every bare identifier as a
+    // required variable reference (even inside typeof), so referencing an
+    // undeclared gtag directly throws here, unlike plain JS.
+    if (typeof window.gtag === "function") window.gtag("event", "chart_export", {chart_name: filename});
     downloadChartAsPng(chartNode, filename);
   };
   return html`<div class="chart-card">${btn}<div>${chartNode}</div></div>`;
