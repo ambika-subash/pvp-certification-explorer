@@ -12,6 +12,7 @@ on:
       - "*.qmd"
       - "_quarto.yml"
       - "**/*.R"
+      - "styles.css"
       - ".github/workflows/weekly-update.yml"
 
 permissions:
