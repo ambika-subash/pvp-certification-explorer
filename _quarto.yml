@@ -22,6 +22,7 @@ format:
     fig-width: 9
     fig-height: 5
     css: styles.css
+    google-analytics: "G-T05FEZT28V"
 
 execute:
   echo: false
