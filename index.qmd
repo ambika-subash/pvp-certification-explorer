@@ -569,7 +569,7 @@ chartGini = Plot.plot({
 })
 ```
 
-::: {.column-page}
+::: {.column-page-right}
 ```{ojs}
 //| echo: false
 html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;max-width:960px">
