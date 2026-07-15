@@ -6,6 +6,7 @@ website:
   title: "PVP Certification Explorer (India)"
   reader-mode: true
   page-footer: "Data: Protection of Plant Varieties & Farmers' Rights Authority · Built with Quarto"
+  google-analytics: "G-T05FEZT28V"
   navbar:
     left:
       - href: index.qmd
@@ -22,7 +23,6 @@ format:
     fig-width: 9
     fig-height: 5
     css: styles.css
-    google-analytics: "G-T05FEZT28V"
 
 execute:
   echo: false
