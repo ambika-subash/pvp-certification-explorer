@@ -35,8 +35,24 @@ var_df <- chr(sel_for(d) %>% filter(!is.na(variety_category), !is.na(sector)) %>
 cum_sel <- sel_for(dd) %>% filter(!is.na(sector)) %>% count(sel, issue_year, sector, name = "n")
 cum_all <- dd %>% filter(!is.na(sector)) %>% count(issue_year, sector, name = "n") %>%
   mutate(sel = "All crops")
-cum_df  <- chr(bind_rows(cum_all, cum_sel) %>% arrange(sel, sector, issue_year) %>%
-  group_by(sel, sector) %>% mutate(cum = cumsum(n)) %>% ungroup())
+# a (sel, sector) pair has no row at all in a year with zero new certificates,
+# which otherwise makes its cumulative line visually stop the moment new
+# certificates dry up, instead of continuing flat to the present. complete()
+# fills in every year from that pair's first appearance through the most
+# recent year in the register, and fill() carries the last cumulative total
+# forward across those gaps.
+all_years <- min(dd$issue_year, na.rm = TRUE):max(dd$issue_year, na.rm = TRUE)
+cum_df <- chr(bind_rows(cum_all, cum_sel) %>%
+  arrange(sel, sector, issue_year) %>%
+  group_by(sel, sector) %>%
+  mutate(cum = cumsum(n)) %>%
+  ungroup() %>%
+  complete(nesting(sel, sector), issue_year = all_years) %>%
+  arrange(sel, sector, issue_year) %>%
+  group_by(sel, sector) %>%
+  fill(cum, .direction = "down") %>%
+  ungroup() %>%
+  filter(!is.na(cum)))
 
 # every crop x applicant category, uncapped, for the reference heatmap
 heat_df <- chr(d %>% filter(!is.na(crop), !is.na(sector)) %>% count(crop, sector, name = "n"))
