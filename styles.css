@@ -44,25 +44,27 @@ h3 {
    heading directly under the real one. Scoped down here to read as a small
    chart label instead. */
 .chart-card h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem;
-  padding-top: 0;
-  border-top: none;
-  color: #1f2937;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin: 0 0 0.25rem !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  color: #1f2937 !important;
 }
 
 .chart-card h3 {
-  font-size: 0.8rem;
-  font-weight: 400;
-  margin: 0 0 0.75rem;
-  color: #6b7280;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  margin: 0 0 0.75rem !important;
+  color: #6b7280 !important;
 }
 
 .chart-card figcaption {
-  font-size: 0.7rem;
-  color: #6b7280;
-  margin-top: 0.5rem;
+  font-size: 0.7rem !important;
+  color: #6b7280 !important;
+  margin-top: 0.5rem !important;
 }
 
 
