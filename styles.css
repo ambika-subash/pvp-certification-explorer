@@ -37,6 +37,34 @@ h3 {
   color: #1f2937;
 }
 
+/* Observable Plot renders a chart's title/subtitle as actual <h2>/<h3>
+   elements inside the figure, which otherwise inherit this page's h2/h3
+   styling (built for section headings: large, bold, with a top divider).
+   That made every chart's own title look like a second, competing section
+   heading directly under the real one. Scoped down here to read as a small
+   chart label instead. */
+.chart-card h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  padding-top: 0;
+  border-top: none;
+  color: #1f2937;
+}
+
+.chart-card h3 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin: 0 0 0.75rem;
+  color: #6b7280;
+}
+
+.chart-card figcaption {
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
 
 .filter-row {
   margin-bottom: 0.75rem;
