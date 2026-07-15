@@ -98,9 +98,6 @@ if (is.na(gini_default_crop)) {
                              default = sort(gini_by_crop$crop)[1])
 }
 
-cotton_private_pct <- round(100 * sum(cot$sector == "Private", na.rm = TRUE) / nrow(cot), 0)
-cotton_farmer_n    <- sum(cot$sector == "Farmer", na.rm = TRUE)
-
 # Total certificates per year (all crops, all applicants)
 total_per_year <- dd %>% filter(!is.na(issue_year)) %>%
   count(issue_year, name = "n")
@@ -154,55 +151,11 @@ ojs_define(total_per_year_ojs = total_per_year_df)
 ojs_define(crop_group_ojs = crop_group_df)
 ```
 
-Certificates are overwhelmingly held by private firms. In cotton, India's only commercially
-cultivated GM crop, private firms hold `r cotton_private_pct` percent of all certificates.
-Farmers hold `r cotton_farmer_n`.
-
 ::: {.callout-note appearance="minimal"}
 **`r format(n_total, big.mark=",")` certificates** analysed, from the
 [PPV&FR Authority register](https://plantauthority.gov.in/list-certificates).
-Last data refresh: **`r last_updated`**. This page rebuilds every week.
+Last data refresh: **`r last_updated`**.
 [Download the full dataset (CSV)](https://raw.githubusercontent.com/ambika-subash/pvp-certification-explorer/main/data/pvp_certificates_clean.csv).
-:::
-
-::: {.callout-note appearance="minimal" icon="false"}
-**About this data.** A certificate under the PPVFRA confers intellectual property rights
-over a registered plant variety: the right to control commercial sale, reproduction, and
-licensing for a fixed term. This register records certificates granted, not applications
-filed or rejected. Certificates are issued to five applicant categories: Private firms,
-State Agricultural Universities (SAUs), Public institutions, Farmers, and Individual
-Breeders. Individual Breeder certificates are rare across the register and absent from most
-crops.
-:::
-
-::: {.callout-note collapse="true" appearance="simple"}
-## Methodology and data notes
-
-**Source.** The PPV&FR Authority's public certificate register:
-[plantauthority.gov.in/list-certificates](https://plantauthority.gov.in/list-certificates).
-
-**Update frequency.** Weekly, every Sunday, via an automated pipeline that re-scrapes the
-full register, rebuilds the dataset, and republishes this site.
-
-**Coverage.** Every certificate granted since `r register_start_year`, through the most
-recent successful weekly refresh.
-
-**What's excluded.** Applications that were withdrawn or rejected are not in this register
-and are not represented here. This page only covers certificates that were actually
-granted.
-
-**Known limitations.** Company names are merged across spelling variants using a
-name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate-registry
-lookup, so a genuine typo or an unlisted acronym could still cause one real firm to appear
-as two. Full methodology, including how every statistic on this page is computed, is
-documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
-:::
-
-For the full written analysis of this data, visit [The Lone Researcher](https://theloneresearcher.substack.com/).
-
-::: {.callout-important appearance="simple"}
-The following charts are interactive. Use the dropdowns to filter by crop, crop category,
-or applicant category.
 :::
 
 ## Total certificates issued per year
@@ -619,7 +572,7 @@ chartGini = Plot.plot({
 ::: {.column-page}
 ```{ojs}
 //| echo: false
-html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start">
+html`<div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;max-width:960px">
   <div>${withExport(chartGini, `gini_concentration_crop_${slug(giniCrop)}`)}</div>
   <div style="flex:0 0 220px;text-align:center;padding-top:1rem">
     <div style="font-size:3rem;font-weight:700;color:#377eb8">${giniValue === null ? "N/A" : giniValue.toFixed(2)}</div>
@@ -792,6 +745,41 @@ firmPick.trim() === ""
 ```
 
 ---
+
+::: {.callout-note appearance="minimal" icon="false"}
+**About this data.** A certificate under the PPVFRA confers intellectual property rights
+over a registered plant variety: the right to control commercial sale, reproduction, and
+licensing for a fixed term. This register records certificates granted, not applications
+filed or rejected. Certificates are issued to five applicant categories: Private firms,
+State Agricultural Universities (SAUs), Public institutions, Farmers, and Individual
+Breeders. Individual Breeder certificates are rare across the register and absent from most
+crops.
+:::
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Methodology and data notes
+
+**Source.** The PPV&FR Authority's public certificate register:
+[plantauthority.gov.in/list-certificates](https://plantauthority.gov.in/list-certificates).
+
+**Update frequency.** Weekly, every Sunday, via an automated pipeline that re-scrapes the
+full register, rebuilds the dataset, and republishes this site.
+
+**Coverage.** Every certificate granted since `r register_start_year`, through the most
+recent successful weekly refresh.
+
+**What's excluded.** Applications that were withdrawn or rejected are not in this register
+and are not represented here. This page only covers certificates that were actually
+granted.
+
+**Known limitations.** Company names are merged across spelling variants using a
+name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate-registry
+lookup, so a genuine typo or an unlisted acronym could still cause one real firm to appear
+as two. Full methodology, including how every statistic on this page is computed, is
+documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
+:::
+
+For the full written analysis of this data, visit [The Lone Researcher](https://theloneresearcher.substack.com/p/who-owns-indias-plant-varieties).
 
 ::: {.callout-tip appearance="minimal"}
 Full methodology and source code: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
