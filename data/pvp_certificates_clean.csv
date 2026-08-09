@@ -10715,3 +10715,89 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10714,REG/2025/0252,2025,-,Extant (VCK),SYN-CO-NP 5383,Maize,Cereals,Syngenta Crop Protection AG,Private,E29 ZM45 25 252,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
 10715,REG/2025/0256,2025,-,Extant (Notified),NK-7884 (SYN-207884),Maize,Cereals,Syngenta India Pvt Ltd,Private,E10 ZM49 25 256,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
 10716,REG/2025/0258,2025,-,Extant (VCK),SYN-CO-NP2405,Maize,Cereals,Syngenta Crop Protection AG,Private,E26 ZM51 25 258,"Tuesday, March 18, 2025",29 June 2026,2025,2026,Private,FALSE,TRUE
+10717,REG/2021/0226,2021,-,New,VSI 12121 (VSI 08005),Sugarcane,Sugar Crops,Vasantdada Sugar Institute,Private,N4 SA4 21 226,"Monday, November 08, 2021",02 July 2026,2021,2026,Private,FALSE,TRUE
+10718,REG/2023/0035,2023,-,New,MS 14082 (PHULE SUGARCANE 13007),Sugarcane,Sugar Crops,Mahatma Phule Krishi Vidyapeeth,Public,N1 SA1 23 35,"Monday, March 27, 2023",02 July 2026,2023,2026,SAU,FALSE,TRUE
+10719,REG/2020/340,2020,-,New,NBRI- PUKHRAJ,Chrysanthemum,Flowers,CSIR- National Botanical Research Institute,Public,N1 CH1 20 340,"Tuesday, November 10, 2020",03 July 2026,2020,2026,Public,FALSE,TRUE
+10720,REG/2020/341,2020,-,New,NBRI- HIMJYOTI,Chrysanthemum,Flowers,CSIR- National Botanical Research Institute,Public,N1 CH2 20 341,"Tuesday, November 10, 2020",03 July 2026,2020,2026,Public,FALSE,TRUE
+10721,REG/2020/357,2020,-,Farmer,BGMJ-69,Velvet Bean,Legumes,Gyan Kali,Farmer,F1 MP1 20 357,"Friday, October 23, 2020",03 July 2026,2020,2026,Farmer,FALSE,TRUE
+10722,REG/2020/358,2020,-,Farmer,BAAK-70,Velvet Bean,Legumes,Anshuman Singh Bindh,Farmer,F2 MP2 20 358,"Friday, October 23, 2020",03 July 2026,2020,2026,Farmer,FALSE,TRUE
+10723,REG/2013/658,2013,-,Farmer,Desi Aada,Ginger,Spices,Chandan Das,Farmer,F2 ZO2 13 658,"Tuesday, October 15, 2013",07 July 2026,2013,2026,Farmer,FALSE,TRUE
+10724,REG/2015/1585,2015,-,Farmer,PNS,Small Cardamom,Spices,Gopinath Surulivel,Farmer,F2 EC2 15 1585,"Thursday, August 06, 2015",07 July 2026,2015,2026,Farmer,FALSE,TRUE
+10725,REG/2017/567,2017,-,Farmer,DHOODH MOGRA SAFED SUKHRAM,Maize,Cereals,Sukhram Dhurve,Farmer,F36 ZM44 17 567,"Monday, March 27, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10726,REG/2017/568,2017,-,Farmer,BHADELI PEELI ADAY,Maize,Cereals,Aday Yadav,Farmer,F37 ZM45 17 568,"Monday, March 27, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10727,REG/2017/608,2017,-,Farmer,SAFED MAKKI HEERALAL,Maize,Cereals,Heeralal Bhumiya,Farmer,F38 ZM46 17 608,"Monday, March 27, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10728,REG/2017/676,2017,-,Farmer,PHOOLVANI MAKKA,Maize,Cereals,Phool Singh,Farmer,F43 ZM51 17 676,"Tuesday, March 28, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10729,REG/2017/677,2017,-,Farmer,BODAH MAKKA,Maize,Cereals,Amar Singh,Farmer,F44 ZM52 17 677,"Tuesday, March 28, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10730,REG/2017/1045,2017,-,Farmer,Rag Bharti Makka,Maize,Cereals,Rag Lal Bharti,Farmer,F91 ZM99 17 1045,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10731,REG/2017/1050,2017,-,Farmer,Makka Keshar,Maize,Cereals,Rakesh Bharti,Farmer,F93 ZM101 17 1050,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10732,REG/2017/1058,2017,-,Farmer,Makka Ishwar,Maize,Cereals,Ishwar Das Sahu,Farmer,F94 ZM102 17 1058,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10733,REG/2017/1062,2017,-,Farmer,Makka Khobadi,Maize,Cereals,Jatiram,Farmer,F95 ZM103 17 1062,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10734,REG/2017/1070,2017,-,Farmer,Makka Jith,Maize,Cereals,Man Singh Uikey,Farmer,F98 ZM106 17 1070,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10735,REG/2017/1078,2017,-,Farmer,Makki Devi,Maize,Cereals,Basant Imnani,Farmer,F100 ZM108 17 1078,"Thursday, March 30, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10736,REG/2017/1104,2017,-,Farmer,Dhana Makka,Maize,Cereals,Laxman Shah,Farmer,F106 ZM114 17 1104,"Friday, March 31, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10737,REG/2017/1117,2017,-,Farmer,Saj Makai,Maize,Cereals,Mamta Jawre,Farmer,F108 ZM116 17 1117,"Friday, March 31, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10738,REG/2017/1372,2017,-,Farmer,Bhankla Makai,Maize,Cereals,Meena Uikey,Farmer,F129 ZM137 17 1372,"Friday, March 31, 2017",07 July 2026,2017,2026,Farmer,FALSE,TRUE
+10739,REG/2018/171,2018,-,Farmer,MOG DANA,Maize,Cereals,Prafulla Debbarma,Farmer,F1 ZM6 18 171,"Wednesday, April 11, 2018",07 July 2026,2018,2026,Farmer,FALSE,TRUE
+10740,REG/2018/566,2018,-,Farmer,Tanra Makai,Maize,Cereals,Bandhna Oraon,Farmer,F58 ZM67 18 566,"Monday, June 18, 2018",07 July 2026,2018,2026,Farmer,FALSE,TRUE
+10741,REG/2024/0094,2024,-,Farmer,LAL CHINA,Rice,Cereals,Jhuma Das,Farmer,F3 OS11 24 94,"Tuesday, May 14, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10742,REG/2024/0106,2024,-,Farmer,MAIMI KACHAK,Rice,Cereals,Dichendra Reang,Farmer,F4 OS12 24 106,"Tuesday, May 14, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10743,REG/2024/0168,2024,-,Farmer,KANCHALI MAI,Rice,Cereals,Dhananbum Halam,Farmer,F5 OS13 24 168,"Monday, May 20, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10744,REG/2024/0228,2024,-,New,SS 336,Rice,Cereals,UACI Seeds and Biotech Pvt. Ltd.,Private,N39 OS50 24 228,"Monday, May 27, 2024",07 July 2026,2024,2026,Private,FALSE,TRUE
+10745,REG/2024/0229,2024,-,New,SS 2014,Rice,Cereals,UACI Seeds and Biotech Pvt. Ltd.,Private,N40 OS51 24 229,"Monday, May 27, 2024",07 July 2026,2024,2026,Private,FALSE,TRUE
+10746,REG/2024/0237,2024,-,New,SS 324,Rice,Cereals,UACI Seeds and Biotech Pvt. Ltd.,Private,N43 OS54 24 237,"Wednesday, May 29, 2024",07 July 2026,2024,2026,Private,FALSE,TRUE
+10747,REG/2024/0346,2024,-,Farmer,Jisulal Makai,Maize,Cereals,Jisulal Murmu,Farmer,F1 ZM25 24 346,"Wednesday, June 26, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10748,REG/2024/0451,2024,-,Farmer,GAJARI,Rice,Cereals,Tumiyarai Reang,Farmer,F12 OS85 24 451,"Tuesday, August 06, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10749,REG/2024/0462,2024,-,Farmer,LAL KHAIYAM,Rice,Cereals,Sumanta Misra,Farmer,F14 OS93 24 462,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10750,REG/2024/0464,2024,-,Farmer,GUJRI NUNIA,Rice,Cereals,Sumanta Misra,Farmer,F16 OS95 24 464,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10751,REG/2024/0465,2024,-,Farmer,KAISHALI,Rice,Cereals,Sumanta Misra,Farmer,F17 OS96 24 465,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10752,REG/2024/0466,2024,-,Farmer,DHARIYAL,Rice,Cereals,Sumanta Misra,Farmer,F18 OS97 24 466,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10753,REG/2024/0468,2024,-,Farmer,SUGANDHI DHEPI,Rice,Cereals,Sumanta Misra,Farmer,F20 OS99 24 468,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10754,REG/2024/0469,2024,-,Farmer,NAGESWARI,Rice,Cereals,Sumanta Misra,Farmer,F21 OS100 24 469,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10755,REG/2024/0470,2024,-,Farmer,MALA SUNDARI,Rice,Cereals,Sumanta Misra,Farmer,F22 OS101 24 470,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10756,REG/2024/0471,2024,-,Farmer,LAL MANSHRA,Rice,Cereals,Sumanta Misra,Farmer,F23 OS102 24 471,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10757,REG/2024/0472,2024,-,Farmer,DESHI PAIZAM,Rice,Cereals,Sumanta Misra,Farmer,F24 OS103 24 472,"Friday, August 16, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10758,REG/2024/0473,2024,-,Farmer,DAL BHOG,Rice,Cereals,Sumanta Misra,Farmer,F25 OS104 24 473,"Thursday, September 05, 2024",07 July 2026,2024,2026,Farmer,FALSE,TRUE
+10759,REG/2017/678,2017,-,Farmer,KHEMA MAKKA,Maize,Cereals,Ranjit Singh,Farmer,F45 ZM53 17 678,"Tuesday, March 28, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10760,REG/2017/685,2017,-,Farmer,MAKKA PILA LAHAIYA,Maize,Cereals,Anand,Farmer,F46 ZM54 17 685,"Tuesday, March 28, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10761,REG/2017/690,2017,-,Farmer,MAKKA JALE SAFEDA,Maize,Cereals,Dharam Singh,Farmer,F48 ZM56 17 690,"Tuesday, March 28, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10762,REG/2017/1099,2017,-,Farmer,Subariya Makka,Maize,Cereals,Subariya,Farmer,F104 ZM112 17 1099,"Friday, March 31, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10763,REG/2017/1356,2017,-,Farmer,Leema Jait Makka,Maize,Cereals,Leema Bai,Farmer,F122 ZM130 17 1356,"Friday, March 31, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10764,REG/2017/1358,2017,-,Farmer,Dulari Makka,Maize,Cereals,Dulari Dhurve,Farmer,F123 ZM131 17 1358,"Friday, March 31, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10765,REG/2017/1360,2017,-,Farmer,Niran Makka,Maize,Cereals,Nirbati Kumre,Farmer,F124 ZM132 17 1360,"Friday, March 31, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10766,REG/2017/1143,2017,-,Farmer,Kushwaha Makai,Maize,Cereals,Suresh Kushwaha,Farmer,F110 ZM118 17 1143,"Friday, March 31, 2017",08 July 2026,2017,2026,Farmer,FALSE,TRUE
+10767,REG/2023/0058,2023,-,New,PAN-845,Rice,Cereals,Pan Seeds Pvt Ltd,Private,N9 OS9 23 58,"Tuesday, May 30, 2023",08 July 2026,2023,2026,Private,FALSE,TRUE
+10768,REG/2024/0061,2024,-,Farmer,CINERATE,Rice,Cereals,Uttam Das,Farmer,F1 OS7 24 61,"Wednesday, April 10, 2024",08 July 2026,2024,2026,Farmer,FALSE,TRUE
+10769,REG/2024/0062,2024,-,Farmer,GALONG MAI,Rice,Cereals,Raichur Nei Halam,Farmer,F2 OS8 24 62,"Wednesday, April 10, 2024",08 July 2026,2024,2026,Farmer,FALSE,TRUE
+10770,REG/2024/1071,2024,-,Extant (VCK),PNPH-X 14,Rice,Cereals,Prabhat Agri Biotech Ltd,Private,E38 OS245 24 1071,"Tuesday, December 03, 2024",08 July 2026,2024,2026,Private,FALSE,TRUE
+10771,REG/2024/1083,2024,-,Extant (VCK),NPS 4128 R,Rice,Cereals,Nuziveedu Seeds Ltd,Private,E44 OS253 24 1083,"Monday, December 09, 2024",08 July 2026,2024,2026,Private,FALSE,TRUE
+10772,REG/2024/1084,2024,-,Extant (VCK),NPS 2022 A,Rice,Cereals,Nuziveedu Seeds Ltd,Private,E45 OS254 24 1084,"Monday, December 09, 2024",08 July 2026,2024,2026,Private,FALSE,TRUE
+10773,REG/2025/0151,2025,-,Extant (VCK),NP 7020,Rice,Cereals,Nuziveedu Seeds Ltd,Private,E19 OS40 25 151,"Thursday, February 20, 2025",08 July 2026,2025,2026,Private,FALSE,TRUE
+10774,REG/2025/0573,2025,-,Extant (VCK),US 362,Rice,Cereals,SeedWorks International Ltd.,Private,E25 OS135 25 573,"Tuesday, May 20, 2025",08 July 2026,2025,2026,Private,FALSE,TRUE
+10775,REG/2025/0574,2025,-,Extant (VCK),5056A,Rice,Cereals,SeedWorks International Ltd.,Private,E26 OS136 25 574,"Tuesday, May 20, 2025",08 July 2026,2025,2026,Private,FALSE,TRUE
+10776,REG/2025/0575,2025,-,Extant (VCK),8208R,Rice,Cereals,SeedWorks International Ltd.,Private,E27 OS137 25 575,"Tuesday, May 20, 2025",08 July 2026,2025,2026,Private,FALSE,TRUE
+10777,REG/2025/0649,2025,-,Extant (VCK),SUPER SONIKA (LVP-661),Rice,Cereals,SeedWorks International Ltd.,Private,E32 OS154 25 649,"Tuesday, June 03, 2025",08 July 2026,2025,2026,Private,FALSE,TRUE
+10778,REG/2014/1248,2014,-,Farmer,NGAHURA,Rice,Cereals,G S Isaac,Farmer,F741 OS788 14 1248,"Wednesday, May 28, 2014",09 July 2026,2014,2026,Farmer,FALSE,TRUE
+10779,REG/2016/107,2016,-,Farmer,PIVALA LAL MAKKA,Maize,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F8 ZM28 16 107,"Tuesday, March 01, 2016",09 July 2026,2016,2026,Farmer,FALSE,TRUE
+10780,REG/2016/108,2016,-,Farmer,PIVALA LAHAN MAKKA,Maize,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F9 ZM29 16 108,"Tuesday, March 01, 2016",09 July 2026,2016,2026,Farmer,FALSE,TRUE
+10781,REG/2016/109,2016,-,Farmer,PIVALA MAKKA,Maize,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F10 ZM30 16 109,"Tuesday, March 01, 2016",09 July 2026,2016,2026,Farmer,FALSE,TRUE
+10782,REG/2016/110,2016,-,Farmer,KESHRI MAKKA,Maize,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F11 ZM31 16 110,"Tuesday, March 01, 2016",09 July 2026,2016,2026,Farmer,FALSE,TRUE
+10783,REG/2016/404,2016,-,Farmer,KUKKUD MAKKA,Maize,Cereals,Yaha Mogi Mata Sthanik Biyanee Savardhan Samitee,Farmer,F18 ZM43 16 404,"Wednesday, May 04, 2016",09 July 2026,2016,2026,Farmer,FALSE,TRUE
+10784,REG/2017/175,2017,-,Farmer,Puran Makka,Maize,Cereals,Satyendra Singh Takam,Farmer,F11 ZM19 17 175,"Monday, March 20, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10785,REG/2017/215,2017,-,Farmer,Shivdhar Makai,Maize,Cereals,Heera Singh,Farmer,F13 ZM21 17 215,"Wednesday, March 22, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10786,REG/2017/221,2017,-,Farmer,Bijag Makai,Maize,Cereals,Biran,Farmer,F14 ZM22 17 221,"Wednesday, March 22, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10787,REG/2017/365,2017,-,Farmer,Sunpuri Makka Peela,Maize,Cereals,Laamu Singh,Farmer,F21 ZM29 17 365,"Friday, March 24, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10788,REG/2017/478,2017,-,Farmer,BARSHORI MAKKA,Maize,Cereals,Kishori Thakur,Farmer,F27 ZM35 17 478,"Monday, March 27, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10789,REG/2017/481,2017,-,Farmer,Kislai Makka 1,Maize,Cereals,Buddhu Singh Thakur,Farmer,F30 ZM38 17 481,"Monday, March 27, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10790,REG/2017/482,2017,-,Farmer,Mekur Makai,Maize,Cereals,Ramesh Thakur,Farmer,F31 ZM39 17 482,"Monday, March 27, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10791,REG/2017/707,2017,-,Farmer,BHALIRA MAKAI,Maize,Cereals,Kashi Ram,Farmer,F50 ZM58 17 707,"Tuesday, March 28, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10792,REG/2017/755,2017,-,Farmer,GENDA MAKAI,Maize,Cereals,Gendlal Uikey,Farmer,F55 ZM63 17 755,"Tuesday, March 28, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10793,REG/2017/812,2017,-,Farmer,VATI MAKKA,Maize,Cereals,Premvati,Farmer,F63 ZM71 17 812,"Wednesday, March 29, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10794,REG/2017/838,2017,-,Farmer,BHALAVI MAKKA,Maize,Cereals,Sansvati,Farmer,F70 ZM78 17 838,"Wednesday, March 29, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10795,REG/2017/862,2017,-,Farmer,BHADELI,Maize,Cereals,Nan Dau Parte,Farmer,F74 ZM82 17 862,"Thursday, March 30, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10796,REG/2017/873,2017,-,Farmer,HANSA,Maize,Cereals,Sant Lal Tekam,Farmer,F77 ZM85 17 873,"Thursday, March 30, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10797,REG/2017/971,2017,-,Farmer,MAKKI DEWARTH,Maize,Cereals,Krishna Nand Sharma,Farmer,F86 ZM94 17 971,"Thursday, March 30, 2017",09 July 2026,2017,2026,Farmer,FALSE,TRUE
+10798,REG/2023/0045,2023,-,New,GOLD 6040 (TANISHA),Soybean,Oilseeds,Green Gold Seeds Pvt Ltd,Private,N1 GM2 23 45,"Tuesday, April 11, 2023",09 July 2026,2023,2026,Private,FALSE,TRUE
+10799,REG/2023/0046,2023,-,New,Vikrant,Soybean,Oilseeds,Basant Agro Tech (I) Ltd,Private,N2 GM3 23 46,"Thursday, April 13, 2023",09 July 2026,2023,2026,Private,FALSE,TRUE
+10800,REG/2023/0053,2023,-,New,EAGLE 1105,Soybean,Oilseeds,Eagle Seeds & Biotech Ltd,Private,N3 GM4 23 53,"Thursday, April 27, 2023",09 July 2026,2023,2026,Private,FALSE,TRUE
+10801,REG/2013/199,2013,-,New,PC - P6507 BG-II,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,N133 GH72 13 199,"Wednesday, April 03, 2013",10 July 2026,2013,2026,Private,TRUE,TRUE
+10802,REG/2013/452,2013,-,Extant (VCK),NC-130 Bt,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,E54 GH169 13 452,"Thursday, August 08, 2013",10 July 2026,2013,2026,Private,TRUE,TRUE
