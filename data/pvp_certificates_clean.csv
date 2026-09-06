@@ -10801,3 +10801,86 @@ s_no,registration_no,registration_year,certificate_s_no,variety_category,variety
 10800,REG/2023/0053,2023,-,New,EAGLE 1105,Soybean,Oilseeds,Eagle Seeds & Biotech Ltd,Private,N3 GM4 23 53,"Thursday, April 27, 2023",09 July 2026,2023,2026,Private,FALSE,TRUE
 10801,REG/2013/199,2013,-,New,PC - P6507 BG-II,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,N133 GH72 13 199,"Wednesday, April 03, 2013",10 July 2026,2013,2026,Private,TRUE,TRUE
 10802,REG/2013/452,2013,-,Extant (VCK),NC-130 Bt,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,E54 GH169 13 452,"Thursday, August 08, 2013",10 July 2026,2013,2026,Private,TRUE,TRUE
+10803,REG/2019/169,2019,-,Extant (VCK),INFINITY,Potato,Vegetables,IPM Potato Group Limited,Private,E18 ST21 19 169,"Monday, December 02, 2019",05 August 2026,2019,2026,Private,FALSE,TRUE
+10804,REG/2019/171,2019,-,Extant (VCK),FANDANGO,Potato,Vegetables,IPM Potato Group Limited,Private,E20 ST23 19 171,"Monday, December 02, 2019",05 August 2026,2019,2026,Private,FALSE,TRUE
+10805,REG/2022/0181,2022,-,New,LADY ALICIA,Potato,Vegetables,C. Meijer B.V.,Private,N3 ST3 22 181,"Friday, December 30, 2022",05 August 2026,2022,2026,Private,FALSE,TRUE
+10806,REG/2023/0094,2023,-,New,Lady Jane,Potato,Vegetables,C. Meijer B.V.,Private,N1 ST1 23 94,"Thursday, May 18, 2023",05 August 2026,2023,2026,Private,FALSE,TRUE
+10807,REG/2023/0095,2023,-,New,Sound,Potato,Vegetables,C. Meijer B.V.,Private,N2 ST2 23 95,"Thursday, May 18, 2023",05 August 2026,2023,2026,Private,FALSE,TRUE
+10808,REG/2024/0078,2024,-,Farmer,SANSAR III,Bael,Fruits,Nirmal Mahto,Farmer,F1 AMC1 24 78,"Monday, May 06, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10809,REG/2024/0218,2024,-,New,M224,Rice,Cereals,Bayer Crop Science LP,Private,N29 OS40 24 218,"Monday, May 27, 2024",05 August 2026,2024,2026,Private,FALSE,TRUE
+10810,REG/2024/0219,2024,-,New,M222,Rice,Cereals,Bayer Crop Science LP,Private,N30 OS41 24 219,"Monday, May 27, 2024",05 August 2026,2024,2026,Private,FALSE,TRUE
+10811,REG/2024/0225,2024,-,New,INH20883,Rice,Cereals,Bayer Crop Science LP,Private,N36 OS47 24 225,"Monday, May 27, 2024",05 August 2026,2024,2026,Private,FALSE,TRUE
+10812,REG/2024/0267,2024,-,New,NP 10444,Rice,Cereals,Nuziveedu Seeds Ltd,Private,N54 OS67 24 267,"Tuesday, June 11, 2024",05 August 2026,2024,2026,Private,FALSE,TRUE
+10813,REG/2024/0467,2024,-,Farmer,SWET NUNIA,Rice,Cereals,Sumanta Misra,Farmer,F19 OS98 24 467,"Friday, August 16, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10814,REG/2024/0680,2024,-,Farmer,RAMNATH BODI,Cowpea,Legumes,Ramnath Kumar,Farmer,F2 VU3 24 680,"Monday, October 14, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10815,REG/2024/0818,2024,-,Farmer,KWANOO SAUNTHA,Cowpea,Legumes,Mohan Singh Tomar,Farmer,F4 VU5 24 818,"Friday, October 25, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10816,REG/2024/0857,2024,-,Farmer,JHAMAJHAM SAUNTHA,Cowpea,Legumes,Jawahar Singh Negi,Farmer,F5 VU6 24 857,"Friday, November 08, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10817,REG/2024/0907,2024,-,Farmer,THAINA SAUNTHA,Cowpea,Legumes,Gopal Singh Tomar,Farmer,F6 VU7 24 907,"Friday, November 08, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10818,REG/2024/0908,2024,-,Farmer,PAHADI SAUNTHA,Cowpea,Legumes,Jawahar Singh Negi,Farmer,F7 VU8 24 908,"Friday, November 08, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10819,REG/2024/0910,2024,-,Farmer,BADO LOBIA,Cowpea,Legumes,Sultan Singh Chauhan,Farmer,F9 VU10 24 910,"Friday, November 08, 2024",05 August 2026,2024,2026,Farmer,FALSE,TRUE
+10820,REG/2024/0998,2024,-,Extant (VCK),RC878,Tetraploid Cotton,Fibre Crops,Rasi Seeds (P) Ltd,Private,E14 GH19 24 998,"Friday, November 22, 2024",05 August 2026,2024,2026,Private,TRUE,TRUE
+10821,REG/2024/0999,2024,-,Extant (VCK),RC880BGII,Tetraploid Cotton,Fibre Crops,Rasi Seeds (P) Ltd,Private,E15 GH20 24 999,"Friday, November 22, 2024",05 August 2026,2024,2026,Private,TRUE,TRUE
+10822,REG/2025/0115,2025,-,New,VNR MAGENTA,Guava,Fruits,VNR Seeds Pvt Ltd,Private,N3 PSG3 25 115,"Monday, January 27, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10823,REG/2025/0206,2025,-,Extant (VCK),SYN-CO-NPE0018,Maize,Cereals,Syngenta Crop Protection AG,Private,E8 ZM25 25 206,"Tuesday, March 11, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10824,REG/2025/0226,2025,-,New,KR20SB050,Rice,Cereals,Kaveri Seed Company Ltd,Private,N18 OS64 25 226,"Sunday, March 16, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10825,REG/2025/0227,2025,-,Extant (VCK),SYN-CO-NPE0126,Maize,Cereals,Syngenta Crop Protection AG,Private,E33 ZM26 25 227,"Sunday, March 16, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10826,REG/2025/0383,2025,-,Extant (VCK),TILBURY,Potato,Vegetables,Germicopa Breeding,Private,E1 ST1 25 383,"Friday, April 04, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10827,REG/2025/0384,2025,-,Extant (VCK),KELLY,Potato,Vegetables,Germicopa Breeding,Private,E2 ST2 25 384,"Friday, April 04, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10828,REG/2025/0385,2025,-,Extant (VCK),AMANY,Potato,Vegetables,Germicopa Breeding,Private,E3 ST3 25 385,"Friday, April 04, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10829,REG/2025/0386,2025,-,Extant (VCK),FASTY,Potato,Vegetables,Germicopa Breeding,Private,E4 ST4 25 386,"Friday, April 04, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10830,REG/2025/0387,2025,-,Extant (VCK),Ascott,Potato,Vegetables,Danespo A/S,Private,E5 ST5 25 387,"Friday, April 04, 2025",05 August 2026,2025,2026,Private,FALSE,TRUE
+10831,REG/2025/1285,2025,-,Farmer,MADHYANCHAL SURKH,Guava,Fruits,Madhusudan Kavariya,Farmer,F4 PSG9 25 1285,"Tuesday, November 18, 2025",05 August 2026,2025,2026,Farmer,FALSE,TRUE
+10832,REG/2026/0056,2026,-,Farmer,MADHUMITA,Guava,Fruits,Rubi Singh,Farmer,F1 PSG1 26 56,"Tuesday, January 13, 2026",05 August 2026,2026,2026,Farmer,FALSE,TRUE
+10833,REG/2026/0353,2026,-,Extant (VCK),TYSON,Potato,Vegetables,STET HOLLAND BV,Private,N4 ST5 26 353,"Friday, March 13, 2026",05 August 2026,2026,2026,Private,FALSE,TRUE
+10834,REG/2026/0361,2026,-,Extant (VCK),SHC 1010,Potato,Vegetables,STET HOLLAND BV,Private,E1 ST6 26 361,"Friday, March 13, 2026",05 August 2026,2026,2026,Private,FALSE,TRUE
+10835,REG/2009/247,2009,-,New,NC-1126 Bt,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,N45 GH129 9 247,"Monday, May 11, 2009",06 August 2026,2009,2026,Private,TRUE,TRUE
+10836,REG/2009/249,2009,-,New,NC-2151 Bt2,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,N43 GH131 9 249,"Monday, May 11, 2009",06 August 2026,2009,2026,Private,TRUE,TRUE
+10837,REG/2011/448,2011,-,Extant (VCK),PCH-1411 Bt2,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,E41 GH21 11 448,"Thursday, August 04, 2011",06 August 2026,2011,2026,Private,TRUE,TRUE
+10838,REG/2011/474,2011,-,Extant (VCK),NCS-955 Bt2,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,E24 GH39 11 474,"Friday, August 12, 2011",06 August 2026,2011,2026,Private,TRUE,TRUE
+10839,REG/2012/286,2012,-,Extant (VCK),PCH-125,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,E32 GH49 12 286,"Friday, June 29, 2012",06 August 2026,2012,2026,Private,TRUE,TRUE
+10840,REG/2013/190,2013,-,Extant (VCK),PCH - 2234 BG-II,Tetraploid Cotton,Fibre Crops,Prabhat Agri Biotech Ltd,Private,E51 GH63 13 190,"Wednesday, April 03, 2013",06 August 2026,2013,2026,Private,TRUE,TRUE
+10841,REG/2013/233,2013,-,Extant (VCK),PRCH - 757 BG-II,Tetraploid Cotton,Fibre Crops,Pravardhan Seeds Pvt Ltd,Private,E53 GH102 13 233,"Monday, April 08, 2013",06 August 2026,2013,2026,Private,TRUE,TRUE
+10842,REG/2013/276,2013,-,New,NC - 160/2 BG-II,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,N122 GH123 13 276,"Monday, April 29, 2013",06 August 2026,2013,2026,Private,TRUE,TRUE
+10843,REG/2014/767,2014,-,New,RHC-0717,Tetraploid Cotton,Fibre Crops,Mahatma Phule Krishi Vidyapeeth,Public,N1 GH41 14 767,"Wednesday, March 26, 2014",06 August 2026,2014,2026,SAU,TRUE,TRUE
+10844,REG/2014/769,2014,-,New,RHCb-011,Tetraploid Cotton,Fibre Crops,Mahatma Phule Krishi Vidyapeeth,Public,N1 GB3 14 769,"Wednesday, March 26, 2014",06 August 2026,2014,2026,SAU,TRUE,TRUE
+10845,REG/2017/1346,2017,-,Farmer,Maharsi Makka,Maize,Cereals,Sudan Lal,Farmer,F117 ZM125 17 1346,"Friday, March 31, 2017",06 August 2026,2017,2026,Farmer,FALSE,TRUE
+10846,REG/2017/1349,2017,-,Farmer,Siliyke Makai,Maize,Cereals,Siliya Uikey,Farmer,F120 ZM128 17 1349,"Friday, March 31, 2017",06 August 2026,2017,2026,Farmer,FALSE,TRUE
+10847,REG/2017/1352,2017,-,Farmer,Khemchand Makka,Maize,Cereals,Khemchand,Farmer,F121 ZM129 17 1352,"Friday, March 31, 2017",06 August 2026,2017,2026,Farmer,FALSE,TRUE
+10848,REG/2017/1371,2017,-,Farmer,Bahori Makka,Maize,Cereals,Vranda Uikey,Farmer,F128 ZM136 17 1371,"Friday, March 31, 2017",06 August 2026,2017,2026,Farmer,FALSE,TRUE
+10849,REG/2017/1654,2017,-,Farmer,Plandri,Maize,Cereals,KVK Farmer Club,Farmer,F151 ZM178 17 1654,"Wednesday, July 07, 2027",06 August 2026,2027,2026,Farmer,FALSE,TRUE
+10850,REG/2017/2022,2017,-,Farmer,AH-M,Maize,Cereals,Abdul Hadi Khan,Farmer,F175 ZM206 17 2022,"Friday, October 13, 2017",06 August 2026,2017,2026,Farmer,FALSE,TRUE
+10851,REG/2024/0060,2024,-,New,SHRISTHI,Rice,Cereals,Astha Agri Genetics,Private,N3 OS6 24 60,"Wednesday, April 10, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10852,REG/2024/0194,2024,-,New,C162,Rice,Cereals,Bayer Crop Science LP,Private,N6 OS17 24 194,"Friday, May 24, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10853,REG/2024/0197,2024,-,New,M225,Rice,Cereals,Bayer Crop Science LP,Private,N9 OS20 24 197,"Friday, May 24, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10854,REG/2024/0198,2024,-,New,M227,Rice,Cereals,Bayer Crop Science LP,Private,N10 OS21 24 198,"Friday, May 24, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10855,REG/2024/0202,2024,-,New,M111,Rice,Cereals,Bayer Crop Science LP,Private,N14 OS25 24 202,"Friday, May 24, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10856,REG/2024/0203,2024,-,New,B188,Rice,Cereals,Bayer Crop Science LP,Private,N15 OS26 24 203,"Friday, May 24, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10857,REG/2024/0211,2024,-,New,M216,Rice,Cereals,Bayer Crop Science LP,Private,N22 OS33 24 211,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10858,REG/2024/0212,2024,-,New,M205,Rice,Cereals,Bayer Crop Science LP,Private,N23 OS34 24 212,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10859,REG/2024/0213,2024,-,New,B163,Rice,Cereals,Bayer Crop Science LP,Private,N24 OS35 24 213,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10860,REG/2024/0214,2024,-,New,M219,Rice,Cereals,Bayer Crop Science LP,Private,N25 OS36 24 214,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10861,REG/2024/0215,2024,-,New,M143,Rice,Cereals,Bayer Crop Science LP,Private,N26 OS37 24 215,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10862,REG/2024/0216,2024,-,New,M141,Rice,Cereals,Bayer Crop Science LP,Private,N27 OS38 24 216,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10863,REG/2024/0217,2024,-,New,C 197,Rice,Cereals,Bayer Crop Science LP,Private,N28 OS39 24 217,"Monday, May 27, 2024",06 August 2026,2024,2026,Private,FALSE,TRUE
+10864,REG/2025/0232,2025,-,Extant (VCK),SYN-CO-NP5645,Maize,Cereals,Syngenta Crop Protection AG,Private,E32 ZM31 25 232,"Sunday, March 16, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10865,REG/2025/0233,2025,-,Extant (VCK),SYN-CO-NP5918,Maize,Cereals,Syngenta Crop Protection AG,Private,E27 ZM32 25 233,"Sunday, March 16, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10866,REG/2025/0249,2025,-,Extant (VCK),SYN-CO-NP5927,Maize,Cereals,Syngenta Crop Protection AG,Private,E19 ZM42 25 249,"Tuesday, March 18, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10867,REG/2025/0389,2025,-,Extant (VCK),NC 7048 Bt2,Tetraploid Cotton,Fibre Crops,Nuziveedu Seeds Ltd,Private,E2 GH6 25 389,"Saturday, April 05, 2025",06 August 2026,2025,2026,Private,TRUE,TRUE
+10868,REG/2025/0510,2025,-,Extant (VCK),KMH 8338,Maize,Cereals,Kaveri Seed Company Ltd,Private,E78 ZM77 25 510,"Friday, April 25, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10869,REG/2025/0512,2025,-,Extant (VCK),KM24SY074,Maize,Cereals,Kaveri Seed Company Ltd,Private,E76 ZM79 25 512,"Friday, April 25, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10870,REG/2025/0541,2025,-,Extant (VCK),UC9699BGI,Tetraploid Cotton,Fibre Crops,SeedWorks International Ltd.,Private,E9 GH21 25 541,"Thursday, May 08, 2025",06 August 2026,2025,2026,Private,TRUE,TRUE
+10871,REG/2025/0542,2025,-,Extant (VCK),UC101BGII,Tetraploid Cotton,Fibre Crops,SeedWorks International Ltd.,Private,E10 GH22 25 542,"Thursday, May 08, 2025",06 August 2026,2025,2026,Private,TRUE,TRUE
+10872,REG/2025/0549,2025,-,Extant (VCK),UC9705BGII,Tetraploid Cotton,Fibre Crops,SeedWorks International Ltd.,Private,E17 GH29 25 549,"Thursday, May 08, 2025",06 August 2026,2025,2026,Private,TRUE,TRUE
+10873,REG/2025/0550,2025,-,Extant (VCK),UC102015BGI,Tetraploid Cotton,Fibre Crops,SeedWorks International Ltd.,Private,E18 GH30 25 550,"Thursday, May 08, 2025",06 August 2026,2025,2026,Private,TRUE,TRUE
+10874,REG/2025/0682,2025,-,Extant (VCK),KMH 8339,Maize,Cereals,Kaveri Seed Company Ltd,Private,E77 ZM97 25 682,"Wednesday, June 11, 2025",06 August 2026,2025,2026,Private,FALSE,TRUE
+10875,REG/2024/0810,2024,-,Farmer,DANDA GAGLEE,Taro,Vegetables,Ravi Chauhan,Farmer,F1 COE1 24 810,"Friday, October 25, 2024",07 August 2026,2024,2026,Farmer,FALSE,TRUE
+10876,REG/2024/0811,2024,-,Farmer,GOL GAGLEE,Taro,Vegetables,Praveen Singh Tomar,Farmer,F2 COE2 24 811,"Friday, October 25, 2024",07 August 2026,2024,2026,Farmer,FALSE,TRUE
+10877,REG/2024/0812,2024,-,Farmer,ANOKHI GAGLEE,Taro,Vegetables,Naresh Chauhan,Farmer,F3 COE3 24 812,"Friday, October 25, 2024",07 August 2026,2024,2026,Farmer,FALSE,TRUE
+10878,REG/2024/0813,2024,-,Farmer,BADO GAGLEE,Taro,Vegetables,Sultan Singh Chauhan,Farmer,F4 COE4 24 813,"Friday, October 25, 2024",07 August 2026,2024,2026,Farmer,FALSE,TRUE
+10879,REG/2024/0814,2024,-,Farmer,GAGLI,Taro,Vegetables,Nittu Tomar,Farmer,F5 COE5 24 814,"Friday, October 25, 2024",07 August 2026,2024,2026,Farmer,FALSE,TRUE
+10880,REG/2025/0139,2025,-,Farmer,PRAYAG VIBHUM,Indian Gooseberry,Medicinal And Aromatic Plants,Keshav Prasad,Farmer,F2 EO2 25 139,"Wednesday, February 12, 2025",07 August 2026,2025,2026,Farmer,FALSE,TRUE
+10881,REG/2025/0624,2025,-,Farmer,Swad Kachalu,Taro,Vegetables,Dharampur Kisan Utpadatak Sahkari Sabha Samiti Darwar,Farmer,F1 COE1 25 624,"Monday, May 26, 2025",07 August 2026,2025,2026,Farmer,FALSE,TRUE
+10882,REG/2025/0772,2025,-,Farmer,KVKB-H1-MUKHIPAN,Taro,Vegetables,Irengbam Kulla Singh,Farmer,F2 COE2 25 772,"Thursday, July 10, 2025",07 August 2026,2025,2026,Farmer,FALSE,TRUE
+10883,REG/2025/1117,2025,-,Extant (VCK),TNPL 192,Eucalyptus,"Tree, Forest And Plantation Crop",Tamilnadu Newsprint and Papers Limited,Private,E1 ED1 25 1117,"Monday, September 15, 2025",07 August 2026,2025,2026,Private,FALSE,TRUE
+10884,REG/2025/1118,2025,-,Extant (VCK),TNPL 193,Eucalyptus,"Tree, Forest And Plantation Crop",Tamilnadu Newsprint and Papers Limited,Private,E2 ED2 25 1118,"Monday, September 15, 2025",07 August 2026,2025,2026,Private,FALSE,TRUE
+10885,REG/2024/0201,2024,-,New,B162,Rice,Cereals,Bayer Crop Science LP,Private,N13 OS24 24 201,"Friday, May 24, 2024",18 August 2026,2024,2026,Private,FALSE,TRUE
