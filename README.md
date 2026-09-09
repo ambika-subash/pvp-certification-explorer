@@ -71,8 +71,9 @@ Generated data files (tracked in `data/`):
 | File | Description |
 |------|-------------|
 | `pvp_certificates_all.csv`   | Raw scrape of the full register (one row per certificate). |
-| `pvp_certificates_clean.csv` | Cleaned/analysis-ready: normalised categories & sectors, parsed years, cotton & ploidy flags. |
+| `pvp_certificates_clean.csv` | Cleaned/analysis-ready: normalised categories & sectors, parsed years, cotton & ploidy flags, expiry/term/live-status, applicant tiers. See [Codebook](#codebook). |
 | `last_updated.txt`           | Timestamp of the last successful refresh. |
+| `reference_date.txt`         | The date `is_live` was computed against for the current `pvp_certificates_clean.csv` (see [Codebook](#codebook)). |
 
 ---
 
@@ -198,6 +199,181 @@ sync with a different caption citing the same thing. The `top_firms_ranked()` an
 readable text, for example `"Nuziveedu Seed (30.1 percent), Prabhat Agri Biotech (11.8
 percent), and Mahyco (7.1 percent)"`, so a chart and the sentence describing it are
 always built from the same underlying ranking.
+
+---
+
+## Codebook
+
+Derived fields in `pvp_certificates_clean.csv` beyond a straight clean-up of the
+register's own columns, and known limitations of the underlying data. Written up here
+because a paper analysing this register cites specific figures from it, and anyone
+trying to reproduce those figures needs to know exactly how each derived field is
+built, not just that it exists.
+
+### `crop_clean` and `is_cotton`
+
+The register's own `crop` field has inconsistent capitalisation for the same crop
+(`Pearl millet` / `Pearl Millet` / `pearl millet`, `Diploid Cotton` / `Diploid cotton`,
+20 such groups in total as of the Sept 2026 pull). `crop_clean` is the title-cased,
+whitespace-squished form, used as the canonical crop name everywhere a crop needs to be
+matched or counted.
+
+**`is_cotton` is `TRUE` only where `crop_clean` is `"Tetraploid Cotton"` or `"Diploid
+Cotton"`.** An earlier version of this pipeline defined it as *either* the crop name
+containing "cotton" *or* `crop_group == "Fibre Crops"` -- which also matches Jute, since
+Jute shares the Fibre Crops group with cotton in the register's own taxonomy. That
+inflated every "cotton" figure by however many Jute certificates existed at the time.
+**`crop_group == "Fibre Crops"` is a deliberately larger, different set** (cotton +
+Jute) and remains available unchanged for anything actually asking about fibre crops as
+a group, not cotton specifically. Do not use `crop_group` as a proxy for cotton.
+
+### `expiry_date`, `term_years`, `is_live`, `is_revoked`
+
+`maximum_protection_period_up_to` (expiry) and `provisional_protection_claim` (a sparse
+date-range string) are carried through from the raw scrape, which previously dropped
+both.
+
+Parsing handles three date formats found in the raw register, tried in order:
+`"16 September 2012"`, `"28-November-2038"` (hyphens are normalised to spaces before
+parsing, so the first two formats share one parse step), and a small number of rows
+(3, as of the Sept 2026 pull, recurring across both the issue-date and expiry-date
+columns) in `"Friday, January 16, 2037"` format, seemingly from an older export.
+
+One certificate, registration `59 of 2016`, is the well-known FL 2027 potato case: its
+expiry field holds free text noting the certificate was **revoked** rather than a plain
+date (`"31/01/2031 (Registration Certificate revoked as per order dated 3rd December,
+2021 ...)"`). This is the *only* place anywhere in the register that a revocation is
+recorded at all (see "Fields the Rules require but the register omits" below) --
+losing it to a failed date parse would throw away the one piece of revocation data the
+register happens to expose. It's handled explicitly:
+- `is_revoked` is `TRUE` for this row (detected by the word "revok" in the raw field).
+- `revocation_note` carries the full free text for this row, `NA` elsewhere.
+- `expiry_date` still gets the embedded date (`2031-01-31`) parsed out, for reference.
+- **`is_live` is forced `FALSE` regardless of that date** -- a revoked certificate's
+  protection ended at revocation, not at its originally scheduled expiry.
+
+`term_years` is `(expiry_date - issue_date) / 365.25`. Its median varies sharply by
+`variety_category` (roughly 15.0 years for Farmer / New / EDV / Extant (VCK), but only
+~7.6 for Extant and ~11.5 for Extant (Notified)) for a statutory reason, not a data
+error: s.24(6) of the Act dates the 15-year cap for Seeds-Act-notified extant varieties
+from the date of **notification**, not registration, so those categories carry a
+shorter effective term measured from issue.
+
+`is_live` compares `expiry_date` against an explicit **reference date**, recorded in
+`data/reference_date.txt` alongside the cleaned CSV every time the pipeline runs (the
+same pattern as `last_updated.txt`). It is **not** silently computed against "today" at
+whatever moment someone happens to open the data -- `Rscript R/clean_pvp_certificates.R
+[in] [out] [reference_date]` takes it as an explicit third argument, defaulting to the
+run date only when not supplied. The live, weekly-refreshed dashboard uses that default
+(each week's refresh is still an explicit, displayed date, just one that advances week
+to week); a frozen data release meant to back a specific paper's figures should instead
+pass a **fixed** reference date, recorded here, so that `is_live` never changes if the
+release is reprocessed later.
+
+> **Caveat for anyone comparing expiry/live rates across sectors:** Farmer-category
+> certificates show a near-zero non-live count (9 of several thousand, as of the Sept
+> 2026 pull) not because farmer varieties are unusually durable, but because the Farmer
+> category is young -- a small fraction were issued before 2013, and the majority were
+> issued in the last few years, against a 15-year term. A cross-sector comparison of
+> "share expired" or "share live" will read as a durability difference when it is
+> actually an age-distribution artefact, unless it explicitly controls for the age
+> profile of each sector's certificates. Label such a comparison accordingly, or don't
+> make it.
+
+### Applicant tiers: `applicant_norm`, `applicant_entity` (`owner_group` pending)
+
+Three progressively broader notions of "who holds this certificate," because collapsing
+them into one number silently picks a methodology:
+
+- **`applicant_norm`** (Tier 1, "as published"): the register's own `applicant` string,
+  with only mechanical spelling/legal-suffix normalisation applied (`canon_company()`
+  in `R/clean_pvp_certificates.R` -- strips punctuation, `&`→"and", singularises
+  "seeds", drops `Private`/`Pvt`/`Ltd`/`Limited`/`LLP`/`Corp`/etc., strips `M/S`/
+  `Messrs` prefixes and reissue/corrigendum annotations). No brand- or parent-company
+  judgment calls happen at this tier -- `"Monsanto Holding Pvt Ltd"`, `"Monsanto
+  Holdings Pvt Ltd"`, and `"Monsanto India Limited"` stay three distinct Tier-1 names,
+  since as filed with the Authority they are three distinct legal names. (An earlier,
+  ad hoc version of this normalisation used elsewhere in this repo, for chart labels
+  only, additionally collapsed anything starting with "Monsanto", "Mahyco", or "Pioneer
+  Overseas" into one bucket regardless of legal identity -- reasonable for a quick chart
+  label, not a defensible Tier 1 for a cited figure, so it's kept separate from
+  `applicant_norm` and unchanged where it was already in use.)
+- **`applicant_entity`** (Tier 2, "same legal entity"): `applicant_norm` folded further
+  wherever two register names are confirmed, by a shared Corporate Identification
+  Number, to be the same legal entity under a different name. The specific pairs folded
+  are listed in `entity_fold` in `R/clean_pvp_certificates.R`.
+- **`owner_group`** (Tier 3, "ownership-adjusted"): **not yet implemented** -- pending
+  the actual entity→group crosswalk (see the open items below).
+
+**Two things are unreconciled and need resolving before these columns back any cited
+figure:**
+1. The fold list above has **eight** pairs; the source brief for this work says
+   "nine register names are the same legal entity" but only lists eight
+   source→target pairs. The ninth is not yet identified.
+2. Computed against the same raw pull the audit behind the paper used
+   (10,802 raw rows), this gives 147 distinct Tier-1 and 141 distinct Tier-2 private
+   applicants, against an audited 133 / 125. The gap is too large to be fully explained
+   by the ~340-row raw→clean difference discussed below, which suggests the audit's
+   Tier-1 normalisation catches variants beyond legal-suffix stripping that this
+   mechanical implementation doesn't. Treat `applicant_norm`/`applicant_entity` counts
+   as provisional until reconciled against the audit's own matching logic.
+
+### Known data-quality issues in the register itself
+
+These are limitations of the Authority's own published register, not of this pipeline.
+Documented here rather than silently corrected, so they don't get mistaken for pipeline
+bugs later.
+
+- **Sector misclassification.** `applicant_category` codes roughly 15 certificates as
+  Private that belong to public bodies -- e.g. MACS Agharkar Research Institute and
+  Agharkar Research Institute (the same institute, two names, both coded Private),
+  Vasantdada Sugar Institute, National Dairy Development Board, Maharashtra State Seeds
+  Corporation (coded under *both* Public and Private across different certificates),
+  Cornell University, University of Maine System Board of Trustees, and Instituto de
+  Investigaciones Agropecuarias (Chile). Immaterial to headline sector shares, but
+  `sector`/`applicant_category` is unreliable at the margin -- don't treat it as ground
+  truth for any specific institution.
+- **The register does not track corporate existence.** Several certificate holders are
+  companies that no longer exist under that name: Monsanto India Limited (amalgamated
+  into Bayer CropScience, 2019), Metahelix Life Sciences (amalgamated into Rallis
+  India, 2019), Monsanto Genetics India (amalgamated; last filed accounts 2007), and at
+  least one case of a company holding certificates filed years before its own
+  incorporation date under a later corporate name (Advanta Enterprises Limited,
+  incorporated 2 June 2022, holds certificates with filing dates from 2013 -- almost
+  certainly a name carried over from a predecessor entity, not evidence of the
+  register's dates being wrong). A name-level concentration measure will therefore
+  understate concentration purely from unmerged corporate history, before any
+  ownership question is even asked.
+- **Fields Rule 23 requires but the published register omits.** Rule 23 of the PPVFR
+  Rules 2003 requires the Register to record expiry date (item 14, recovered here from
+  the raw scrape -- see above), revocation date and grounds (item 15, surfaced by the
+  register in exactly one case, as free text in the expiry field -- see `is_revoked`
+  above), and licensee names and licence terms (item 20, not surfaced anywhere). Rule
+  22(7)-(8) also require the Authority to maintain seed production and sales records;
+  none of this is public. This defines the outer boundary of what this dataset can show
+  -- no analysis of licensing or seed-production volume is possible from this source at
+  all.
+- **A handful of rows have expiry one day before issue.** Six certificates as of the
+  Sept 2026 pull (`535 of 2014`, `REG/2017/916`, `REG/2017/1021`, `REG/2017/1031`,
+  `REG/2017/1032`, `REG/2017/1040`) have `maximum_protection_period_up_to` exactly one
+  calendar day *before* `date_of_certificate_issue` -- almost certainly a register-side
+  date entry error (all five `REG/2017/9xx`/`REG/2017/10xx` rows share the same issue
+  date, suggesting a batch entry mistake), not a parsing artefact here. `term_years`
+  is left as the resulting (trivially negative, about -1/365.25) computed value rather
+  than silently corrected, and `is_live` is correctly `FALSE` for all six.
+- **No location field.** The register records no state, district, or address for any
+  applicant. Any geographic analysis is impossible from this source; there is no field
+  to recover it from.
+- **Raw-vs-clean row count.** As of the Sept 2026 pull, this pipeline's
+  `pvp_certificates_all.csv` and `pvp_certificates_clean.csv` have the *same* row
+  count -- the cleaning step here does not currently drop any rows. The audit behind
+  the paper reports a raw count of 10,802 against a cleaned count of 10,462 (a 340-row
+  difference) for what appears to be the same underlying pull. That drop does not
+  happen anywhere in this repo's pipeline, and no single obvious criterion (duplicate
+  `registration_no`, duplicate full row, blank applicant/variety/crop, missing issue or
+  expiry date) accounts for 340 rows in that snapshot. **Unresolved** -- needs the
+  actual drop criterion from the audit to document properly, or confirmation that it
+  should be reproduced here.
 
 ---
 
