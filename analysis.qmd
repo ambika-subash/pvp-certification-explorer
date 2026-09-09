@@ -97,9 +97,7 @@ name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate
 lookup, so a genuine typo or an unlisted acronym could still cause one real firm to
 appear as two. Every figure quoted in the prose below (firm percentages, EDV and VCK
 counts, cotton applicant splits) is computed live from the current dataset at render
-time, not hardcoded, so it updates automatically with each weekly refresh. Full
-methodology is documented in the
-[project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
+time, not hardcoded, so it updates automatically with each weekly refresh.
 :::
 
 # Certificates at a glance
@@ -494,15 +492,12 @@ registrations.
 ::: {.callout-tip appearance="minimal"}
 Data source: Protection of Plant Varieties and Farmers' Rights Authority public
 certificate register, scraped weekly. Applicant categories are normalised from raw
-register entries. All figures use year of certificate issue. Full pipeline is open source
-and available in the
-[project repository](https://github.com/ambika-subash/pvp-certification-explorer).
+register entries. All figures use year of certificate issue.
 Built with R and Quarto.
 :::
 
 ::: {style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;font-size:0.82rem;color:#4b5563;line-height:1.7"}
-**License.** Code: [MIT License](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE).
-Data and content: [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA).
+**License.** Code: MIT License. Data and content: CC BY 4.0.
 
 **How to cite.** Subash, Ambika. 2026. *Who owns India's plant varieties? PVP
 Certification Explorer (India).* <https://doi.org/10.5281/zenodo.21140353>

@@ -802,18 +802,13 @@ granted.
 **Known limitations.** Company names are merged across spelling variants using a
 name-matching heuristic (`canon_company()` / `alias_company()`), not a corporate-registry
 lookup, so a genuine typo or an unlisted acronym could still cause one real firm to appear
-as two. Full methodology, including how every statistic on this page is computed, is
-documented in the [project repository](https://github.com/ambika-subash/pvp-certification-explorer#readme).
+as two.
 :::
 
 For the full written analysis of this data, visit [The Lone Researcher](https://theloneresearcher.substack.com/p/who-owns-indias-plant-varieties).
 
-::: {.callout-tip appearance="minimal"}
-Full methodology and source code: [project repository](https://github.com/ambika-subash/pvp-certification-explorer).
-:::
-
 ::: {.site-footer}
-**License:** [MIT](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE) (code) · [CC BY 4.0](https://github.com/ambika-subash/pvp-certification-explorer/blob/main/LICENSE-DATA) (data)
+**License:** MIT (code) · CC BY 4.0 (data)
 
 **Cite:** Subash, A. (2026). *Who owns India's plant varieties? PVP Certification Explorer.* <https://doi.org/10.5281/zenodo.21140353>
 
