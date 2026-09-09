@@ -1,0 +1,23 @@
+Group,Entity,Control designation in source,Stake disclosed,Source,Verification status
+NSL,Prabhat Agri Biotech Limited,wholly owned subsidiary,100% (implied),"CARE Annexure-6, rationale column",DESIGNATION + implied 100%
+NSL,Yaaganti Seeds Private Limited,wholly owned subsidiary,100% (implied),CARE Annexure-6,DESIGNATION + implied 100%
+NSL,Asian Agri Genetics Limited,wholly owned subsidiary,100% (implied),CARE Annexure-6,DESIGNATION + implied 100%
+NSL,Fortune Hybrid Seeds Limited,wholly owned subsidiary,100% (implied),CARE Annexure-6,DESIGNATION + implied 100%
+NSL,Pravardhan Seeds Private Limited,subsidiary (NOT wholly owned),not stated by CARE; 51% reported in press,CARE Annexure-6; press report of 51% acquisition,*** STAKE NOT IN A COMPANY DOCUMENT ***
+Bayer,Bayer Biosciences Private Limited,fully consolidated subsidiary,100%,"Bayer AG schedule, interest column",EXPLICIT %
+Bayer,Bayer Cropscience Limited,fully consolidated subsidiary,71.4%,"Bayer AG schedule, interest column",EXPLICIT %
+Bayer,Bayer Crop Sciences Ag,fully consolidated subsidiary,100%,"Bayer AG schedule, interest column",EXPLICIT %
+Bayer,Bayer Crop Science LP,indirect wholly owned,100% indirect,NRC filing by the entity itself,EXPLICIT %
+Bayer,Monsanto India Limited,amalgamated into Bayer CropScience Ltd 2019,n/a - entity merged,Bayer India press release; NCLT order,"MERGED, not a stake"
+Bayer,Monsanto Holdings Private Limited,not in Bayer AG schedule,NOT STATED,chain via Monsanto Company (100%),*** NO STAKE EVIDENCE ***
+Bayer,Monsanto Genetics India Private Limited,not in Bayer AG schedule,NOT STATED,chain via Monsanto Company (100%),*** NO STAKE EVIDENCE ***
+Corteva,Pioneer Overseas Corporation,listed in Exhibit 21 subsidiary schedule,NOT STATED (Exhibit 21 gives jurisdiction only),Corteva Form 10-K Ex-21,DESIGNATION ONLY
+Corteva,Corteva Crop India Private Limited,listed in Exhibit 21 subsidiary schedule,NOT STATED,Corteva Form 10-K Ex-21,DESIGNATION ONLY
+DCM Shriram,Bioseed Research India Private Limited,not named in the RPT disclosure,NOT STATED,-,*** NO STAKE EVIDENCE ***
+Tata (Rallis),Rallis India Limited,subsidiary of Tata Chemicals,NOT STATED in the source consulted,Tata Chemicals press release,DESIGNATION ONLY
+Tata (Rallis),Metahelix Life Sciences Limited,wholly owned then amalgamated 2019,53.5% (2010) -> 77.02% -> 80.51% (2014) -> 100% (FY2016),Tata Chemicals release; Rallis disclosures,EXPLICIT % SERIES
+UPL,Advanta Enterprises Limited,majority-owned subsidiary,78.21%,UPL filing,EXPLICIT %
+UPL,Advanta India Limited,promoter majority,51.97%,BSE filing Feb 2015,EXPLICIT %
+Syngenta,Devgen Nv,acquired in full,100% (remaining interest acquired 2013),Syngenta Form 20-F FY2013,EXPLICIT %
+BASF,Nunhems India Private Limited,acquired with Bayer vegetable seeds business,NOT STATED for the Indian entity,BASF 2018 report,DESIGNATION ONLY
+Beejsheetal,Bejo Sheetal Seeds Private Limited,same entity renamed,n/a - not a stake,Bombay HC; identical CIN,"SAME ENTITY, not a stake"
