@@ -74,6 +74,12 @@ Generated data files (tracked in `data/`):
 | `pvp_certificates_clean.csv` | Cleaned/analysis-ready: normalised categories & sectors, parsed years, cotton & ploidy flags, expiry/term/live-status, applicant tiers. See [Codebook](#codebook). |
 | `last_updated.txt`           | Timestamp of the last successful refresh. |
 | `reference_date.txt`         | The date `is_live` was computed against for the current `pvp_certificates_clean.csv` (see [Codebook](#codebook)). |
+| `applicant_normalisation_lookup.csv` | Audited applicant → Tier-1 `applicant_norm` dictionary (human-maintained; grows as new applicants are reviewed). See [Codebook](#codebook). |
+| `entity_exceptions.csv`      | Layer-2 override table for applicant strings the mechanical Tier-1 rule can't derive on its own. |
+| `same_entity_merges.csv`     | Tier-1 → Tier-2 (`applicant_entity`) fold: CIN-confirmed same-legal-entity pairs. |
+| `A1_ownership_crosswalk.csv` | Tier-2 → Tier-3 (`owner_group`) fold: evidence-backed ownership groupings, with CIN and source per row. |
+| `A2_considered_not_merged.csv`, `A3_related_entities_absent.csv`, `A5_control_verification.csv`, `A6_larger_holders_examined.csv` | Supporting evidence for the Tier-3 crosswalk, deposited alongside as supplementary files. |
+| `applicant_review_queue.csv` | Private-sector applicant strings seen for the first time since the audit -- generated fresh each run, present only when non-empty. Not a data-quality signal on its own; see [Codebook](#codebook). |
 
 ---
 
@@ -280,43 +286,78 @@ release is reprocessed later.
 > profile of each sector's certificates. Label such a comparison accordingly, or don't
 > make it.
 
-### Applicant tiers: `applicant_norm`, `applicant_entity` (`owner_group` pending)
+### Applicant tiers: `applicant_norm`, `applicant_entity`, `owner_group`
 
 Three progressively broader notions of "who holds this certificate," because collapsing
-them into one number silently picks a methodology:
+them into one number silently picks a methodology. Computed against the same raw pull
+the paper's audit used (the 10,802-row pull of 2026-08-09), this pipeline now reproduces
+the audit's figures exactly for Tiers 1 and 2, and within one entity of Tier 3 (see the
+one open item below) -- see `R/test_clean_pvp_certificates.R`.
 
 - **`applicant_norm`** (Tier 1, "as published"): the register's own `applicant` string,
-  with only mechanical spelling/legal-suffix normalisation applied (`canon_company()`
-  in `R/clean_pvp_certificates.R` -- strips punctuation, `&`→"and", singularises
-  "seeds", drops `Private`/`Pvt`/`Ltd`/`Limited`/`LLP`/`Corp`/etc., strips `M/S`/
-  `Messrs` prefixes and reissue/corrigendum annotations). No brand- or parent-company
-  judgment calls happen at this tier -- `"Monsanto Holding Pvt Ltd"`, `"Monsanto
+  with only mechanical spelling/legal-suffix normalisation applied -- strips `M/S`/
+  `Messrs` prefixes and reissue/corrigendum annotations, canonicalises legal suffixes
+  (`Pvt Ltd`/`Pvt Limited` → `Private Limited`, `P Ltd` → `P Limited`, `Co Ltd` →
+  `Co Limited`, bare `Ltd` → `Limited`), strips periods, and title-cases with a small
+  validated acronym-preserve list (`DCM`, `JK`, `LP`). No brand- or parent-company
+  judgment call happens at this tier -- `"Monsanto Holding Pvt Ltd"`, `"Monsanto
   Holdings Pvt Ltd"`, and `"Monsanto India Limited"` stay three distinct Tier-1 names,
-  since as filed with the Authority they are three distinct legal names. (An earlier,
-  ad hoc version of this normalisation used elsewhere in this repo, for chart labels
-  only, additionally collapsed anything starting with "Monsanto", "Mahyco", or "Pioneer
-  Overseas" into one bucket regardless of legal identity -- reasonable for a quick chart
-  label, not a defensible Tier 1 for a cited figure, so it's kept separate from
-  `applicant_norm` and unchanged where it was already in use.)
+  since as filed with the Authority they are three distinct legal names.
 - **`applicant_entity`** (Tier 2, "same legal entity"): `applicant_norm` folded further
   wherever two register names are confirmed, by a shared Corporate Identification
-  Number, to be the same legal entity under a different name. The specific pairs folded
-  are listed in `entity_fold` in `R/clean_pvp_certificates.R`.
-- **`owner_group`** (Tier 3, "ownership-adjusted"): **not yet implemented** -- pending
-  the actual entity→group crosswalk (see the open items below).
+  Number, to be the same legal entity under a different name -- the eight pairs in
+  `data/same_entity_merges.csv`.
+- **`owner_group`** (Tier 3, "ownership-adjusted"): `applicant_entity` folded again
+  wherever a documented, evidence-backed ownership relationship (majority control,
+  verified by CIN, regulatory filing, or rating-agency disclosure -- never a bare
+  promoter-family or director link) puts two entities under one controlling group --
+  `data/A1_ownership_crosswalk.csv`. An entity with no row there is its own group,
+  never silently merged. `data/A2_considered_not_merged.csv`,
+  `A3_related_entities_absent.csv`, `A5_control_verification.csv`, and
+  `A6_larger_holders_examined.csv` are the supporting evidence, deposited alongside as
+  supplementary files, not regenerated.
+  **This tier must never be used for period/time-series concentration** -- several of
+  the underlying relationships postdate certificates they would otherwise govern (most
+  of Bayer's former-Monsanto certificates were filed before the 2018 acquisition; a
+  large share of NSL's Prabhat/Pravardhan certificates predate the 2011 acquisitions
+  that brought them into the group). Use Tier 1 or 2 for anything time-series.
 
-**Two things are unreconciled and need resolving before these columns back any cited
-figure:**
-1. The fold list above has **eight** pairs; the source brief for this work says
-   "nine register names are the same legal entity" but only lists eight
-   source→target pairs. The ninth is not yet identified.
-2. Computed against the same raw pull the audit behind the paper used
-   (10,802 raw rows), this gives 147 distinct Tier-1 and 141 distinct Tier-2 private
-   applicants, against an audited 133 / 125. The gap is too large to be fully explained
-   by the ~340-row raw→clean difference discussed below, which suggests the audit's
-   Tier-1 normalisation catches variants beyond legal-suffix stripping that this
-   mechanical implementation doesn't. Treat `applicant_norm`/`applicant_entity` counts
-   as provisional until reconciled against the audit's own matching logic.
+**How Tier 1 is actually computed**, since a mechanical rule alone doesn't reach the
+audited count: a validated dictionary (`data/applicant_normalisation_lookup.csv`, every
+applicant string the audit has already resolved) is checked first, so historical
+figures reproduce exactly regardless of any edge case in the mechanical rule. A second,
+smaller table (`data/entity_exceptions.csv`) covers the specific residue the mechanical
+rule can't derive on its own -- private→public conversions, trade-name changes,
+typo-renames -- applied by exact match on the as-filed string. Only a genuinely new
+applicant string (not in either table) falls through to the mechanical rule directly.
+This is not a shortcut: the mechanical rule was validated by running it against every
+one of the 236 known applicants and diffing against the audited answer -- 235 matched
+immediately, and the one residual mismatch (`"Bayer CropScience LP"`, whose camelCase
+spelling the rule doesn't split) was folded into `entity_exceptions.csv` rather than
+special-cased away, per "let the diff define the exception set, don't hand-sort."
+
+**Weekly-refresh triage.** Any applicant string not already in
+`applicant_normalisation_lookup.csv` is queued to `data/applicant_review_queue.csv`
+(private sector only -- Tiers 2/3 don't apply elsewhere, and the lookup was never
+meant to cover the thousands of distinct farmer names). Its `applicant_norm` is still
+computed immediately by the mechanical rule (degrade-safe: it appears as itself, never
+silently merged into an existing entity or ownership group it hasn't been checked
+against), but Tier 3 in particular should not be trusted for a brand-new name until a
+person has reviewed it and, if warranted, added a row to `A1_ownership_crosswalk.csv`
+-- majority control needs documentary evidence a script can't gather on its own. Tiers
+1 and 2 refresh automatically every week; Tier 3 only changes after that review.
+
+**One open item:** `owner_group` currently gives 106 distinct private groups against
+the audited 105. The gap is one specific, fully diagnosed row: `A1_ownership_crosswalk.csv`
+assigns `"Devgen Nv"` (16 certificates) to group `"Syngenta"`, but has no row at all for
+`"Syngenta India Limited"` (224 certificates) itself, so it defaults to standing as its
+own group under its own name instead of joining `"Syngenta"` -- 224 + 16 = 240, matching
+the Syngenta group total in the original brief exactly, confirming this is a missing
+row rather than a disagreement about the grouping. Needs either an explicit
+`"Syngenta India Limited" -> "Syngenta"` row added to `A1_ownership_crosswalk.csv`, or
+`Devgen Nv`'s assigned group renamed to `"Syngenta India Limited"` (this pipeline does
+not invent or correct crosswalk rows on its own -- they're evidence-backed and
+human-maintained).
 
 ### Known data-quality issues in the register itself
 
@@ -364,16 +405,24 @@ bugs later.
 - **No location field.** The register records no state, district, or address for any
   applicant. Any geographic analysis is impossible from this source; there is no field
   to recover it from.
-- **Raw-vs-clean row count.** As of the Sept 2026 pull, this pipeline's
-  `pvp_certificates_all.csv` and `pvp_certificates_clean.csv` have the *same* row
-  count -- the cleaning step here does not currently drop any rows. The audit behind
-  the paper reports a raw count of 10,802 against a cleaned count of 10,462 (a 340-row
-  difference) for what appears to be the same underlying pull. That drop does not
-  happen anywhere in this repo's pipeline, and no single obvious criterion (duplicate
-  `registration_no`, duplicate full row, blank applicant/variety/crop, missing issue or
-  expiry date) accounts for 340 rows in that snapshot. **Unresolved** -- needs the
-  actual drop criterion from the audit to document properly, or confirmation that it
-  should be reproduced here.
+- **`date_of_filling` uses a verbose format** (`"Wednesday, March 29, 2017"`) more often
+  than the other two date fields do; `date_filed_raw` carries it through unparsed
+  (nothing downstream currently needs a parsed filing date), but the same
+  weekday-prefixed style is one of the two formats `parse_ppvfr_date()` handles for
+  `issue_date`/`expiry_date`, see above.
+- **`is_complete` is `FALSE` for 2 rows** (as of the Sept 2026 pull) -- rows with no
+  variety name recorded. Left in the data rather than dropped; filter on `is_complete`
+  if a variety name is required for the analysis at hand.
+- **Raw-vs-clean row count is a period filter, not a data-quality drop.** The paper's
+  cited figures compare complete calendar years through 2025, so its snapshot excludes
+  the 340 certificates issued in January 2026 or later (a partial year at the time of
+  that pull) via an `issue_year <= 2025` filter -- not a cleaning rule. This pipeline's
+  `pvp_certificates_clean.csv` for the *live* dashboard deliberately does **not** apply
+  this filter (a continuously-refreshed dataset that permanently excluded "this year so
+  far" would defeat the point of the weekly refresh); a frozen release meant to
+  reproduce the paper's exact figures should pass the cutoff year explicitly --
+  `Rscript R/clean_pvp_certificates.R [in] [out] [reference_date] 2025` -- which is
+  what makes the 10,802-row pull of 2026-08-09 reduce to exactly 10,462 rows here too.
 
 ---
 

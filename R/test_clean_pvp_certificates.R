@@ -48,16 +48,25 @@ check("is_live is never TRUE past its own expiry_date",
                readLines(file.path(dirname(in_file), "reference_date.txt"))[1])),
            na.rm = TRUE))
 
-## Priority 3 (tiers 1-2, mechanical properties only -- see README Codebook
-## for the open reconciliation questions on the actual counts)
+## Priority 3 (tiers 1-3, mechanical/monotonicity properties only -- exact
+## counts against a specific pull belong in test_frozen_release.R, since the
+## register keeps growing)
 check("applicant_entity never splits what applicant_norm already merged
        (Tier 2 is always a coarsening of Tier 1, never a refinement)",
       {
         norm_to_entity <- d %>% distinct(applicant_norm, applicant_entity)
         !any(duplicated(norm_to_entity$applicant_norm))
       })
-check("every private-sector row has a non-missing applicant_norm",
-      all(!is.na(d$applicant_norm[d$sector == "Private"])))
+check("owner_group never splits what applicant_entity already merged
+       (Tier 3 is always a coarsening of Tier 2, never a refinement)",
+      {
+        entity_to_owner <- d %>% distinct(applicant_entity, owner_group)
+        !any(duplicated(entity_to_owner$applicant_entity))
+      })
+check("every private-sector row has a non-missing applicant_norm/applicant_entity/owner_group",
+      all(!is.na(d$applicant_norm[d$sector == "Private"])) &&
+      all(!is.na(d$applicant_entity[d$sector == "Private"])) &&
+      all(!is.na(d$owner_group[d$sector == "Private"])))
 
 if (length(failures) == 0) {
   cat("\nAll checks passed.\n")
