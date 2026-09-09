@@ -79,7 +79,8 @@ jobs:
             echo "No data changes this week — nothing to commit."
           else
             date -u +"Last updated: %Y-%m-%d %H:%M UTC" > data/last_updated.txt
-            git add data/last_updated.txt
+            git add data/last_updated.txt data/reference_date.txt
+            git add -A -- data/applicant_review_queue.csv
             git commit -m "Weekly PPVFRA refresh ($(date -u +%Y-%m-%d))"
             git push
           fi
