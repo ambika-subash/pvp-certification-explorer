@@ -273,6 +273,41 @@ message("Private applicants -- Tier 2 (applicant_entity): ",
 message("Private applicants -- Tier 3 (owner_group): ",
         n_distinct(clean$owner_group[clean$sector == "Private"]))
 
+## Validation: each ownership group's member count should match the reference
+## list (so any missing member row is caught). Single-firm standalones that
+## are themselves groups aren't in the reference list and skip this check.
+group_ref <- tibble::tribble(
+  ~group, ~expected_certs,
+  "NSL (Nuziveedu)", 888,
+  "Syngenta", 240,
+  "Kaveri", 233,
+  "Corteva", 185,
+  "Mahyco", 173,
+  "Bayer", 153,
+  "DCM Shriram", 130,
+  "JK Agri Genetics", 101,
+  "Beejsheetal", 64,
+  "UPL (Advanta)", 62,
+  "Acsen", 61,
+  "Rasi", 49,
+  "Limagrain", 40,
+  "BASF", 16
+)
+group_counts <- clean %>%
+  filter(sector == "Private") %>%
+  group_by(owner_group) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  left_join(group_ref, by = c("owner_group" = "group"))
+
+group_mismatches <- group_counts %>% filter(!is.na(expected_certs) & n != expected_certs)
+if (nrow(group_mismatches) > 0) {
+  warning("\nOwnership group validation FAILED: the following groups have certificate ",
+          "counts that don't match the reference list (missing rows in A1_ownership_crosswalk.csv?):")
+  print(as.data.frame(group_mismatches), right = FALSE)
+} else {
+  message("\n✓ Ownership group validation passed: all reference groups have correct certificate counts.")
+}
+
 write_csv(clean, out_file, na = "")
 message("\nWrote ", out_file)
 
