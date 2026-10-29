@@ -119,13 +119,6 @@ gini_bar_df <- chr(bind_rows(gini_bar_all, firm_crop_counts %>%
   group_by(crop) %>% slice_max(certs, n = 10, with_ties = FALSE) %>% ungroup() %>%
   transmute(crop, firm, certs)))
 
-gini_default_crop <- gini_by_crop %>% filter(str_detect(str_to_lower(crop), "tetraploid")) %>%
-  pull(crop) %>% first()
-if (is.na(gini_default_crop)) {
-  gini_default_crop <- first(gini_by_crop$crop[str_to_lower(gini_by_crop$crop) == "cotton"],
-                             default = sort(gini_by_crop$crop)[1])
-}
-
 # Total certificates per year (all crops, all applicants)
 total_per_year <- dd %>% filter(!is.na(issue_year)) %>%
   count(issue_year, name = "n")
@@ -174,7 +167,6 @@ ojs_define(firm_overview_ojs = firm_overview_df)
 ojs_define(gini_crops_ojs      = c("All crops", sort(setdiff(gini_by_crop$crop, "All crops"))))
 ojs_define(gini_lookup_ojs     = chr(gini_by_crop))
 ojs_define(gini_bar_ojs        = gini_bar_df)
-ojs_define(gini_default_crop_ojs = gini_default_crop)
 ojs_define(total_per_year_ojs = total_per_year_df)
 ojs_define(crop_group_ojs = crop_group_df)
 ```
@@ -450,7 +442,7 @@ counts and percentage shares. All crops in the register are available here.
 ```{ojs}
 //| echo: false
 viewof sel1 = pairedCropInput({catOptions: ["All crops"].concat(categories),
-  catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
+  catValue: "All crops", cropValue: "Cotton (All)", defaultMode: "category"})
 ```
 
 ```{ojs}
@@ -484,7 +476,7 @@ Annual certificates for the selected crop, stacked by applicant category.
 ```{ojs}
 //| echo: false
 viewof sel2 = pairedCropInput({catOptions: ["All crops"].concat(categories),
-  catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
+  catValue: "All crops", cropValue: "Cotton (All)", defaultMode: "category"})
 ```
 
 ```{ojs}
@@ -598,7 +590,7 @@ use "Look up a firm" below to look up any individual firm's full crop-by-crop hi
 ```{ojs}
 //| echo: false
 viewof sel3 = pairedCropInput({catOptions: ["All crops"].concat(categories),
-  catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
+  catValue: "All crops", cropValue: "Cotton (All)", defaultMode: "category"})
 ```
 
 ```{ojs}
@@ -687,12 +679,11 @@ holds a substantial share collectively, even where individual top firms look dom
 //| echo: false
 giniCrops = gini_crops_ojs
 giniLookup = transpose(gini_lookup_ojs)
-giniDefaultCrop = Array.isArray(gini_default_crop_ojs) ? gini_default_crop_ojs[0] : gini_default_crop_ojs
 ```
 
 ```{ojs}
 //| echo: false
-viewof giniCrop = Inputs.select(giniCrops, {label: "Crop", value: giniDefaultCrop})
+viewof giniCrop = Inputs.select(giniCrops, {label: "Crop", value: "All crops"})
 ```
 
 ```{ojs}
@@ -770,7 +761,7 @@ Crops with fewer than 5 private certificate holders are not shown.
 ```{ojs}
 //| echo: false
 viewof sel4 = pairedCropInput({catOptions: ["All crops"].concat(categories),
-  catValue: "Cereals", cropValue: "Cotton (All)", defaultMode: "crop"})
+  catValue: "All crops", cropValue: "Cotton (All)", defaultMode: "category"})
 ```
 
 ```{ojs}
