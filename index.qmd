@@ -33,17 +33,6 @@ firm_df <- chr(bind_rows(firm_all, firm_key %>% count(sel, firm, name = "n") %>%
   group_by(sel) %>% slice_max(n, n = 10, with_ties = FALSE) %>% ungroup() %>%
   left_join(firm_labels, by = "firm")))
 
-# Top 3 private firms within each crop category (crop_bucket), for the
-# "who leads in which category" comparison chart. firm_key is already
-# tagged per category by sel_for() above, so this is just a narrower slice
-# of the same tagging rather than a fresh pass over the raw data.
-category_leader_df <- chr(firm_key %>% filter(sel %in% crop_categories) %>%
-  count(sel, firm, name = "n") %>%
-  group_by(sel) %>% slice_max(n, n = 3, with_ties = FALSE) %>%
-  mutate(rank_in_category = row_number()) %>% ungroup() %>%
-  left_join(firm_labels, by = "firm") %>%
-  rename(category = sel))
-
 var_all <- d %>% filter(!is.na(variety_category), !is.na(sector)) %>%
   count(sector, variety_category, name = "n") %>% mutate(sel = "All crops")
 var_df <- chr(bind_rows(var_all, sel_for(d) %>% filter(!is.na(variety_category), !is.na(sector)) %>%
@@ -177,7 +166,6 @@ ojs_define(firm_year_crop_ojs = firm_year_crop_df)
 ojs_define(trends_ojs = trends_df)
 ojs_define(comp_ojs   = comp_df)
 ojs_define(firm_ojs   = firm_df)
-ojs_define(category_leader_ojs = category_leader_df)
 ojs_define(var_ojs    = var_df)
 ojs_define(cum_ojs    = cum_df)
 ojs_define(heat_ojs       = heat_df)
@@ -692,46 +680,6 @@ The top 10 private firms by certificate count, measured against every other priv
 applicant combined ("All other firms"), across the entire register -- not limited to any
 one crop. A large "All other firms" bar means the long tail of smaller applicants still
 holds a substantial share collectively, even where individual top firms look dominant.
-
-## Top companies by crop category
-
-```{ojs}
-//| echo: false
-categoryLeaderRows = transpose(category_leader_ojs)
-  .map(d => ({...d, n: +d.n, rank_in_category: +d.rank_in_category}))
-categoryLeaderCount = new Set(categoryLeaderRows.map(d => d.category)).size
-```
-
-```{ojs}
-//| echo: false
-chartCategoryLeaders = Plot.plot({
-  title: "Top 3 private firms in each crop category",
-  caption: "Source: PPV&FR Authority register",
-  marginLeft: 220,
-  marginRight: 30,
-  marginBottom: 20,
-  width: 760,
-  height: categoryLeaderCount * 110,
-  style: {fontSize: "13px"},
-  x: {label: "Certificates", grid: true, tickPadding: 8},
-  y: {label: null, tickPadding: 8},
-  fy: {label: null},
-  marks: [
-    Plot.barX(categoryLeaderRows, {x: "n", y: "label", fy: "category",
-      sort: {y: "x", reverse: true}, fill: "#377eb8", tip: true}),
-    Plot.ruleX([0])
-  ]
-})
-```
-
-```{ojs}
-//| echo: false
-withExport(chartCategoryLeaders, `top_firms_by_crop_category`)
-```
-
-The single top firm varies by crop category -- a firm that dominates one category (for
-example, cereals or fibre crops) is not necessarily a top holder in another. Categories
-with fewer than three distinct private firms show fewer than three bars.
 
 ## Private sector concentration by crop
 
