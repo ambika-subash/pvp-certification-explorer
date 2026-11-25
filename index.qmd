@@ -526,8 +526,13 @@ composition independently of crop size.
 
 ```{ojs}
 //| echo: false
+viewof topNPick = Inputs.radio([10, 20, 30], {label: "Company pool size", value: 20})
+```
+
+```{ojs}
+//| echo: false
 topFirmNamesForTrend = transpose(firm_overview_ojs)
-  .slice().sort((a, b) => +a.Rank - +b.Rank).slice(0, 20).map(d => d.Firm)
+  .slice().sort((a, b) => +a.Rank - +b.Rank).slice(0, topNPick).map(d => d.Firm)
 ```
 
 ```{ojs}
@@ -578,12 +583,16 @@ chartFirmTrend = rowsFirmTrend.length === 0 ? null : Plot.plot({
 //| echo: false
 chartFirmTrend === null
   ? html`<p><em>Select at least one company above.</em></p>`
-  : withExport(chartFirmTrend, `firm_trend_${firmsTrendPick.map(slug).join("_")}_${slug(cropTrendSel)}`)
+  : withExport(chartFirmTrend, `firm_trend_top${topNPick}_${firmsTrendPick.map(slug).join("_")}_${slug(cropTrendSel)}`)
 ```
 
-Compare certificate counts per year across companies, for a specific crop or across all
-crops combined. The company list is limited to the top 20 private applicants nationally;
-use "Look up a firm" below to look up any individual firm's full crop-by-crop history.
+```{ojs}
+//| echo: false
+md`Compare certificate counts per year across companies, for a specific crop or across
+all crops combined. The company list is limited to the top ${topNPick} private
+applicants nationally; use "Look up a firm" below to look up any individual firm's full
+crop-by-crop history.`
+```
 
 ## Firm-level concentration
 
